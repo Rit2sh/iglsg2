@@ -1,0 +1,412 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id         String  @id @default(uuid())
+  firstName  String?
+  middleName String?
+  lastName   String?
+  title      Title?
+  acceptedTC Boolean
+  acceptedPP Boolean
+
+  email             String    @unique
+  emailVerified     Boolean   @default(false)
+  emailVerifiedDate DateTime?
+  avatar            String?
+  password          String
+
+  role Role @default(USER)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  mobileNumber String?
+  occupation   String?
+  institute    String?
+  nationality  String?
+  address      String?
+  gender       String?
+
+  accounts      Account[]
+  sessions      Session[]
+  refreshTokens RefreshToken[]
+  auditLogs     AuditLog[]
+
+  articles         Article[]           @relation("AuthorArticles")
+  assignedArticles Article[]           @relation("AssignedEditor")
+  versions         ArticleVersion[]
+  logs             WorkflowLog[]
+  files            File[]
+  assignedUser     ArticleAssignment[] @relation("AssignedUser")
+  assignedBy       ArticleAssignment[] @relation("AssignedBy")
+  education        Education[]
+  socials          Socials[]
+}
+
+model Account {
+  id                String @id @default(uuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+
+  refresh_token String?
+  access_token  String?
+  expires_at    Int?
+  token_type    String?
+  scope         String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Education {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  degree      String
+  institution String
+  field       String
+  location    String?
+  startDate   DateTime
+  endDate     DateTime?
+}
+
+model Socials {
+  id     String  @id @default(uuid())
+  name   String?
+  url    String?
+  type   String
+  userId String
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Session {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  ipAddress String?
+  userAgent String?
+  device    String?
+  browser   String?
+  os        String?
+
+  city      String?
+  region    String?
+  country   String?
+  latitude  Float?
+  longitude Float?
+  org       String?
+
+  isActive Boolean @default(true)
+
+  createdAt  DateTime  @default(now())
+  lastUsedAt DateTime  @updatedAt
+  expiresAt  DateTime?
+
+  refreshTokens RefreshToken[]
+}
+
+model RefreshToken {
+  id    String @id @default(uuid())
+  token String @unique
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  sessionId String
+  session   Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  expiresAt DateTime
+  revoked   Boolean  @default(false)
+
+  createdAt DateTime @default(now())
+}
+
+model AuditLog {
+  id     String  @id @default(uuid())
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
+
+  action    String
+  ipAddress String?
+  userAgent String?
+  device    String?
+  browser   String?
+  os        String?
+
+  metadata Json?
+
+  createdAt DateTime @default(now())
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+//////////////////////////////////////
+// CORE DOMAIN
+//////////////////////////////////////
+
+model File {
+  id        String  @id @default(uuid())
+  articleId String
+  article   Article @relation(fields: [articleId], references: [id])
+
+  editedById String?
+  editedBy   User?   @relation(fields: [editedById], references: [id])
+
+  url      String
+  fileName String?
+  fileType String?
+  fileSize Int?
+  stage    ArticleStage
+
+  createdAt          DateTime            @default(now())
+  articleAssignments ArticleAssignment[]
+}
+
+// Add file model or link
+model Article {
+  id       String  @id @default(uuid())
+  title    String
+  abstract String
+  keywords String?
+  category String?
+
+  journalName       String?
+  volume            Int?
+  issue             Int?
+  publicationYear   Int?
+  publicationPeriod String?
+  isAnonymized      Boolean @default(false)
+  isRequested       Boolean @default(false)
+  isGuestUser       Boolean @default(false)
+  pageStart         Int?
+  pageEnd           Int?
+
+  doi         String?       @unique
+  publishedAt DateTime?
+  status      ArticleStatus @default(SUBMITTED)
+  stage       ArticleStage  @default(SUBMISSION)
+
+  authorId String
+  author   User   @relation("AuthorArticles", fields: [authorId], references: [id])
+
+  assignedEditorId String?
+  assignedEditor   User?   @relation("AssignedEditor", fields: [assignedEditorId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  issueId   String?
+
+  versions           ArticleVersion[]
+  logs               WorkflowLog[]
+  tokens             AccessToken[]
+  files              File[]
+  articleAssignments ArticleAssignment[]
+}
+
+model ArticleAssignment {
+  id String @id @default(uuid())
+
+  articleId String
+  article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+
+  assignedById String
+  assignedBy   User   @relation("AssignedBy", fields: [assignedById], references: [id], onDelete: Cascade)
+
+  assignedToId String
+  assignedTo   User   @relation("AssignedUser", fields: [assignedToId], references: [id], onDelete: Cascade)
+
+  // 🔥 ROLE / PURPOSE
+  role AssignmentRole
+
+  // 🔥 STATUS
+  status AssignmentStatus @default(PENDING)
+
+  note String?
+
+  dueDate DateTime?
+
+  // 🔥 TRACKING
+  assignedAt  DateTime  @default(now())
+  acceptedAt  DateTime?
+  completedAt DateTime?
+
+  // 🔥 VERSION LINK (VERY IMPORTANT)
+  fileId String?
+  file   File?   @relation(fields: [fileId], references: [id])
+
+  createdAt DateTime @default(now())
+}
+
+//////////////////////////////////////
+// VERSIONING
+//////////////////////////////////////
+
+model ArticleVersion {
+  id        String  @id @default(uuid())
+  articleId String
+  article   Article @relation(fields: [articleId], references: [id])
+
+  content    String
+  editedById String?
+  editedBy   User?   @relation(fields: [editedById], references: [id])
+
+  stage     ArticleStage
+  createdAt DateTime     @default(now())
+}
+
+//////////////////////////////////////
+// WORKFLOW LOG
+//////////////////////////////////////
+
+model WorkflowLog {
+  id        String  @id @default(uuid())
+  articleId String
+  article   Article @relation(fields: [articleId], references: [id])
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  action    ActionType
+  metadata  Json?
+  createdAt DateTime   @default(now())
+}
+
+//////////////////////////////////////
+// DISPOSABLE LINKS
+//////////////////////////////////////
+
+model AccessToken {
+  id        String  @id @default(uuid())
+  token     String  @unique
+  articleId String
+  article   Article @relation(fields: [articleId], references: [id])
+
+  role      String // PRE_REVIEWER / DRAFTER (dynamic)
+  expiresAt DateTime
+  isUsed    Boolean  @default(false)
+
+  createdAt DateTime @default(now())
+}
+
+//////////////////////////////////////
+// ABAC SYSTEM
+//////////////////////////////////////
+
+model Permission {
+  id       String @id @default(uuid())
+  action   String // "article.approve"
+  resource String // "article"
+
+  createdAt DateTime @default(now())
+}
+
+model Policy {
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+
+  rules Json // ABAC rules (conditions)
+
+  createdAt    DateTime     @default(now())
+  rolePolicies RolePolicy[]
+}
+
+model RolePolicy {
+  id       String @id @default(uuid())
+  role     Role
+  policyId String
+  policy   Policy @relation(fields: [policyId], references: [id])
+}
+
+//////////////////////////////////////
+// ENUMS
+//////////////////////////////////////
+
+enum Role {
+  USER
+  MANAGER
+  EDITOR
+  PRE_REVIEWER
+  DRAFTER
+  EDITOR_IN_CHIEF
+  EDITORIAL_DIRECTOR
+  ADMIN
+}
+
+enum ArticleStatus {
+  SUBMITTED
+  IN_REVIEW
+  APPROVED
+  REJECTED
+  PUBLISHED
+}
+
+enum ArticleStage {
+  SUBMISSION
+  MANAGER_REVIEW
+  EDITOR_REVIEW
+  PRE_REVIEW
+  DRAFTING
+  FINAL_APPROVAL
+  PUBLISHED
+}
+
+enum ActionType {
+  MANAGER_APPROVED
+  EDITOR_APPROVED
+  PRE_REVIEWER_APPROVED
+  DRAFTER_APPROVED
+  EDITOR_IN_CHIEF_APPROVED
+  EDITORIAL_DIRECTOR_APPROVED
+  ADMIN_APPROVED
+  CREATE
+  UPDATE
+  REJECT
+  REVIEW
+  PUBLISH
+}
+
+enum AssignmentRole {
+  EDITOR
+  PRE_REVIEWER
+  REVIEWER
+  DRAFTER
+  EDITOR_IN_CHIEF
+  MANAGER
+}
+
+enum AssignmentStatus {
+  PENDING
+  ACCEPTED
+  IN_PROGRESS
+  COMPLETED
+  REJECTED
+}
+
+enum Title {
+  MR
+  MRS
+  MS
+  DR
+  PROF
+  REV
+  OTHER
+}
