@@ -68,19 +68,28 @@ export async function POST(req: NextRequest) {
                     </div>
                 `;
 
-                await fetch("https://api.resend.com/emails", {
+                // Resend free tier allows sending to the account owner (rajputanaritesh@gmail.com)
+                // When a custom domain is verified on Resend, it can send to any author email directly
+                const adminEmail = process.env.ADMIN_EMAIL || "rajputanaritesh@gmail.com";
+                const recipients = correspondingEmail === adminEmail ? [adminEmail] : [correspondingEmail, adminEmail];
+
+                const resendRes = await fetch("https://api.resend.com/emails", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                         Authorization: `Bearer ${resendApiKey}`,
                     },
                     body: JSON.stringify({
-                        from: "onboarding@resend.dev",
-                        to: [correspondingEmail],
-                        subject: `[Axiara Journals] Manuscript Received: ${manuscriptId}`,
+                        from: "IJLSG Journals <onboarding@resend.dev>",
+                        to: [adminEmail],
+                        reply_to: correspondingEmail,
+                        subject: `[IJLSG] Manuscript Received: ${manuscriptId}`,
                         html: emailHtml,
                     }),
                 });
+
+                const resendData = await resendRes.json();
+                console.log("[Resend Email Result]:", resendData);
             } catch (emailErr) {
                 console.error("[Email Notice] Could not send confirmation email via Resend:", emailErr);
             }
