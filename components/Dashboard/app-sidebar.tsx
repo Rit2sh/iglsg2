@@ -20,48 +20,48 @@ import Link from "next/link"
 
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    name: "JIAS Administrator",
+    email: "admin@ijlsg.org",
+    avatar: "https://avatar.vercel.sh/admin@ijlsg.org?rounded=60",
   },
   navMain: [
     {
-      title: "Dashboard",
-      url: "#",
+      title: "Admin Dashboard",
+      url: "/admin/dashboard",
       icon: (
         <LayoutDashboardIcon
         />
       ),
     },
     {
-      title: "Lifecycle",
-      url: "#",
+      title: "Manuscript Queue",
+      url: "/dashboard/submissions",
       icon: (
         <ListIcon
         />
       ),
     },
     {
-      title: "Analytics",
-      url: "#",
+      title: "Review Queue",
+      url: "/dashboard/review-queue",
       icon: (
-        <ChartBarIcon
+        <UsersIcon
         />
       ),
     },
     {
-      title: "Projects",
-      url: "#",
+      title: "Editorial Archives",
+      url: "/dashboard/archives",
       icon: (
         <FolderIcon
         />
       ),
     },
     {
-      title: "Team",
-      url: "#",
+      title: "Editorial Oversight",
+      url: "/dashboard",
       icon: (
-        <UsersIcon
+        <ChartBarIcon
         />
       ),
     },
@@ -74,15 +74,15 @@ const data = {
         />
       ),
       isActive: true,
-      url: "#",
+      url: "/admin/dashboard",
       items: [
         {
           title: "Active Proposals",
-          url: "#",
+          url: "/dashboard/submissions",
         },
         {
           title: "Archived",
-          url: "#",
+          url: "/dashboard/archives",
         },
       ],
     },
@@ -92,15 +92,15 @@ const data = {
         <FileTextIcon
         />
       ),
-      url: "#",
+      url: "/dashboard/submissions",
       items: [
         {
           title: "Active Proposals",
-          url: "#",
+          url: "/dashboard/submissions",
         },
         {
           title: "Archived",
-          url: "#",
+          url: "/dashboard/archives",
         },
       ],
     },
@@ -110,39 +110,39 @@ const data = {
         <FileTextIcon
         />
       ),
-      url: "#",
+      url: "/dashboard/review-queue",
       items: [
         {
           title: "Active Proposals",
-          url: "#",
+          url: "/dashboard/submissions",
         },
         {
           title: "Archived",
-          url: "#",
+          url: "/dashboard/archives",
         },
       ],
     },
   ],
   navSecondary: [
     {
-      title: "Settings",
-      url: "#",
+      title: "Editorial Profile",
+      url: "/dashboard/profile",
       icon: (
         <Settings2Icon
         />
       ),
     },
     {
-      title: "Get Help",
-      url: "#",
+      title: "Author Guidelines",
+      url: "/guidelines",
       icon: (
         <CircleHelpIcon
         />
       ),
     },
     {
-      title: "Search",
-      url: "#",
+      title: "Browse Archives",
+      url: "/archives",
       icon: (
         <SearchIcon
         />
@@ -151,26 +151,26 @@ const data = {
   ],
   documents: [
     {
-      name: "Data Library",
-      url: "#",
+      name: "Public Portal",
+      url: "/",
       icon: (
         <DatabaseIcon
         />
       ),
     },
     {
-      name: "Reports",
-      url: "#",
+      name: "Submit Paper",
+      url: "/submission",
       icon: (
-        <FileChartColumnIcon
+        <FileIcon
         />
       ),
     },
     {
-      name: "Word Assistant",
-      url: "#",
+      name: "Editorial Board",
+      url: "/editorial-board",
       icon: (
-        <FileIcon
+        <FileChartColumnIcon
         />
       ),
     },
@@ -187,9 +187,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               asChild
               className="data-[slot=sidebar-menu-button]:p-1.5!"
             >
-              <Link href="#">
+              <Link href="/admin/dashboard">
                 <CommandIcon className="size-5!" />
-                <span className="text-base font-semibold">Acme Inc.</span>
+                <span className="text-base font-semibold">JIAS Admin Hub</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

@@ -40,10 +40,7 @@ function getStatusBadge(status: string) {
 
 export default async function ArticlesPage() {
     const { data: articles } = await getArticles();
-
-    if (!articles) {
-        return <div className="p-8 text-center text-muted-foreground animate-pulse">Loading articles...</div>;
-    }
+    const articlesList = articles || [];
 
     return (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -54,25 +51,25 @@ export default async function ArticlesPage() {
                         Manage your articles and track their review progress.
                     </p>
                 </div>
-                <Link href="/submit">
+                <Link href="/submission">
                     <div className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-10 px-4 py-2">
                         New Submission
                     </div>
                 </Link>
             </div>
 
-            {articles.length === 0 ? (
+            {articlesList.length === 0 ? (
                 <div className="p-12 text-center border rounded-xl bg-muted/20 border-dashed">
                     <FileText className="w-12 h-12 text-muted-foreground opacity-50 mx-auto mb-4" />
                     <h3 className="text-lg font-medium">No submissions yet</h3>
-                    <p className="text-sm text-muted-foreground mt-1 mb-6">You haven't submitted any articles for review.</p>
-                    <Link href="/submit" className="text-primary hover:underline">
+                    <p className="text-sm text-muted-foreground mt-1 mb-6">You haven{"'"}t submitted any articles for review.</p>
+                    <Link href="/submission" className="text-primary hover:underline">
                         Submit your first article
                     </Link>
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                    {articles.map((article) => (
+                    {articlesList.map((article) => (
                         <Card key={article.id} className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-md border-border/50 hover:border-primary/50">
                             <CardHeader className="bg-muted/10 pb-4 border-b border-border/50">
                                 <div className="flex justify-between items-start gap-4">

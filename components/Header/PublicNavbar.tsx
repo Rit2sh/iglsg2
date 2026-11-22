@@ -236,8 +236,11 @@ export function PublicNavbar() {
                                             </AvatarFallback>
                                         </Avatar>
                                     </Link>
+                                    {user?.role === "ADMIN" && (
+                                        <Link href="/admin/dashboard" className="hidden md:flex items-center gap-1.5 text-sm font-bold px-5 py-2.5 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 active:scale-95">Admin Hub</Link>
+                                    )}
                                     {user?.role !== "ADMIN" && user?.role !== "USER" && (
-                                        <Link href="/dashboard" className="hidden md:flex items-center gap-1.5 text-sm font-bold px-5 py-2.5 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 active:scale-95">Dashboard</Link>
+                                        <Link href="/dashboard" className="hidden md:flex items-center gap-1.5 text-sm font-bold px-5 py-2.5 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 active:scale-95">Editorial Hub</Link>
                                     )}
                                 </>
                             ) : (
