@@ -80,8 +80,8 @@ export default function ArchivesPage() {
                         Explore Past Issues
                     </h1>
                     <p className="text-[#64748B] dark:text-[#94A3B8] max-w-2xl text-lg">
-                        Access the complete repository of the International Journal of Law and Social Governance,
-                        organized by year and volume[cite: 157].
+                        Access the complete repository of the Journal of Intercontinental Academic Studies,
+                        organized by year and volume.
                     </p>
                 </div>
 

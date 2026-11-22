@@ -285,7 +285,7 @@ export default function ProfileDataSetting({ user }: { user: GetUserDataResponse
             <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-4 px-1">
                 <div className="flex items-start gap-3 text-xs text-muted-foreground/80 max-w-md">
                     <ShieldCheck className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
-                    <p>Submissions to the <strong>International Journal of Law and Social Governance</strong> require high data accuracy. Please ensure all details match your institutional records.</p>
+                    <p>Submissions to the <strong>Journal of Intercontinental Academic Studies</strong> require high data accuracy. Please ensure all details match your institutional records.</p>
                 </div>
                 <Button
                     type="submit"

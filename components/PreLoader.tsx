@@ -7,7 +7,7 @@ import { Newspaper, ShieldCheck, Cpu, Globe } from "lucide-react";
 export default function PreLoader() {
     const [statusIndex, setStatusIndex] = useState(0);
     const statuses = [
-        "Initializing IJLSG Portal...",
+        "Initializing JIAS Portal...",
         "Verifying SSL Encryption...",
         "Fetching Latest Volumes...",
         "Syncing Editorial Board...",
@@ -54,7 +54,7 @@ export default function PreLoader() {
                 <div className="text-center space-y-2 relative z-10">
                     <h2 className="text-2xl font-bold tracking-tight text-[#0F172A] dark:text-[#F1F5F9]"
                         style={{ fontFamily: "'Playfair Display', serif" }}>
-                        IJLSG
+                        JIAS
                     </h2>
 
                     {/* Dynamic Status Text */}

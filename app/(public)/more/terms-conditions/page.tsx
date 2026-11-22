@@ -180,7 +180,7 @@ export default function TermsPage() {
             {/* Header */}
             <div style={{ borderBottom: "0.5px solid #e2e2e2", paddingBottom: "1.5rem", marginBottom: "2rem" }}>
                 <p style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.1em", color: "#999", textTransform: "uppercase", margin: "0 0 8px" }}>
-                    IJLSG · Effective January 01, 2026
+                    JIAS · Effective January 01, 2026
                 </p>
                 <h1 style={{ fontSize: "28px", fontWeight: 600, margin: "0 0 8px", color: "#111" }}>
                     Terms &amp; Conditions

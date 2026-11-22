@@ -40,7 +40,7 @@ export function AuthPopUp() {
                         <div className="relative">
                             <Newspaper className="w-6 h-6 text-white mb-2" />
                             <p className="text-[10px] font-bold text-white/50 uppercase tracking-widest leading-tight">
-                                IJLSG <br /> Publishing
+                                JIAS <br /> Publishing
                             </p>
                         </div>
 

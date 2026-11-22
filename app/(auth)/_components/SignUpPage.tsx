@@ -542,7 +542,7 @@ function LeftPanel() {
                     className="text-xl font-bold text-white tracking-wide"
                     style={{ fontFamily: "'Playfair Display', serif" }}
                 >
-                    IJLSG
+                    JIAS
                 </Link>
             </div>
 
@@ -562,7 +562,7 @@ function LeftPanel() {
 
                 <p className="text-[13.5px] text-white/65 leading-relaxed">
                     Join thousands of reporters, editors, and publishers who rely on
-                    IJLSG for real-time collaboration and publishing.
+                    JIAS for real-time collaboration and publishing.
                 </p>
 
                 {/* Feature pills */}
@@ -587,7 +587,7 @@ function LeftPanel() {
                     ))}
                 </div>
                 <p className="text-[13px] text-white/80 leading-relaxed">
-                    {'"'} IJLSG transformed how our team collaborates on breaking stories —
+                    {'"'} JIAS transformed how our team collaborates on breaking stories —
                     it{"'"}s simply indispensable. {'"'}
                 </p>
                 <div className="flex items-center gap-3 pt-1">

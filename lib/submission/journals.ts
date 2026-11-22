@@ -3,16 +3,16 @@ import { JournalConfig, FeeCalculation, ReferralValidationResult } from "./types
 export const JOURNALS: Record<string, JournalConfig> = {
     j1: {
         id: "j1",
-        name: "International Journal of Law and Social Governance (IJLSG)",
-        shortName: "IJLSG",
+        name: "Journal of Intercontinental Academic Studies (JIAS)",
+        shortName: "JIAS",
         issn: "2583-9993 (Online)",
         base: 1000,
         second: 200,
         later: 100,
         doi: 200,
         max: 6,
-        note: "Journal 1: Base APC ₹1,000 (1st Author); 2nd author ₹200; 3rd–6th authors ₹100 each. Optional DOI ₹200. GST @ 18% applies.",
-        disciplines: ["Constitutional Law", "Human Rights", "Environmental Governance", "Social Justice Jurisprudence", "Criminal Law"],
+        note: "Journal of Intercontinental Academic Studies: Base APC ₹1,000 (1st Author); 2nd author ₹200; 3rd–6th authors ₹100 each. Optional DOI ₹200. GST @ 18% applies.",
+        disciplines: ["Intercontinental Public Policy", "Comparative Jurisprudence", "International Economic Governance", "Human Rights", "Digital Governance"],
     },
     j2: {
         id: "j2",

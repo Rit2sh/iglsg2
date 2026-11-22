@@ -25,7 +25,7 @@ const dummyProfile = {
     role: "Editor-in-Chief",
     education: "Ph.D. in Constitutional Law, National Law School",
     address: "Sector 14, National Law University Campus, New Delhi, India",
-    bio: "Senior legal scholar specializing in digital governance and constitutional frameworks. Serving on the IJLSG board since 2024.",
+    bio: "Senior legal scholar specializing in digital governance and constitutional frameworks. Serving on the JIAS board since 2024.",
     socials: {
         website: "https://arjunsharma.law",
         linkedin: "linkedin.com/in/arjunsharma",

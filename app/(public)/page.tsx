@@ -134,7 +134,7 @@ export default function HomePage() {
                                     className="text-[22px] sm:text-[26px] font-bold text-white leading-tight"
                                     style={{ fontFamily: "'Playfair Display', serif" }}
                                 >
-                                    International Journal of Law & Social Governance
+                                    Journal of Intercontinental Academic Studies
                                 </h1>
                             </div>
 
@@ -201,9 +201,9 @@ export default function HomePage() {
                                 </div>
 
                                 <p className="text-[13.5px] text-white/75 leading-relaxed">
-                                    The <span className="text-white font-semibold">International Journal of Law and Social Governance</span> is
+                                    The <span className="text-white font-semibold">Journal of Intercontinental Academic Studies</span> is
                                     a peer-reviewed academic journal devoted to interdisciplinary research
-                                    in law, governance, and public policy.
+                                    and innovative scholarship.
                                 </p>
 
                                 <p className="text-[13.5px] text-white/70 leading-relaxed mt-3">

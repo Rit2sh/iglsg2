@@ -33,7 +33,7 @@ export default function ProfileSidebar({ isMobile }: { isMobile?: boolean }) {
                 {!isMobile && (
                     <h2 className="text-2xl font-bold tracking-tight mb-10 text-primary"
                         style={{ fontFamily: "'Playfair Display', serif" }}>
-                        IJLSG
+                        JIAS
                     </h2>
                 )}
 

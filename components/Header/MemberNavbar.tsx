@@ -100,7 +100,7 @@ export function MemberNavbar() {
                             Peer-Reviewed • Open Access • Bi-Annual
                         </span>
                         <Badge variant="secondary" className="text-[9px] font-bold px-2 py-0 uppercase sm:hidden bg-primary/10 text-primary border-none">
-                            IJLSG
+                            JIAS
                         </Badge>
                     </div>
 
@@ -160,12 +160,12 @@ export function MemberNavbar() {
                             </div>
                             <div className="flex flex-col">
                                 <span className="font-extrabold text-foreground leading-tight tracking-tight text-sm md:text-base transition-colors group-hover:text-primary">
-                                    <span className="hidden lg:inline">International Journal of Law</span>
-                                    <span className="lg:hidden">IJLSG</span>
+                                    <span className="hidden lg:inline">Journal of Intercontinental</span>
+                                    <span className="lg:hidden">JIAS</span>
                                 </span>
                                 <span className="text-muted-foreground text-[10px] md:text-[11px] font-medium tracking-wide">
-                                    <span className="hidden lg:inline">and Social Governance</span>
-                                    <span className="lg:hidden">Law & Social Governance</span>
+                                    <span className="hidden lg:inline">Academic Studies</span>
+                                    <span className="lg:hidden">Academic Studies</span>
                                 </span>
                             </div>
                         </Link>
@@ -235,7 +235,7 @@ export function MemberNavbar() {
                                                 <BookOpen className="w-5 h-5 text-primary-foreground" />
                                             </div>
                                             <div className="flex flex-col">
-                                                <span className="font-extrabold text-foreground leading-tight text-lg">IJLSG</span>
+                                                <span className="font-extrabold text-foreground leading-tight text-lg">JIAS</span>
                                                 <span className="text-muted-foreground text-[10px] font-semibold tracking-wider uppercase">Menu Directory</span>
                                             </div>
                                         </div>

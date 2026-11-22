@@ -264,8 +264,8 @@ export default function AboutPage() {
                     </h1>
 
                     <p className="text-[15px] sm:text-[17px] text-white/70 max-w-2xl mx-auto leading-relaxed mb-8">
-                        International Journal of Law and Social Governance (IJLSG) — a peer-reviewed,
-                        open-access platform advancing interdisciplinary legal scholarship globally.
+                        Journal of Intercontinental Academic Studies (JIAS) — a peer-reviewed,
+                        open-access platform advancing interdisciplinary scholarship globally.
                     </p>
 
                     {/* Stat strip */}
@@ -299,9 +299,9 @@ export default function AboutPage() {
                                 A Premier Platform for Legal Scholarship
                             </h2>
                             <p className="text-[14px] text-[#64748B] dark:text-[#94A3B8] leading-relaxed">
-                                The <span className="text-[#1E3A8A] dark:text-[#3B82F6] font-semibold">International Journal of Law and Social Governance (IJLSG)</span> is
+                                The <span className="text-[#1E3A8A] dark:text-[#3B82F6] font-semibold">Journal of Intercontinental Academic Studies (JIAS)</span> is
                                 a peer-reviewed, open-access academic journal dedicated to fostering high-quality research
-                                at the intersection of law, governance, public policy, and socio-legal studies.
+                                across interdisciplinary studies, governance, public policy, and socio-economic frameworks.
                             </p>
                             <p className="text-[14px] text-[#64748B] dark:text-[#94A3B8] leading-relaxed">
                                 The journal provides a rigorous yet inclusive platform for scholars, practitioners,
@@ -406,9 +406,9 @@ export default function AboutPage() {
                                 Axiara Private Limited
                             </h2>
                             <p className="text-[14px] text-[#64748B] dark:text-[#94A3B8] leading-relaxed mb-4">
-                                IJLSG is published by <span className="text-[#0F172A] dark:text-[#F1F5F9] font-semibold">Axiara Private Limited</span> —
-                                an organization committed to advancing knowledge, research, and innovation in the
-                                fields of law, governance, and social transformation.
+                                JIAS is published by <span className="text-[#0F172A] dark:text-[#F1F5F9] font-semibold">Axiara Private Limited</span> —
+                                an organization committed to advancing knowledge, research, and innovation across
+                                interdisciplinary academia, global governance, and social transformation.
                             </p>
                             <p className="text-[14px] text-[#64748B] dark:text-[#94A3B8] leading-relaxed">
                                 The Foundation operates with a mission to democratize access to legal knowledge
@@ -556,7 +556,7 @@ export default function AboutPage() {
                         <p className="text-[12.5px] text-[#166534] dark:text-[#4ADE80] leading-relaxed">
                             <span className="font-bold">Ethics & Integrity:</span> All submissions are screened
                             for plagiarism using industry-standard tools. Authors must declare conflicts of
-                            interest and confirm ethical compliance. IJLSG follows COPE guidelines strictly.
+                            interest and confirm ethical compliance. JIAS follows COPE guidelines strictly.
                         </p>
                     </div>
                 </Card>
@@ -580,7 +580,7 @@ export default function AboutPage() {
                                 Ready to Submit Your Research?
                             </h3>
                             <p className="text-[14px] text-white/65 max-w-xl">
-                                Join hundreds of scholars contributing to IJLSG. Our editorial team provides
+                                Join hundreds of scholars contributing to JIAS. Our editorial team provides
                                 constructive feedback and a transparent review process.
                             </p>
                         </div>

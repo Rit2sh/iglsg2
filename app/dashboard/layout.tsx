@@ -18,7 +18,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
                     <footer className="mt-12 py-6 border-t border-dashed border-border/60">
                         <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">
-                            IJLSG Editorial Management System • Confidential & Secure
+                            JIAS Editorial Management System • Confidential & Secure
                         </p>
                     </footer>
                 </main>

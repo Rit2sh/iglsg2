@@ -40,12 +40,12 @@ export default function DashboardSidebar() {
             {!isCollapsed || mobile ? (
                 <div className="px-6 mb-10">
                     <h2 className="text-2xl font-bold text-primary" style={{ fontFamily: "'Playfair Display', serif" }}>
-                        IJLSG <span className="text-[10px] uppercase tracking-tighter text-muted-foreground block">Management Hub</span>
+                        JIAS <span className="text-[10px] uppercase tracking-tighter text-muted-foreground block">Management Hub</span>
                     </h2>
                 </div>
             ) : (
                 <div className="flex justify-center mb-10">
-                    <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white font-bold">I</div>
+                    <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white font-bold">J</div>
                 </div>
             )}
 
