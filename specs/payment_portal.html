@@ -1,0 +1,797 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Axiara Journals | Central Manuscript Submission Portal</title>
+<style>
+
+:root{--navy:#061a43;--deep:#00245d;--blue:#0755ad;--royal:#123f9d;--pale:#eaf4ff;--line:#c8def8;--gold:#ffe66b;--ink:#101b36;--muted:#52647f}
+*{box-sizing:border-box}
+body{margin:0;background:#f4f8fe;color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+header{min-height:62px;background:#061a43;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:7px 22px;gap:15px}
+.brand{display:flex;align-items:center;gap:9px;min-width:265px}.logo{font-size:36px;color:#ffd329}.brand strong{font:bold 24px Georgia,serif;line-height:1}.brand small{display:block;color:#ffdc37;font-size:16px;font-weight:800;letter-spacing:1px}
+.cin{border-left:1px solid #b9c8e4;padding-left:15px;font-size:12px;line-height:1.5;white-space:nowrap}
+nav{display:flex;align-items:center;gap:19px;font-size:14px;font-weight:700;white-space:nowrap}nav a{color:#fff;text-decoration:none}nav a.active{color:#ffdb27;border-bottom:3px solid #ffdb27;padding-bottom:8px}.login{border:1px solid #fff;border-radius:10px;padding:8px 11px}
+.layout{display:grid;grid-template-columns:285px minmax(0,1fr);min-height:calc(100vh - 62px)}
+aside{background:#eef5ff;border-right:1px solid #c9d9ef;padding:0 13px 20px}
+.aside-art{height:145px;margin:0 -13px 12px;background:linear-gradient(90deg,#dcecff,#b9d3f0);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.art-icon{font-size:86px;color:#7c542c;text-shadow:2px 2px 2px #fff}
+.aside-heading{background:linear-gradient(90deg,#092d68,#001d4b);color:#fff;padding:12px 14px;border-radius:11px 11px 0 0;font-size:18px;font-weight:800}
+.guidelines{display:flex;flex-direction:column;gap:5px}
+.guidelines a{display:flex;align-items:center;gap:10px;min-height:47px;background:linear-gradient(#fff,#f4f8ff);border:1px solid #d0dff2;border-radius:9px;padding:8px 11px;color:#14213b;text-decoration:none;font-weight:700;font-size:13px;box-shadow:0 1px 3px #dce7f6}
+.guidelines .gicon{width:27px;text-align:center;font-size:22px;color:#123f9d;flex:none}.guidelines .arrow{margin-left:auto;font-size:21px;color:#0c2556}
+main{min-width:0;padding:0 24px 22px}
+.hero{text-align:center;padding:3px 0 8px;background:radial-gradient(ellipse at top,#fff 0%,#f5f9ff 75%)}
+.hero h1{font:bold 36px Georgia,serif;color:#081c65;margin:0 0 2px}.hero p{font:italic bold 17px Georgia,serif;color:#101c5d;margin:0}
+.progress{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;margin:8px 7% 14px;text-align:center;position:relative}
+.progress:before{content:"";position:absolute;left:16%;right:16%;top:18px;height:2px;background:#173d88;z-index:0}
+.step{position:relative;z-index:1;font-size:14px;font-weight:700}.bubble{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#fff;border:2px solid #173d88;margin:0 auto 4px;font-size:19px}
+.current .bubble{background:#123b83;color:#fff;border-color:#123b83}.step-label{display:inline-block;padding:6px 13px;border-radius:18px}.current .step-label{background:#123b83;color:#fff}
+.bar{background:linear-gradient(90deg,#0a3479,#001d51);color:#fff;border-radius:12px;padding:9px 18px;font-size:20px;font-weight:800;margin-bottom:7px;box-shadow:0 2px 4px #b8cce7}
+.panel{background:#fff;border:1px solid var(--line);border-radius:13px;overflow:hidden;box-shadow:0 2px 5px #dce9f8;margin-bottom:11px}
+.panel-title{background:linear-gradient(90deg,#d8eaff,#c8e0ff);color:#092d94;font-size:17px;font-weight:800;padding:7px 14px;display:flex;align-items:center;gap:10px}
+.panel-body{padding:9px 14px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px 22px}
+.field label{display:block;font-size:13px;font-weight:800;margin-bottom:4px}.req{color:#e11d48}
+input[type=text],select,textarea{width:100%;border:1px solid #aabfdd;border-radius:8px;padding:8px 11px;background:#fff;color:#17233e;font:13px Arial;min-height:32px;box-shadow:inset 0 1px 2px #edf2f9}
+textarea{resize:vertical;min-height:47px;line-height:1.35}
+.full{grid-column:1/-1}
+.title-count{display:flex;justify-content:flex-end;color:#3e526f;font-size:12px;margin-top:2px}
+.keyword-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-height:31px}.chip{background:#e6f1ff;border:1px solid #c8ddf6;border-radius:18px;padding:6px 11px;font-size:12px;font-weight:700}.chip button{border:0;background:none;color:#45617e;font-weight:bold;cursor:pointer;margin-left:4px}
+.keyword-entry{width:155px!important;min-height:29px!important}
+.author-head{display:grid;grid-template-columns:48px 1fr 1.8fr 1fr 28px;gap:9px;padding:0 4px 5px;font-size:12px;font-weight:800;color:#20345b}
+.author-row{display:grid;grid-template-columns:48px 1fr 1.8fr 1fr 28px;gap:9px;align-items:center;margin-bottom:5px}
+.author-row .num{font-weight:800;text-align:center;font-size:13px}.author-row input,.author-row select{min-width:0}
+.delete{border:0;background:none;color:#e11d48;font-size:20px;cursor:pointer}
+.author-actions{display:flex;justify-content:space-between;align-items:center;margin-top:4px}.add{border:1px solid #4a9b68;background:#f4fff7;color:#14743b;border-radius:7px;padding:6px 13px;font-weight:800;cursor:pointer}.limit{background:#fff2b8;border-radius:16px;padding:5px 11px;font-size:12px;font-weight:800}
+.upload-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;align-items:center}.upload-unit{display:grid;grid-template-columns:25px 1fr auto;gap:9px;align-items:center;min-width:0}.upload-icon{font-size:20px;color:#123f9d}.upload-copy b{display:block;font-size:14px}.upload-copy small{display:block;color:#52647f;font-size:11px;margin-top:3px}
+.file-label{display:inline-block;background:#0752a7;color:white;padding:7px 12px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}.file-label input{display:none}.file-status{font-size:11px;color:#176b38;margin-top:3px;overflow-wrap:anywhere}
+.file-divider{border-left:1px solid #b9cce6;padding-left:20px}
+.actions{display:flex;justify-content:space-between;align-items:center;margin-top:14px}.btn{border:1px solid #9eb5d3;border-radius:11px;padding:12px 22px;font-size:16px;font-weight:800;background:#edf3fb;color:#111;cursor:pointer}.btn.primary{background:linear-gradient(#075dc0,#001e65);color:#fff;border:0;min-width:300px}
+@media(max-width:1200px){header{flex-wrap:wrap;height:auto}nav{gap:11px;flex-wrap:wrap}.layout{grid-template-columns:240px minmax(0,1fr)}main{padding:0 14px 20px}.form-grid{gap:8px 12px}}
+@media(max-width:850px){.layout{grid-template-columns:1fr}aside{display:none}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}.author-head{display:none}.author-row{grid-template-columns:25px 1fr 1.4fr 1fr 25px}.upload-grid{grid-template-columns:1fr}.file-divider{border-left:0;border-top:1px solid #c8d9ee;padding:12px 0 0}}
+@media(max-width:600px){main{padding:0 9px 18px}.hero h1{font-size:27px}.hero p{font-size:14px}.progress{grid-template-columns:1fr;gap:8px;margin:8px 0}.progress:before{display:none}.step{display:flex;align-items:center;gap:8px;text-align:left}.bubble{margin:0;width:32px;height:32px;flex:none}.step-label{padding:5px 8px}.bar{font-size:16px}.author-row{grid-template-columns:20px 1fr 1fr 25px}.author-row .affiliation{grid-column:2/4}.author-row select{grid-column:2/4}.author-row .delete{grid-column:4;grid-row:1}.actions{gap:9px;flex-direction:column}.btn,.btn.primary{width:100%;min-width:0}.brand{min-width:0}.cin{display:none}nav{font-size:12px}}
+
+
+:root{--navy:#06275e;--blue:#0752a7;--royal:#123f9d;--pale:#eaf4ff;--line:#c9def7;--gold:#ffe66b;--ink:#101b36}
+*{box-sizing:border-box}
+body{margin:0;background:#f5f9ff;color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+header{height:64px;background:#061a43;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:8px 28px;gap:20px}
+.brand{display:flex;align-items:center;gap:10px;min-width:285px}.logo{font-size:36px;color:#ffcf27}.brand strong{font-family:Georgia,serif;font-size:24px;line-height:1;color:#fff}.brand small{display:block;color:#ffdc37;font-size:17px;font-weight:800;letter-spacing:1px}
+.cin{border-left:1px solid #b9c8e4;padding-left:18px;font-size:13px;line-height:1.5;white-space:nowrap}
+nav{display:flex;align-items:center;gap:25px;font-size:15px;font-weight:700;white-space:nowrap}nav a{color:#fff;text-decoration:none}nav a.active{color:#ffdb27;border-bottom:3px solid #ffdb27;padding-bottom:8px}.login{border:1px solid #fff;border-radius:10px;padding:9px 13px}
+main{max-width:1600px;margin:auto;padding:0 28px 24px}
+.hero{text-align:center;padding:4px 0 12px;background:radial-gradient(ellipse at top,#fff 0%,#f5f9ff 70%)}.hero h1{font-family:Georgia,serif;font-size:38px;color:#081c65;margin:0 0 2px}.hero p{font-family:Georgia,serif;font-size:19px;font-weight:bold;font-style:italic;color:#101c5d;margin:0}
+.progress{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;margin:10px 7% 18px;text-align:center;position:relative}.progress:before{content:"";position:absolute;left:16%;right:16%;top:18px;height:2px;background:#173d88;z-index:0}.step{position:relative;z-index:1;font-size:15px;font-weight:700}.bubble{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#fff;border:2px solid #173d88;margin:0 auto 5px;font-size:19px}.done .bubble{background:#0ba64b;color:#fff;border-color:#0ba64b}.current .bubble{background:#123b83;color:#fff;border-color:#123b83}.step-label{display:inline-block;padding:7px 14px;border-radius:18px}.current .step-label{background:#123b83;color:#fff}
+.bar{background:linear-gradient(90deg,#0a3479,#001d51);color:#fff;border-radius:14px;padding:10px 22px;font-size:22px;font-weight:800;margin-bottom:14px;box-shadow:0 2px 4px #b8cce7}
+.columns{display:grid;grid-template-columns:0.88fr 1.12fr;gap:14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:15px;overflow:hidden;box-shadow:0 2px 5px #dce9f8;margin-bottom:12px}
+.card-title{background:linear-gradient(90deg,#d8eaff,#c8e0ff);color:#092d94;font-size:20px;font-weight:800;padding:9px 18px;display:flex;align-items:center;gap:12px}
+.card-body{padding:13px 18px}
+.summary-row{display:grid;grid-template-columns:190px 18px 1fr;gap:7px;padding:8px 4px;border-bottom:1px solid #e5edf7;font-size:16px;line-height:1.3}.summary-row:last-child{border-bottom:0}.summary-row b{font-weight:800}.summary-row .colon{font-weight:bold}.summary-row select,.summary-row input{width:100%;padding:7px 9px;border:1px solid #9eb8df;border-radius:8px;background:#fff;font:14px Arial;color:#17233e}.fee-warning{display:none;background:#fff0d6;border:1px solid #e9c27d;color:#754400;border-radius:9px;padding:10px 12px;margin:8px 0;font-size:14px;font-weight:700}
+.rules table,.fees table{width:100%;border-collapse:collapse;font-size:15px}.rules th,.fees th{background:linear-gradient(90deg,#124c9c,#06295e);color:#fff;padding:9px 10px;text-align:center}.rules td,.fees td{border:1px solid #d7e2ef;padding:8px 10px}.rules td:last-child{text-align:center;font-weight:700}.rules tr:nth-child(even){background:#fff9dd}.rules-note{margin-top:9px;background:#fff5ca;border-radius:9px;padding:10px 12px;font-size:14px;line-height:1.45}
+.info{background:#fff4bc;border-radius:10px;padding:9px 12px;text-align:center;font-size:15px;font-weight:700;margin-bottom:10px}
+.fees th{background:#e4efff;color:#102d76}.fees td{text-align:right}.fees td:first-child{text-align:left}.fees .total-row{background:#ffe978;font-weight:800}.fees .apc-total{background:#0b4c9d;color:#fff;font-weight:800}.doi-head{display:flex;align-items:center;gap:10px;background:#e6f0ff;padding:8px 13px;font-weight:800;color:#092d94;margin-top:12px;border-radius:9px 9px 0 0}.doi-head input{width:20px;height:20px;accent-color:#0b4c9d}
+.payable{margin-top:12px;background:linear-gradient(90deg,#092c6d,#001b4e);color:#fff;border-radius:13px;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;font-size:20px;font-weight:800}.payable strong{color:#ffdf20;font-size:31px}.without{margin-top:7px;border:1px solid #9fc5f6;background:#e6f2ff;color:#091e6c;text-align:center;padding:9px;border-radius:9px;font-weight:800}
+.note{margin-top:13px;background:#e3f1ff;border:1px solid #a8cdf8;border-radius:12px;padding:13px 20px;display:flex;gap:15px;align-items:center;font-size:18px;font-weight:700}.note .i{font-size:27px;color:#0752bf}
+.actions{display:flex;justify-content:space-between;align-items:center;margin-top:14px}.btn{border:1px solid #9eb5d3;border-radius:12px;padding:14px 24px;font-size:17px;font-weight:800;background:#edf3fb;color:#111;cursor:pointer}.btn.primary{background:linear-gradient(#075dc0,#001e65);color:#fff;border:0;min-width:300px}
+@media(max-width:1050px){header{height:auto;flex-wrap:wrap}nav{gap:12px;flex-wrap:wrap}.columns{grid-template-columns:1fr}.progress{margin-left:0;margin-right:0}.summary-row{grid-template-columns:155px 12px 1fr}}
+@media(max-width:650px){#page3 .field{grid-template-columns:1fr;gap:5px}main{padding:0 10px}.hero h1{font-size:28px}.hero p{font-size:15px}.progress{grid-template-columns:1fr;gap:10px}.progress:before{display:none}.step{display:flex;align-items:center;gap:8px;text-align:left}.bubble{margin:0;width:32px;height:32px;flex:none}.step-label{padding:5px 8px}.bar{font-size:17px}.summary-row{grid-template-columns:120px 10px 1fr;font-size:14px}.card-title{font-size:17px}.payable{font-size:16px}.payable strong{font-size:24px}.actions{gap:10px;flex-direction:column}.btn,.btn.primary{width:100%;min-width:0}.brand{min-width:0}.cin{display:none}nav{font-size:13px}}
+
+
+:root{--navy:#061a43;--deep:#00245d;--blue:#0755ad;--royal:#123f9d;--pale:#eaf4ff;--line:#c8def8;--gold:#ffe66b;--ink:#101b36}
+*{box-sizing:border-box}
+body{margin:0;background:#f5f9ff;color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+header{min-height:62px;background:#061a43;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:7px 28px;gap:18px}
+.brand{display:flex;align-items:center;gap:9px;min-width:270px}.logo{font-size:37px;color:#ffd329}.brand strong{font: bold 24px Georgia,serif;line-height:1}.brand small{display:block;color:#ffdc37;font-size:16px;font-weight:800;letter-spacing:1px}
+.cin{border-left:1px solid #b9c8e4;padding-left:17px;font-size:12px;line-height:1.5;white-space:nowrap}
+nav{display:flex;align-items:center;gap:22px;font-size:15px;font-weight:700;white-space:nowrap}nav a{color:#fff;text-decoration:none}nav a.active{color:#ffdb27;border-bottom:3px solid #ffdb27;padding-bottom:8px}.login{border:1px solid #fff;border-radius:10px;padding:8px 12px}
+main{max-width:1600px;margin:auto;padding:0 28px 24px}
+.hero{text-align:center;padding:4px 0 7px;background:radial-gradient(ellipse at top,#fff 0%,#f5f9ff 72%)}
+.hero h1{font: bold 37px Georgia,serif;color:#081c65;margin:0 0 2px}.hero p{font:italic bold 18px Georgia,serif;color:#101c5d;margin:0}
+.progress{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;margin:8px 7% 15px;text-align:center;position:relative}
+.progress:before{content:"";position:absolute;left:16%;right:16%;top:18px;height:2px;background:#173d88;z-index:0}
+.step{position:relative;z-index:1;font-size:15px;font-weight:700}.bubble{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#fff;border:2px solid #173d88;margin:0 auto 4px;font-size:19px}
+.done .bubble{background:#0ba64b;color:#fff;border-color:#0ba64b}.current .bubble{background:#123b83;color:#fff;border-color:#123b83}.step-label{display:inline-block;padding:6px 13px;border-radius:18px}.current .step-label{background:#123b83;color:#fff}
+.bar{background:linear-gradient(90deg,#0a3479,#001d51);color:#fff;border-radius:13px;padding:10px 22px;font-size:22px;font-weight:800;margin-bottom:12px;box-shadow:0 2px 4px #b8cce7}
+.manuscript-strip{display:grid;grid-template-columns:1.05fr .9fr 1.15fr .45fr 1.45fr;align-items:center;background:#edf6ff;border:1px solid var(--line);border-radius:13px;padding:10px 12px;margin-bottom:14px;box-shadow:0 2px 5px #e0ebf8}
+.strip-item{display:flex;align-items:center;gap:10px;padding:3px 12px;border-right:1px solid #9cb8e2;min-height:53px;font-size:14px;line-height:1.3}.strip-item:last-child{border:0}.strip-icon{font-size:25px;color:#082e9b;flex:none}.strip-item b{display:block;color:#0b246c;margin-bottom:2px}.id-pill{display:inline-block;background:#fff1a8;border-radius:9px;padding:8px 12px;font-weight:800;white-space:nowrap}.authors{text-align:center;justify-content:center}.total-box{background:#fff1a8;border-radius:10px;padding:8px 10px;text-align:center;font-weight:800;white-space:nowrap}.total-box b{display:block;color:#0b246c;margin-bottom:4px}.total-parts{font-size:13px}
+.columns{display:grid;grid-template-columns:1fr 1.02fr;gap:14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:15px;overflow:hidden;box-shadow:0 2px 5px #dce9f8}
+.card-title{background:linear-gradient(90deg,#d8eaff,#c8e0ff);color:#092d94;font-size:20px;font-weight:800;padding:9px 18px;display:flex;align-items:center;gap:12px}
+.card-body{padding:13px 16px}
+.instructions{font-size:15px;line-height:1.45;margin:0 0 15px}
+.payment-methods{display:grid;grid-template-columns:.88fr 1fr;gap:26px;align-items:start}
+.method{border:1px solid #b9d4f7;border-radius:12px;overflow:hidden;box-shadow:0 2px 4px #e0eafa}
+.method-title{background:linear-gradient(90deg,#0d4d9d,#06275e);color:white;text-align:center;padding:10px 7px;font-weight:800;font-size:16px}
+.qr-body{padding:12px 12px 10px;text-align:center;background:#fff}
+.qr-placeholder{width:min(100%,190px);aspect-ratio:1;margin:0 auto 8px;border:8px solid #fff;outline:1px solid #e0e8f2;background:
+ repeating-conic-gradient(#111 0% 25%,#fff 0% 50%) 0 0/18px 18px;position:relative}
+.qr-placeholder:before,.qr-placeholder:after{content:"";position:absolute;width:43px;height:43px;background:#fff;border:7px solid #111;box-shadow:inset 0 0 0 7px #fff,inset 0 0 0 13px #111;top:5px;left:5px}
+.qr-placeholder:after{left:auto;right:5px}
+.qr-bottom{background:#fff2a8;border-radius:9px;padding:9px 7px;font-weight:800;margin-top:8px;display:flex;justify-content:center;align-items:center;gap:8px}
+.or{position:absolute;right:-22px;top:46%;transform:translateY(-50%);background:#d9e9ff;border-radius:50%;width:42px;height:42px;display:grid;place-items:center;font-weight:800;color:#0b246c;border:1px solid #b7ccef}
+.qr-wrap{position:relative}
+.bank-body{padding:13px 15px}.bank-row{display:grid;grid-template-columns:115px 12px 1fr;gap:5px;padding:11px 2px;border-bottom:1px solid #e5edf7;font-size:14px;line-height:1.3}.bank-row:last-child{border:0}.bank-row b{font-weight:800}
+.confirm .card-body{padding:13px 15px}
+#page3 .field{display:grid;grid-template-columns:225px 1fr;align-items:center;gap:10px;margin:11px 0}#page3 .field label{font-weight:800;font-size:14px}.required{color:#e11d48}
+input[type=text],input[type=date]{width:100%;height:42px;border:1px solid #9eb8df;border-radius:9px;padding:9px 12px;font-size:14px;color:#17233e;background:#fff;box-shadow:inset 0 1px 2px #edf2f9}
+.code-row{display:grid;grid-template-columns:1fr auto;gap:8px}.apply{border:0;background:linear-gradient(#075dc0,#001e65);color:#fff;font-weight:800;border-radius:9px;padding:0 20px;cursor:pointer}
+.code-box{background:#fff3bf;border-radius:10px;padding:9px 11px;display:grid;grid-template-columns:1fr 1.15fr auto;align-items:center;gap:8px;margin-bottom:13px;font-size:13px;font-weight:800}
+.discount{grid-column:1/-1;background:#e9ffef;border:1px solid #a6dfb5;color:#166534;border-radius:7px;padding:7px 10px;font-size:13px}.discount.error{background:#fff0f0;border-color:#efb4b4;color:#991b1b}
+.upload{border:1px dashed #73a8ee;border-radius:10px;min-height:83px;background:#f1f7ff;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;cursor:pointer;color:#172c62;font-weight:700;font-size:14px}
+.upload input{display:none}.upload span{display:block;font-size:25px;color:#0752b8;margin-bottom:2px}
+.declaration{background:#fff7ce;border-radius:10px;padding:12px;display:flex;gap:10px;align-items:flex-start;margin-top:14px;font-size:14px;line-height:1.4;font-weight:700}.declaration input{width:19px;height:19px;accent-color:#0a4a9c;flex:none}
+.actions{display:flex;justify-content:space-between;align-items:center;margin-top:18px}.btn{border:1px solid #9eb5d3;border-radius:12px;padding:13px 22px;font-size:17px;font-weight:800;background:#edf3fb;color:#111;cursor:pointer}.btn.primary{background:linear-gradient(#075dc0,#001e65);color:#fff;border:0;min-width:300px}
+#fileName{font-size:12px;color:#1b5a31;margin-top:5px}
+@media(max-width:1100px){header{flex-wrap:wrap;height:auto}nav{gap:12px;flex-wrap:wrap}.manuscript-strip{grid-template-columns:repeat(2,1fr)}.strip-item:nth-child(2){border-right:0}.strip-item:last-child{grid-column:1/-1}.columns{grid-template-columns:1fr}}
+@media(max-width:650px){main{padding:0 10px}.hero h1{font-size:27px}.hero p{font-size:14px}.progress{grid-template-columns:1fr;gap:8px;margin:8px 0}.progress:before{display:none}.step{display:flex;align-items:center;gap:8px;text-align:left}.bubble{margin:0;width:32px;height:32px;flex:none}.step-label{padding:5px 8px}.bar{font-size:17px}.manuscript-strip{grid-template-columns:1fr}.strip-item{border-right:0;border-bottom:1px solid #c8d9ee}.strip-item:last-child{grid-column:auto}.payment-methods{grid-template-columns:1fr}.or{display:none}.field{grid-template-columns:1fr;gap:5px}.code-box{grid-template-columns:1fr}.discount{grid-column:auto}.actions{gap:10px;flex-direction:column}.btn,.btn.primary{width:100%;min-width:0}.brand{min-width:0}.cin{display:none}nav{font-size:12px}.bank-row{grid-template-columns:105px 10px 1fr}}
+
+
+.wizard-page{display:none}
+.wizard-page.active{display:block}
+#page1 .actions{margin-top:14px}
+#page2 .columns{align-items:start}
+#page3 .manuscript-strip{margin-top:0}
+#page3 .total-box{white-space:normal}
+#page3 .total-parts{line-height:1.55}
+button:disabled{opacity:.5;cursor:not-allowed}
+
+[hidden]{display:none!important}
+.actual-qr {
+    display: block;
+    width: 5cm;
+    height: 5cm;
+    object-fit: contain;
+    margin: 10px auto;
+    padding: 2px;
+    background: #ffffff;
+    border: 1px solid #dce5f0;
+    border-radius: 4px;
+}
+/* SINGLE CONTROL: change this value to resize BOTH payment boxes together */
+:root { --payment-method-height: 430 px;--payment-box-width: 430px }
+.payment-methods { align-items: stretch; }
+.payment-methods > .qr-wrap { display: flex; height: var(--payment-method-height); }
+.payment-methods > .qr-wrap > .method { width: 100%; height: 100%; }
+.payment-methods > .method { height: var(--payment-method-height); }
+
+/* Axiara Payment Portal – Step 3 */
+.payment-intro{background:#e8f2ff;border:1px solid #c8def8;border-radius:11px;padding:12px 16px;margin:0 0 13px;color:#233b61;font-size:14px}
+.portal-details{display:grid;grid-template-columns:1fr 1fr;gap:13px 20px}
+.portal-field label{display:block;font-size:13px;font-weight:800;margin-bottom:5px;color:#20345b}
+.portal-field input{width:100%;min-height:39px;border:1px solid #aabfdd;border-radius:8px;padding:9px 11px;background:#f7faff;color:#17233e;font:14px Arial}
+.portal-field input[readonly]{background:#f3f7fd}
+.portal-field.payable-field input{background:#fff5c7;border-color:#e5c96b;color:#092d68;font-weight:800;font-size:18px}
+.portal-methods{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.portal-method{position:relative;display:flex;min-height:102px;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center;padding:12px 8px;border:1px solid #c8d8ed;border-radius:11px;background:#fbfdff;cursor:pointer;color:#19335b}
+.portal-method input{position:absolute;opacity:0;pointer-events:none}
+.portal-method.selected{border:2px solid #0755ad;background:#edf5ff;box-shadow:0 2px 7px #d8e7f9}
+.portal-method:focus-within{outline:3px solid #c5dcf7}
+.portal-method .method-icon{font-size:25px;color:#0752a7}
+.portal-method b{font-size:13px}.portal-method small{font-size:11px;color:#64748b}
+.payment-option-panel{border:1px solid #c8def8;border-radius:11px;overflow:hidden;margin-top:10px;background:#fff}
+.payment-panel-title{background:linear-gradient(90deg,#0d4d9d,#06275e);color:#fff;padding:11px 15px;font-weight:800;font-size:15px}
+.upi-content{display:grid;grid-template-columns:minmax(180px,230px) 1fr;gap:22px;align-items:center;padding:18px}
+.qr-frame{min-height:205px;display:grid;place-items:center;background:#fff;border:1px solid #e1e8f2;border-radius:10px;padding:10px}
+.qr-frame img{width:190px;height:190px;object-fit:contain}
+.qr-missing{font-size:12px;text-align:center;color:#7c4a10;background:#fff8e6;padding:15px;border-radius:8px}
+.upi-details p,.bank-instruction{font-size:13px;color:#52647f;margin:0 0 13px}
+.detail-caption{display:block;font-size:11px;color:#65758d;font-weight:800;letter-spacing:.08em;margin-bottom:5px}
+.upi-id{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#f0f6ff;border:1px solid #d3e3f8;border-radius:8px;padding:11px 12px;color:#092d68}
+.copy-upi{border:0;border-radius:6px;background:#0752a7;color:#fff;padding:7px 11px;font-weight:700;cursor:pointer}
+.upi-details small{display:block;color:#64748b;font-size:11px;margin-top:11px;line-height:1.5}
+.maintenance{padding:22px;background:#fff8e8;color:#80520a;display:flex;flex-direction:column;gap:6px}
+.maintenance strong{font-size:16px}.maintenance span{font-size:13px}
+.bank-instruction{padding:13px 15px 0;margin-bottom:8px}
+.bank-details{display:grid;grid-template-columns:1fr 1fr;gap:0 20px;padding:0 15px 13px}
+.bank-details div{display:grid;grid-template-columns:125px 1fr;gap:8px;padding:10px 2px;border-bottom:1px solid #e5edf7;font-size:13px}
+.bank-details b{color:#20345b}.bank-details span{color:#334155;overflow-wrap:anywhere}
+.payment-confirm-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px}
+.payment-confirm-grid .field{min-width:0}.payment-confirm-grid .full{grid-column:1/-1}
+.payment-confirm-grid label{display:block;font-size:13px;font-weight:800;margin-bottom:6px}
+.payment-confirm-grid input[type=text],.payment-confirm-grid input[type=date]{width:100%;min-height:40px;border:1px solid #9eb8df;border-radius:8px;padding:9px 11px;font-size:14px}
+.date-hint{display:block;color:#64748b;font-size:11px;margin-top:5px}
+@media(max-width:850px){.portal-methods{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.portal-details,.payment-confirm-grid,.bank-details,.upi-content{grid-template-columns:1fr}.payment-confirm-grid .full{grid-column:auto}.portal-method{min-height:88px}.bank-details div{grid-template-columns:115px 1fr}}
+
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><span class="logo">◈</span><div><strong>AXIARA®</strong><small>JOURNALS </small></div></div>
+  <div class="cin"><b>An Imprint of Axiara Private Limited</b><br>CIN: UXXXXXXXXXXXXXX</div>
+  <nav><a href="#">Home</a><a href="#">About⌄</a><a href="#">Journals⌄</a><a href="#">Author Guidelines</a><a class="active" href="#">Submission</a><a href="#">Payment</a><a href="#">Contact</a><a class="login" href="#">♙ Author Login</a></nav>
+</header>
+<main>
+  <section class="hero"><h1>Manuscript Submission Portal</h1><p>Submit Your Research Manuscript</p></section>
+  <section class="progress" aria-label="Submission progress">
+    <div class="step current" id="progress1"><div class="bubble">1</div><span class="step-label">Manuscript, Authors &amp; File Upload</span></div>
+    <div class="step" id="progress2"><div class="bubble">2</div><span class="step-label">Payment Details (Review of Amount)</span></div>
+    <div class="step" id="progress3"><div class="bubble">3</div><span class="step-label">Axiara Payment Portal &amp; Final Submission</span></div>
+  </section>
+  <section id="page1" class="wizard-page active">
+  <div class="bar">▤ &nbsp; Step 1 of 3: Manuscript, Authors &amp; File Upload</div>
+
+  <section class="panel">
+    <div class="panel-title">▤ &nbsp; A. Manuscript Details</div>
+    <div class="panel-body form-grid">
+      <div class="field"><label for="journal">Select Journal <span class="req">*</span></label><select id="journal"><option value="j1">International Journal of Law and Social Governance (Journal 1)</option><option value="j2">Journal 2</option><option value="j3">Journal 3</option></select></div>
+      <div class="field"><label for="category">Manuscript Category <span class="req">*</span></label><select id="category"><option>Research Article</option><option>Book Review</option><option>Case Comment</option><option>Conference Proceedings</option><option>Dissertation</option><option>Essays</option><option>Thesis</option></select></div>
+      <div class="field full"><label for="title">Title of the Manuscript <span class="req">*</span></label><input id="title" type="text" maxlength="300" value="The Legal Ontology of Digital Signatures in the Algorithmic Age"><div class="title-count"><span id="titleCount">56</span> / 300</div></div>
+      <div class="field full"><label for="abstract">Abstract <span class="req">*</span> &nbsp; <span style="font-weight:400">(Max 250 words)</span></label><textarea id="abstract" maxlength="2500">This paper examines the legal ontology of digital signatures, their evidentiary integrity and emerging liabilities in the algorithmic age ...</textarea><div class="title-count"><span id="abstractCount">112</span> / 250 words</div></div>
+      <div class="field full"><label>Keywords <span class="req">*</span> &nbsp; <span style="font-weight:400">(3–6 keywords)</span></label><div class="keyword-row" id="keywords"><span class="chip">Digital Signature <button type="button" aria-label="Remove keyword">×</button></span><span class="chip">Evidentiary Law <button type="button" aria-label="Remove keyword">×</button></span><span class="chip">Cybersecurity <button type="button" aria-label="Remove keyword">×</button></span><span class="chip">Legal Ontology <button type="button" aria-label="Remove keyword">×</button></span><input class="keyword-entry" id="keywordInput" type="text" placeholder="Add keyword + Enter"></div></div>
+      <div class="field full"><label for="researchArea">Research Area / Theme <span class="req">*</span></label><select id="researchArea"><option>Technology Law</option><option>Constitutional Law</option><option>Criminal Law</option><option>Corporate Law</option><option>International Law</option><option>Other</option></select></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-title">♧ &nbsp; B. Authors &amp; Affiliation <span class="limit" style="margin-left:auto">ⓘ &nbsp; Maximum 6 Authors Allowed</span></div>
+    <div class="panel-body">
+      <div class="author-head"><span>#</span><span>Author Name <span class="req">*</span></span><span>Affiliation (Institution, City, Country) <span class="req">*</span></span><span>Author Type <span class="req">*</span></span><span></span></div>
+      <div id="authorRows">
+        <div class="author-row"><span class="num">1</span><input type="text" aria-label="Author 1 name" value="Dr. Satendra Rajput"><input class="affiliation" type="text" aria-label="Author 1 affiliation" value="Seedling School of Law and Governance, Jaipur National University, Jaipur, India"><select aria-label="Author 1 type"><option>First Author</option><option>Co-author</option></select><button class="delete" type="button" title="Remove author">▤</button></div>
+        <div class="author-row"><span class="num">2</span><input type="text" aria-label="Author 2 name" value="Ananya Sharma"><input class="affiliation" type="text" aria-label="Author 2 affiliation" value="Faculty of Law, University of Delhi, New Delhi, India"><select aria-label="Author 2 type"><option>Co-author</option><option>First author Author</option></select><button class="delete" type="button" title="Remove author">▤</button></div>
+        <div class="author-row"><span class="num">3</span><input type="text" aria-label="Author 3 name" value="Rohit Verma"><input class="affiliation" type="text" aria-label="Author 3 affiliation" value="School of Law, Banaras Hindu University, Varanasi, India"><select aria-label="Author 3 type"><option>Co-author</option><option>First Author</option></select><button class="delete" type="button" title="Remove author">▤</button></div>
+      </div>
+      <div class="author-actions"><button class="add" type="button" id="addAuthor">＋ Add Author</button><span class="limit" id="authorCountBadge">3 / 6 Authors</span></div>
+    </div>
+  </section>
+
+
+  <section class="panel">
+    <div class="panel-title">♙ &nbsp; Corresponding Author Contact Details</div>
+    <div class="panel-body form-grid">
+      <div class="field"><label for="correspondingEmail">First Author / Corresponding Author Email <span class="req">*</span></label><input id="correspondingEmail" type="email" placeholder="Enter email address" required></div>
+      <div class="field"><label for="correspondingMobile">First Author / Corresponding Author Mobile <span class="req">*</span></label><input id="correspondingMobile" type="tel" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="10-digit mobile number" required></div>
+      <div class="full" style="font-size:12px;color:#52647f">These contact details will be transferred automatically to the Axiara Payment Portal.</div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-title">♧ &nbsp; C. Upload Files</div>
+    <div class="panel-body upload-grid">
+      <div class="upload-unit">
+        <span class="upload-icon">▤</span>
+        <div class="upload-copy"><b>Manuscript File <span class="req">*</span></b><small>(Word: .doc / .docx only, Max 10 MB)</small><div class="file-status" id="manuscriptStatus">No manuscript selected</div></div>
+        <label class="file-label">Choose File<input type="file" id="manuscriptFile" accept=".doc,.docx"></label>
+      </div>
+      <div class="upload-unit file-divider">
+        <span class="upload-icon">♧</span>
+        <div class="upload-copy"><b>Supplementary File(s) (Optional)</b><small>(Figures, Tables, Annexures, etc. | PDF, DOC, JPG, PNG, Max 5 MB each)</small><div class="file-status" id="supplementaryStatus">No supplementary files selected</div></div>
+        <label class="file-label">Choose File<input type="file" id="supplementaryFiles" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" multiple></label>
+      </div>
+    </div>
+  </section>
+
+  <div id="step1Error" role="alert" aria-live="polite" hidden style="margin-top:10px;padding:10px 13px;border:1px solid #e6a4a4;background:#fff0f0;color:#991b1b;border-radius:9px;font-weight:700;font-size:13px"></div>
+  <div class="actions">
+    <button class="btn" type="button" id="saveDraft">▣ &nbsp; Save as Draft</button>
+    <button class="btn primary" type="button" id="proceedToReview">Proceed to Payment Details &nbsp; →</button>
+  </div>
+  </section>
+  <section id="page2" class="wizard-page">
+  <div class="bar">▤ &nbsp; Step 2 of 3: Payment Details (Review of Amount)</div>
+  <section class="card" id="feeWaiverPanel" style="margin:0 0 14px;border:2px solid #9fc5f6">
+    <div class="card-title">％ &nbsp; Fee-Waiver / Referral / Exemption Code</div>
+    <div class="card-body">
+      <p style="margin:0 0 10px;color:#263b62;font-size:14px">Enter an authorised fee-waiver, referral or exemption code. Once successfully applied, the payment details below will reflect the applicable waiver, GST and final payable amount.</p>
+      <div class="code-box">
+        <label for="referralCode"><b>Fee-Waiver / Referral Code (Optional)</b></label>
+        <input type="text" id="referralCode" placeholder="Enter your fee-waiver or referral code" autocomplete="off">
+        <button class="apply" type="button" id="applyReferralCode">Apply Code</button>
+        <div id="referralCodeStatus" class="discount" role="status" aria-live="polite" hidden></div>
+      </div>
+      <p style="margin:8px 0 0;color:#52627b;font-size:12px">Referral codes: Axiara75 (75%), Satendra50 (50%), Rajput25 (25%), NanaG00 (100%). Other authorised fee-waiver codes are validated through the fee-waiver service. Only one code can be applied at a time.</p>
+    </div>
+  </section>
+  <div class="columns">
+    <div>
+      <section class="card">
+        <div class="card-title">▤ &nbsp; Submission Summary</div>
+        <div class="card-body">
+          <div class="summary-row"><b>Manuscript ID</b><span class="colon">:</span><span>AXJLSG-2026-0387</span></div>
+          <div class="summary-row"><b>Name of Journal</b><span class="colon">:</span><span><select id="journalSelect"><option value="j1">International Journal of Law and Social Governance (Journal 1)</option><option value="j2">Journal 2</option><option value="j3">Journal 3</option></select></span></div>
+          <div class="summary-row"><b>Manuscript Title</b><span class="colon">:</span><span>The Legal Ontology of Digital Signatures<br>in the Algorithmic Age</span></div>
+          <div class="summary-row"><b>Manuscript Category</b><span class="colon">:</span><span>Research Article</span></div>
+          <div class="summary-row"><b>Number of Authors</b><span class="colon">:</span><span><select id="authorCount"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></span></div>
+          <div class="summary-row"><b>Corresponding Author</b><span class="colon">:</span><span>Dr. Satendra Rajput<br>(satendra@jnuj aipur.ac.in)</span></div>
+        </div>
+      </section>
+      <section class="card rules">
+        <div class="card-title">♧ &nbsp; Author-based APC Rules (Including GST @ 18%)</div>
+        <div class="card-body">
+          <table>
+            <thead><tr><th>Author Configuration</th><th>Total Fee<br>(APC + GST)</th></tr></thead>
+            <tbody id="rulesBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+    <div>
+      <section class="card">
+        <div class="card-title">▦ &nbsp; Payment Details</div>
+        <div class="card-body">
+          <div class="info" id="feeInfo">ⓘ &nbsp; Select a journal to view its APC and additional-author fee structure. GST @ 18% is calculated separately.</div>
+          <div class="fee-warning" id="feeWarning"></div>
+          <div class="fees">
+            <table>
+              <thead><tr><th>Particulars</th><th>APC (₹)</th><th>GST @ 18% (₹)</th><th>Total (₹)</th></tr></thead>
+              <tbody id="apcBody"></tbody>
+            </table>
+          </div>
+          <div class="doi-head"><input id="doi" type="checkbox" checked><label for="doi">DOI Assignment (Optional)</label> ⓘ</div>
+          <div class="fees">
+            <table><tbody id="doiBody"></tbody></table>
+          </div>
+          <div class="fees" id="referralCodeBreakdown" hidden></div>
+          <div class="fees" id="waiverBreakdown" hidden></div>
+          <div class="payable"><span>▤ &nbsp; Total Payable Amount<br><small>(APC + DOI, Including GST)</small></span><strong id="total">₹ 1,770.00</strong></div>
+          <div class="without" id="without">Without DOI Charge (Only APC, Including GST): ₹ 1,534.00</div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div class="note"><span class="i">ⓘ</span><span id="notice">If you do not opt for DOI, the total payable amount will be ₹ 1,534.00.</span></div>
+  <div class="actions"><button class="btn" type="button" id="backToSubmission">← &nbsp; Edit Submission</button><button class="btn primary" type="button" id="proceedToFinal">Proceed to Payment &nbsp; →</button></div>
+  </section>
+  <section id="page3" class="wizard-page">
+    <div class="bar">▣ &nbsp; Axiara Payment Portal</div>
+    <div class="payment-intro">Complete your publication payment using one of the available payment methods. Your manuscript and payable amount have been transferred from the previous step.</div>
+
+    <section class="card">
+      <div class="card-title">▤ &nbsp; Applicant &amp; Payment Details</div>
+      <div class="card-body portal-details">
+        <div class="portal-field"><label for="portalApplicant">Applicant Name (First Author)</label><input id="portalApplicant" type="text" readonly></div>
+        <div class="portal-field"><label for="portalEmail">Email Address</label><input id="portalEmail" type="email" readonly></div>
+        <div class="portal-field"><label for="portalMobile">Mobile Number</label><input id="portalMobile" type="text" readonly></div>
+        <div class="portal-field"><label for="portalManuscript">Manuscript Number (Application / Reference ID)</label><input id="portalManuscript" type="text" readonly></div>
+        <div class="portal-field payable-field"><label for="portalAmount">Payable Amount</label><input id="portalAmount" type="text" readonly></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-title">▦ &nbsp; Select Payment Method</div>
+      <div class="card-body">
+        <div class="portal-methods" id="paymentMethods" role="radiogroup" aria-label="Select payment method">
+          <label class="portal-method selected" for="methodUpi"><input type="radio" name="portalPaymentMethod" id="methodUpi" value="upi" checked><span class="method-icon">▦</span><b>UPI / QR</b><small>Scan and pay</small></label>
+          <label class="portal-method" for="methodCard"><input type="radio" name="portalPaymentMethod" id="methodCard" value="card"><span class="method-icon">▤</span><b>Debit / Credit Card</b><small>Currently unavailable</small></label>
+          <label class="portal-method" for="methodNet"><input type="radio" name="portalPaymentMethod" id="methodNet" value="netbanking"><span class="method-icon">▥</span><b>Net Banking</b><small>Bank account details</small></label>
+          <label class="portal-method" for="methodBank"><input type="radio" name="portalPaymentMethod" id="methodBank" value="bank"><span class="method-icon">⇄</span><b>Bank Transfer</b><small>NEFT / RTGS / IMPS</small></label>
+        </div>
+
+        <div id="upiPanel" class="payment-option-panel">
+          <div class="payment-panel-title">Scan &amp; Pay (UPI)</div>
+          <div class="upi-content">
+            <div class="qr-frame">
+              <img src="Sample QR.png" alt="Axiara Private Limited UPI QR Code" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+              <div class="qr-missing" style="display:none">Add the official <b>Sample QR.png</b> file in the same folder as this HTML page to display the UPI QR code.</div>
+            </div>
+            <div class="upi-details">
+              <p>Scan the QR code using any UPI application and pay the exact payable amount shown above.</p>
+              <span class="detail-caption">AXIARA UPI ID</span>
+              <div class="upi-id"><strong>axiara.journals@upi</strong><button type="button" class="copy-upi" id="copyUpi">Copy</button></div>
+              <small>After completing the payment, enter the UTR / transaction number and upload the payment receipt below.</small>
+            </div>
+          </div>
+        </div>
+
+        <div id="cardPanel" class="payment-option-panel" hidden>
+          <div class="maintenance"><strong>Debit / Credit Card – Under Maintenance</strong><span>Card payments are temporarily unavailable. Please select UPI / QR, Net Banking or Bank Transfer.</span></div>
+        </div>
+
+        <div id="netPanel" class="payment-option-panel" hidden>
+          <div class="payment-panel-title">Net Banking – Bank Account Details</div>
+          <p class="bank-instruction">Use the following beneficiary details to complete your payment through your bank's Net Banking facility.</p>
+          <div class="bank-details">
+            <div><b>Account Name</b><span>Axiara Private Limited</span></div>
+            <div><b>Bank Name</b><span>State Bank of India</span></div>
+            <div><b>Branch</b><span>Rath (Uttar Pradesh)</span></div>
+            <div><b>Account No.</b><span>123456789012</span></div>
+            <div><b>IFSC Code</b><span>SBIN0001234</span></div>
+          </div>
+        </div>
+
+        <div id="bankPanel" class="payment-option-panel" hidden>
+          <div class="payment-panel-title">Bank Transfer (NEFT / RTGS / IMPS)</div>
+          <p class="bank-instruction">Transfer the payable amount to the Axiara bank account using the following details.</p>
+          <div class="bank-details">
+            <div><b>Account Name</b><span>Axiara Private Limited</span></div>
+            <div><b>Bank Name</b><span>State Bank of India</span></div>
+            <div><b>Branch</b><span>Rath (Uttar Pradesh)</span></div>
+            <div><b>Account No.</b><span>123456789012</span></div>
+            <div><b>IFSC Code</b><span>SBIN0001234</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card confirm">
+      <div class="card-title">▤ &nbsp; Payment Confirmation</div>
+      <div class="card-body">
+        <div class="payment-confirm-grid">
+          <div class="field">
+            <label for="utr">Transaction / UTR Number <span class="required">*</span></label>
+            <input type="text" id="utr" placeholder="Enter UTR / Transaction ID" required>
+          </div>
+          <div class="field">
+            <label for="paymentDate">Payment Date <span class="required">*</span></label>
+            <input type="date" id="paymentDate" required>
+            <small class="date-hint">Auto-filled with today's date. Change it if your actual payment was made on a different date.</small>
+          </div>
+          <div class="field full">
+            <label for="receipt">Upload Payment Receipt <span class="required">*</span></label>
+            <label class="upload" for="receipt"><span>♧</span>Click to Upload Payment Receipt<br>(PDF / JPG / PNG, Max 5 MB)<input type="file" id="receipt" accept=".pdf,.jpg,.jpeg,.png" required></label>
+            <div id="fileName"></div>
+          </div>
+        </div>
+        <label class="declaration"><input type="checkbox" id="declaration" required aria-required="true"><span>I hereby confirm that (a) I have paid the applicable publication charges for the above manuscript; or (b) where an authorised fee waiver has been applied, I acknowledge and accept the approved waiver. I further confirm that the payment details and receipt submitted, where applicable, are true and correct. <span class="required">*</span></span></label>
+      </div>
+    </section>
+
+    <div class="actions">
+      <button class="btn" type="button" id="backToReview">← &nbsp; Back to Payment Details</button>
+      <button class="btn primary" type="button" id="submit">Final Submit Manuscript &nbsp; ➤</button>
+    </div>
+  </section>
+</main>
+<script>
+(function(){
+  const $ = id => { const el = document.getElementById(id); if (!el) throw new Error('Required page element is missing: #' + id); return el; };
+  const journalSelect = $('journalSelect');
+  const authorCountSelect = $('authorCount');
+  const doi = $('doi');
+  const gstRate = 0.18;
+  const journals = {
+    j1: {name:'International Journal of Law and Social Governance',base:1000,second:200,later:100,doi:200,max:6,note:'Journal 1: Base APC ₹1,000; 2nd author ₹200; 3rd–6th authors ₹100 each.'},
+    j2: {name:'Journal 2',base:1500,second:500,later:200,doi:300,max:6,note:'Journal 2: Base APC ₹1,500; 2nd author ₹500; 3rd–6th authors ₹200 each.'},
+    j3: {name:'Journal 3',base:2500,second:1000,later:0,doi:800,max:2,note:'Journal 3: Base APC ₹2,500; 2nd author ₹1,000; maximum 2 authors.'}
+  };
+  let currentApc = 0, currentGst = 0, currentDoi = 0, currentTotal = 0, currentNetFee = 0, currentReferralDiscount = 0;
+  let appliedWaiver = null;
+  let appliedReferral = null;
+  let waiverRequestPending = false;
+  let manuscriptId = 'AXJ-' + new Date().getFullYear() + '-0387';
+
+  function money(n){return '₹ '+Number(n).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function countAuthors(){return $('authorRows').children.length;}
+  function feeRow(label,amount,cls=''){
+    const gst=amount*gstRate;
+    return `<tr class="${cls}"><td>${label}</td><td>${money(amount)}</td><td>${money(gst)}</td><td><b>${money(amount+gst)}</b></td></tr>`;
+  }
+  function getParts(j,count){
+    const p=[{label:'Base Article Processing Charge (1st Author)',amount:j.base}];
+    if(count>=2)p.push({label:'Additional Author Charge (2nd Author)',amount:j.second});
+    for(let i=3;i<=count;i++)p.push({label:`Additional Author Charge (${i}${i===3?'rd':'th'} Author)`,amount:j.later});
+    return p;
+  }
+  function updateFinalSummary(){
+    const firstAuthorRow=$('authorRows').querySelector('.author-row');
+    const firstAuthor=firstAuthorRow ? firstAuthorRow.querySelector('input[type="text"]')?.value.trim() : '';
+    const email=$('correspondingEmail')?.value.trim()||'';
+    const mobile=$('correspondingMobile')?.value.trim()||'';
+    const fullyWaived=!!((appliedWaiver||appliedReferral)&&currentTotal<=0);
+    $('portalApplicant').value=firstAuthor;
+    $('portalEmail').value=email;
+    $('portalMobile').value=mobile;
+    $('portalManuscript').value=manuscriptId;
+    $('portalAmount').value=money(currentTotal);
+    $('paymentMethods').closest('.card').hidden=fullyWaived;
+    $('paymentMethods').hidden=fullyWaived;
+    document.querySelector('#page3 .confirm').hidden=false;
+    document.querySelector('#page3 .payment-confirm-grid').hidden=fullyWaived;
+    $('utr').required=!fullyWaived;
+    $('paymentDate').required=!fullyWaived;
+    $('receipt').required=!fullyWaived;
+    $('utr').disabled=fullyWaived;
+    $('paymentDate').disabled=fullyWaived;
+    $('receipt').disabled=fullyWaived;
+    if(fullyWaived){
+      $('utr').value='';$('paymentDate').value='';$('receipt').value='';$('fileName').textContent='';
+    }
+  }
+  function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+  function clearAppliedWaiver(message='',isError=false){
+    appliedWaiver=null;
+    $('waiverBreakdown').hidden=true;
+    $('waiverBreakdown').innerHTML='';
+    $('total').textContent=money(currentTotal);
+  }
+  function clearReferral(message='',isError=false){
+    appliedReferral=null;
+    currentReferralDiscount=0;
+    $('referralCodeBreakdown').hidden=true;
+    $('referralCodeBreakdown').innerHTML='';
+    $('referralCodeStatus').hidden=!message;
+    $('referralCodeStatus').classList.toggle('error',!!isError);
+    $('referralCodeStatus').textContent=message;
+  }
+  function updateReview(){
+    const j=journals[journalSelect.value], count=countAuthors(), invalid=count>j.max;
+    authorCountSelect.innerHTML='';
+    for(let n=1;n<=6;n++){
+      const opt=document.createElement('option');opt.value=n;opt.textContent=n;authorCountSelect.append(opt);
+    }
+    authorCountSelect.value=String(count);
+    $('feeInfo').textContent='ⓘ  '+j.note+' GST @ 18% is calculated separately.';
+    $('feeWarning').style.display=invalid?'block':'none';
+    $('feeWarning').textContent=invalid?`This journal permits a maximum of ${j.max} authors. The manuscript currently has ${count} authors. Remove the additional author(s) on Step 1 before proceeding.`:'';
+
+    const baseTotal=j.base*(1+gstRate), secondTotal=j.second*(1+gstRate), laterTotal=j.later*(1+gstRate);
+    let rules=`<tr><td><b>Single Author</b> (1st Author)</td><td>${money(baseTotal)}</td></tr>`;
+    if(j.max>=2)rules+=`<tr><td><b>Two Authors</b> (1st + 2nd)</td><td>${money(baseTotal+secondTotal)}</td></tr>`;
+    if(j.max>=3){
+      rules+=`<tr><td><b>Three Authors</b> (1st + 2nd + 3rd)</td><td>${money(baseTotal+secondTotal+laterTotal)}</td></tr>`;
+      rules+=`<tr><td><b>4–6 Authors</b> (additional author fee)</td><td>Add ${money(laterTotal)} per author</td></tr>`;
+    }
+    $('rulesBody').innerHTML=rules;
+    if(invalid){
+      $('apcBody').innerHTML=`<tr><td colspan="4" style="text-align:center;color:#9b2c2c;font-weight:700">Invalid author count. Maximum allowed: ${j.max}.</td></tr>`;
+      $('doiBody').innerHTML=feeRow('DOI Charge',j.doi)+feeRow('DOI Amount (Including GST)',j.doi,'total-row');
+      currentApc=currentGst=currentDoi=currentTotal=currentNetFee=currentReferralDiscount=0;
+      clearAppliedWaiver();
+      clearReferral();
+      $('total').textContent='Not applicable';
+      $('without').textContent='Please correct the number of authors to calculate the payable amount.';
+      $('without').style.display='block';
+      $('notice').textContent=`The selected journal allows a maximum of ${j.max} authors. Please edit the submission.`;
+      updateFinalSummary();return;
+    }
+    const parts=getParts(j,count), apc=parts.reduce((s,p)=>s+p.amount,0);
+    $('apcBody').innerHTML=parts.map(p=>feeRow(p.label,p.amount)).join('')+feeRow(`Total APC for ${count} Author${count===1?'':'s'}`,apc,'total-row');
+    $('doiBody').innerHTML=feeRow('DOI Charge',j.doi)+feeRow('DOI Amount (Including GST)',j.doi,'total-row');
+    currentApc=apc;currentDoi=doi.checked?j.doi:0;
+    const grossFee=currentApc+currentDoi;
+    currentReferralDiscount=appliedReferral?Math.min(grossFee,Math.round(grossFee*appliedReferral.percent)/100):0;
+    currentNetFee=Math.max(0,grossFee-currentReferralDiscount);
+    currentGst=currentNetFee*gstRate;
+    currentTotal=currentNetFee+currentGst;
+    if(appliedReferral){
+      $('referralCodeBreakdown').innerHTML='<table><tbody>'+
+        '<tr><td>Publication fee before referral waiver</td><td><b>'+money(grossFee)+'</b></td></tr>'+
+        '<tr><td>'+escapeHtml(appliedReferral.label)+'</td><td><b>−'+money(currentReferralDiscount)+'</b></td></tr>'+
+        '<tr><td>Fee after referral waiver (taxable value)</td><td><b>'+money(currentNetFee)+'</b></td></tr>'+
+        '<tr><td>GST @ 18% on discounted fee</td><td><b>'+money(currentGst)+'</b></td></tr>'+
+        '<tr class="total-row"><td>Final total payable</td><td><b>'+money(currentTotal)+'</b></td></tr>'+
+        '</tbody></table>';
+      $('referralCodeBreakdown').hidden=false;
+      $('waiverBreakdown').hidden=true;
+    } else if(appliedWaiver){
+      currentTotal=Math.max(0,currentTotal-appliedWaiver.amount);
+      $('waiverBreakdown').innerHTML='<table><tbody><tr><td>Authorised fee waiver ('+escapeHtml(appliedWaiver.label)+')</td><td><b>−'+money(appliedWaiver.amount)+'</b></td></tr></tbody></table>';
+      $('waiverBreakdown').hidden=false;
+    } else {
+      $('waiverBreakdown').hidden=true;
+      $('waiverBreakdown').innerHTML='';
+    }
+    $('total').textContent=money(currentTotal);
+    const apcAfterReferral=appliedReferral?apc*(1-appliedReferral.percent/100):apc;
+    $('without').textContent='Without DOI Charge (APC + GST, after any referral waiver): '+money(apcAfterReferral*(1+gstRate));
+    $('without').style.display=doi.checked?'block':'none';
+    $('notice').textContent=doi.checked?'If you do not opt for DOI, the total payable amount will be '+money(apcAfterReferral*(1+gstRate))+'.':'DOI assignment has not been selected. Your payable amount is '+money(apcAfterReferral*(1+gstRate))+'.';
+    updateFinalSummary();
+  }
+  function setStep(n){
+    [1,2,3].forEach(i=>{
+      $('page'+i).classList.toggle('active',i===n);
+      const p=$('progress'+i);p.classList.toggle('current',i===n);p.classList.toggle('done',i<n);
+      p.querySelector('.bubble').textContent=i<n?'✓':String(i);
+    });
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  const title=$('title'), abstract=$('abstract');
+  title.addEventListener('input',()=>{$('titleCount').textContent=title.value.length;updateFinalSummary();});
+  function countWords(s){return s.trim()?s.trim().split(/\s+/).length:0;}
+  abstract.addEventListener('input',()=>$('abstractCount').textContent=countWords(abstract.value));
+  $('keywords').addEventListener('click',e=>{if(e.target.tagName==='BUTTON')e.target.parentElement.remove();});
+  $('keywordInput').addEventListener('keydown',e=>{
+    if(e.key==='Enter'){
+      e.preventDefault();const v=e.target.value.trim();
+      if(v&&document.querySelectorAll('#keywords .chip').length<6){
+        const chip=document.createElement('span');chip.className='chip';chip.append(document.createTextNode(v+' '));
+        const btn=document.createElement('button');btn.type='button';btn.textContent='×';btn.setAttribute('aria-label','Remove keyword');
+        chip.append(btn);$('keywords').insertBefore(chip,e.target);e.target.value='';
+      }
+    }
+  });
+
+  const authorRows=$('authorRows');
+  function renumber(){
+    [...authorRows.children].forEach((r,i)=>r.querySelector('.num').textContent=i+1);
+    $('authorCountBadge').textContent=authorRows.children.length+' / 6 Authors';
+    const max=journals[$('journal').value].max;
+    $('addAuthor').disabled=authorRows.children.length>=max;
+  }
+  authorRows.addEventListener('click',e=>{
+    if(e.target.classList.contains('delete')&&authorRows.children.length>1){
+      e.target.closest('.author-row').remove();renumber();updateReview();
+    }
+  });
+  $('addAuthor').addEventListener('click',()=>{
+    const max=journals[$('journal').value].max;
+    if(authorRows.children.length>=max)return;
+    const r=document.createElement('div');r.className='author-row';
+    r.innerHTML='<span class="num"></span><input type="text" placeholder="Author full name" aria-label="Author name"><input class="affiliation" type="text" placeholder="Institution, City, Country" aria-label="Author affiliation"><select aria-label="Author type"><option>Co-author</option><option>First Author</option></select><button class="delete" type="button" title="Remove author">▤</button>';
+    authorRows.append(r);renumber();updateReview();
+  });
+  function showFile(inputId,statusId,extensions,maxSize){
+    const input=$(inputId);
+    input.addEventListener('change',()=>{
+      const files=[...input.files],valid=files.every(f=>extensions.includes(f.name.split('.').pop().toLowerCase())&&f.size<=maxSize*1024*1024);
+      const status=$(statusId);
+      if(!valid){alert('One or more files do not meet the permitted format or size limit.');input.value='';status.textContent='No file selected';return;}
+      status.textContent=files.length?files.map(f=>f.name+' ('+(f.size/1024/1024).toFixed(2)+' MB)').join(', '):'No file selected';
+    });
+  }
+  showFile('manuscriptFile','manuscriptStatus',['doc','docx'],10);
+  ['title','abstract','journal'].forEach(id=>$(id).addEventListener('input',()=>{$('step1Error').hidden=true;}));
+  $('manuscriptFile').addEventListener('change',()=>{$('step1Error').hidden=true;});
+  showFile('supplementaryFiles','supplementaryStatus',['pdf','doc','docx','jpg','jpeg','png'],5);
+  $('saveDraft').addEventListener('click',()=>alert('Draft-saving requires connection to the submission database.'));
+  $('proceedToReview').addEventListener('click',()=>{
+    const errorBox=$('step1Error');
+    const missing=[];
+    if(!title.value.trim()) missing.push('manuscript title');
+    if(!abstract.value.trim()) missing.push('abstract');
+    if(!$('correspondingEmail').value.trim()) missing.push('first author email address');
+    if(!$('correspondingMobile').value.trim() || !/^[0-9]{10}$/.test($('correspondingMobile').value.trim())) missing.push('valid 10-digit first author mobile number');
+    const rows=[...authorRows.querySelectorAll('.author-row')];
+    rows.forEach((row,index)=>{
+      const fields=row.querySelectorAll('input[type="text"]');
+      if(!fields[0]||!fields[0].value.trim()) missing.push('author '+(index+1)+' name');
+      if(!fields[1]||!fields[1].value.trim()) missing.push('author '+(index+1)+' affiliation');
+    });
+    const manuscript=$('manuscriptFile');
+    if(!manuscript.files||!manuscript.files.length) missing.push('manuscript file (.doc or .docx)');
+    if(countAuthors()>journals[$('journal').value].max){
+      missing.push('a valid author count (maximum '+journals[$('journal').value].max+')');
+    }
+    if(missing.length){
+      errorBox.textContent='Please complete the following before proceeding: '+missing.join('; ')+'.';
+      errorBox.hidden=false;
+      errorBox.scrollIntoView({behavior:'smooth',block:'center'});
+      return;
+    }
+    errorBox.hidden=true;
+    try{
+      journalSelect.value=$('journal').value;
+      renumber();
+      updateReview();
+      setStep(2);
+    }catch(error){
+      console.error('Unable to open Step 2:',error);
+      errorBox.textContent='The submission could not advance because of a page error: '+(error.message||'Unknown error')+'. Please refresh and try again.';
+      errorBox.hidden=false;
+      errorBox.scrollIntoView({behavior:'smooth',block:'center'});
+    }
+  });
+
+  journalSelect.addEventListener('change',()=>{
+    $('journal').value=journalSelect.value;clearAppliedWaiver();clearReferral();$('referralCode').value='';renumber();updateReview();
+  });
+  $('journal').addEventListener('change',()=>{
+    journalSelect.value=$('journal').value;clearAppliedWaiver();clearReferral();$('referralCode').value='';renumber();updateReview();
+  });
+  authorCountSelect.addEventListener('change',()=>{authorCountSelect.value=countAuthors();});
+  doi.addEventListener('change',()=>{clearAppliedWaiver();clearReferral();$('referralCode').value='';updateReview();});
+  $('backToSubmission').addEventListener('click',()=>setStep(1));
+  $('proceedToFinal').addEventListener('click',()=>{
+    if(waiverRequestPending){alert('Please wait until fee-waiver validation is complete.');return;}
+    if(countAuthors()>journals[journalSelect.value].max){alert('This journal permits a maximum of '+journals[journalSelect.value].max+' authors. Please edit the author list.');return;}
+    updateReview();updateFinalSummary();setStep(3);
+  });
+
+  const paymentDate=$('paymentDate'),now=new Date();
+  paymentDate.value=[now.getFullYear(),String(now.getMonth()+1).padStart(2,'0'),String(now.getDate()).padStart(2,'0')].join('-');
+  const receipt=$('receipt');
+  receipt.addEventListener('change',()=>{
+    const f=receipt.files[0],out=$('fileName');
+    if(!f){out.textContent='';return;}
+    if(!['application/pdf','image/jpeg','image/png'].includes(f.type)||f.size>5*1024*1024){
+      alert('Please upload a PDF, JPG or PNG file not exceeding 5 MB.');receipt.value='';out.textContent='';return;
+    }
+    out.textContent='Selected file: '+f.name;
+  });
+  const referralOffers={
+    satendra50:{percent:50,label:'Satendra referral code — 50% fee waiver'},
+    Axiara75:{percent:50,label:'Satendra referral code — 50% fee waiver'},
+    rajput25:{percent:25,label:'Rajput referral code — 25% fee waiver'},
+    nanag00:{percent:100,label:'NanaG referral code — 100% fee waiver'}
+  };
+  function showUnifiedCodeMessage(message,isError=false){
+    $('referralCodeStatus').hidden=false;
+    $('referralCodeStatus').classList.toggle('error',!!isError);
+    $('referralCodeStatus').textContent=message;
+  }
+  $('applyReferralCode').addEventListener('click',async()=>{
+    const code=$('referralCode').value.trim();
+    if(waiverRequestPending)return;
+    clearAppliedWaiver();
+    clearReferral();
+    if(!code){showUnifiedCodeMessage('Please enter a fee-waiver, referral or exemption code.',true);return;}
+    if(countAuthors()>journals[journalSelect.value].max){showUnifiedCodeMessage('Correct the author count before applying a code.',true);return;}
+    const offer=referralOffers[code.toLowerCase()];
+    if(offer){
+      appliedReferral={percent:offer.percent,label:offer.label,code};
+      $('referralCodeStatus').hidden=false;
+      $('referralCodeStatus').classList.remove('error');
+      $('referralCodeStatus').textContent='✓ '+offer.percent+'% referral fee waiver successfully applied.';
+      updateReview();
+      return;
+    }
+    const requestContext={journalId:journalSelect.value,doiSelected:doi.checked,authorCount:countAuthors(),manuscriptId};
+    const requestTotal=currentApc+currentDoi+currentGst;
+    waiverRequestPending=true;$('applyReferralCode').disabled=true;$('applyReferralCode').textContent='Validating…';
+    try{
+      const response=await fetch('/api/fee-waivers/validate',{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({code,...requestContext})
+      });
+      let result;
+      try{result=await response.json();}catch(_){throw new Error('The fee-waiver service returned an invalid response.');}
+      const contextUnchanged=requestContext.journalId===journalSelect.value && requestContext.doiSelected===doi.checked && requestContext.authorCount===countAuthors() && requestContext.manuscriptId===manuscriptId;
+      if(!contextUnchanged)throw new Error('Fee details changed during validation. Please apply the code again.');
+      if(!response.ok||!result||result.valid!==true||!Number.isFinite(Number(result.waiverAmount))||Number(result.waiverAmount)<=0){
+        throw new Error(result&&result.message?String(result.message):'Invalid, expired, used or ineligible fee-waiver code.');
+      }
+      const authorisedAmount=Math.min(requestTotal,Number(result.waiverAmount));
+      if(authorisedAmount<=0)throw new Error('This code does not provide an applicable fee exemption.');
+      appliedWaiver={amount:authorisedAmount,label:String(result.label||'Authorised fee exemption'),code};
+      showUnifiedCodeMessage('✓ Fee-waiver code successfully validated. '+appliedWaiver.label+' applied.');
+      updateReview();
+    }catch(error){
+      appliedWaiver=null;
+      showUnifiedCodeMessage(error.message||'Code validation failed. Please try again.',true);
+      updateReview();
+    }finally{
+      waiverRequestPending=false;$('applyReferralCode').disabled=false;$('applyReferralCode').textContent='Apply Code';
+    }
+  });
+  $('referralCode').addEventListener('input',()=>{
+    if(appliedReferral||appliedWaiver){clearReferral();clearAppliedWaiver();updateReview();}
+    $('referralCodeStatus').hidden=true;
+    $('referralCodeStatus').classList.remove('error');
+  });
+
+
+  // Payment Portal interactions
+  function showPaymentMethod(method){
+    const panels={upi:'upiPanel',card:'cardPanel',netbanking:'netPanel',bank:'bankPanel'};
+    Object.entries(panels).forEach(([key,id])=>$(id).hidden=key!==method);
+    document.querySelectorAll('.portal-method').forEach(label=>{
+      const radio=label.querySelector('input');
+      label.classList.toggle('selected',radio.value===method);
+    });
+    const confirmCard=document.querySelector('#page3 .confirm');
+    confirmCard.hidden=(method==='card');
+  }
+  document.querySelectorAll('input[name="portalPaymentMethod"]').forEach(radio=>{
+    radio.addEventListener('change',()=>showPaymentMethod(radio.value));
+  });
+  showPaymentMethod('upi');
+  $('copyUpi').addEventListener('click',async()=>{
+    try{await navigator.clipboard.writeText('axiara.journals@upi');$('copyUpi').textContent='Copied';}
+    catch(_){$('copyUpi').textContent='Select and copy';}
+  });
+  ['correspondingEmail','correspondingMobile'].forEach(id=>{
+    $(id).addEventListener('input',updateFinalSummary);
+  });
+  $('authorRows').addEventListener('input',updateFinalSummary);
+
+  $('backToReview').addEventListener('click',()=>setStep(2));
+  $('submit').addEventListener('click',()=>{
+    const fullyWaived=!!((appliedWaiver||appliedReferral)&&currentTotal<=0);
+    const utr=$('utr').value.trim(),date=paymentDate.value,file=receipt.files[0],declaration=$('declaration').checked;
+    if(!declaration){alert('Please accept the mandatory payment and fee-waiver declaration to continue.');return;}
+    if(!fullyWaived&&(!utr||!date||!file)){alert('Please enter the UTR number, payment date and upload the payment receipt.');return;}
+    alert('The HTML prototype has validated the required fields. Connect it to your submission database and payment verification system to complete the submission.');
+  });
+  journalSelect.value=$('journal').value||'j1';
+  renumber();updateReview();
+})();
+</script>
+</body>
+</html>

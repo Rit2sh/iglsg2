@@ -1,33 +1,15 @@
-import ArticleForm from "./_components/ArticleForm";
 import type { Metadata } from "next";
+import SubmissionWizard from "./_components/SubmissionWizard";
 
 export const metadata: Metadata = {
-    title: "Submit Article",
-    description: "Submit your article for review and publication.",
+    title: "Manuscript Submission & Payment Portal | Axiara Journals Wing",
+    description: "Central manuscript submission, author affiliations, APC review, and payment portal for Axiara Journals.",
 };
-
 
 export default function SubmissionPage() {
     return (
-        <main className="min-h-screen bg-muted/40 py-12 px-4">
-            <div className="max-w-2xl mx-auto space-y-6">
-                <div className="space-y-1">
-                    <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                        Submissions
-                    </p>
-                    <h1 className="text-3xl font-bold tracking-tight">
-                        Submit Your Article
-                    </h1>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                        Fill in the details below. Fields marked with an asterisk (
-                        <span className="text-destructive">*</span>) are required. You can
-                        attach a PDF or Word document alongside or instead of pasting the
-                        full content.
-                    </p>
-                </div>
-
-                <ArticleForm />
-            </div>
+        <main className="min-h-screen bg-[#f5f9ff] dark:bg-slate-950 py-10 px-4 md:px-8">
+            <SubmissionWizard />
         </main>
     );
 }

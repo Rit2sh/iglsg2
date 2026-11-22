@@ -35,6 +35,7 @@ import {
     LayoutDashboard,
     LucideIcon,
     Archive,
+    CreditCard,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
@@ -61,6 +62,7 @@ const NAV_LINKS = [
     { label: "Editorial Board", href: "/editorial-board", icon: Users },
     { label: "Guidelines", href: "/guidelines", icon: FileText },
     { label: "Submission", href: "/submission", icon: Send },
+    { label: "Payment", href: "/payment", icon: CreditCard },
     // { label: "More", href: "/more", icon: Globe },
 ];
 

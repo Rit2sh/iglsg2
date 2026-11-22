@@ -15,6 +15,7 @@ import {
     Newspaper,
     ExternalLink,
     ChevronRight,
+    CreditCard,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
@@ -53,6 +54,7 @@ const FOOTER_SECTIONS: FooterSection[] = [
         title: "For Authors",
         links: [
             { label: "Submit Manuscript", href: "/submission", icon: Send },
+            { label: "Publication Fees & Payment", href: "/payment", icon: CreditCard },
             { label: "Author Guidelines", href: "/guidelines", icon: FileText },
             { label: "Review & Ethics", href: "/more/ethics", icon: ShieldCheck },
             { label: "Editorial Board", href: "/editorial-board", icon: Users },

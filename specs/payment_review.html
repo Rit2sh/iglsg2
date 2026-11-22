@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Axiara Journals Wing | Payment Details</title>
+<style>
+:root{--navy:#06275e;--blue:#0752a7;--royal:#123f9d;--pale:#eaf4ff;--line:#c9def7;--gold:#ffe66b;--ink:#101b36}
+*{box-sizing:border-box}
+body{margin:0;background:#f5f9ff;color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+header{height:64px;background:#061a43;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:8px 28px;gap:20px}
+.brand{display:flex;align-items:center;gap:10px;min-width:285px}.logo{font-size:36px;color:#ffcf27}.brand strong{font-family:Georgia,serif;font-size:24px;line-height:1;color:#fff}.brand small{display:block;color:#ffdc37;font-size:17px;font-weight:800;letter-spacing:1px}
+.cin{border-left:1px solid #b9c8e4;padding-left:18px;font-size:13px;line-height:1.5;white-space:nowrap}
+nav{display:flex;align-items:center;gap:25px;font-size:15px;font-weight:700;white-space:nowrap}nav a{color:#fff;text-decoration:none}nav a.active{color:#ffdb27;border-bottom:3px solid #ffdb27;padding-bottom:8px}.login{border:1px solid #fff;border-radius:10px;padding:9px 13px}
+main{max-width:1600px;margin:auto;padding:0 28px 24px}
+.hero{text-align:center;padding:4px 0 12px;background:radial-gradient(ellipse at top,#fff 0%,#f5f9ff 70%)}.hero h1{font-family:Georgia,serif;font-size:38px;color:#081c65;margin:0 0 2px}.hero p{font-family:Georgia,serif;font-size:19px;font-weight:bold;font-style:italic;color:#101c5d;margin:0}
+.progress{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;margin:10px 7% 18px;text-align:center;position:relative}.progress:before{content:"";position:absolute;left:16%;right:16%;top:18px;height:2px;background:#173d88;z-index:0}.step{position:relative;z-index:1;font-size:15px;font-weight:700}.bubble{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#fff;border:2px solid #173d88;margin:0 auto 5px;font-size:19px}.done .bubble{background:#0ba64b;color:#fff;border-color:#0ba64b}.current .bubble{background:#123b83;color:#fff;border-color:#123b83}.step-label{display:inline-block;padding:7px 14px;border-radius:18px}.current .step-label{background:#123b83;color:#fff}
+.bar{background:linear-gradient(90deg,#0a3479,#001d51);color:#fff;border-radius:14px;padding:10px 22px;font-size:22px;font-weight:800;margin-bottom:14px;box-shadow:0 2px 4px #b8cce7}
+.columns{display:grid;grid-template-columns:0.88fr 1.12fr;gap:14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:15px;overflow:hidden;box-shadow:0 2px 5px #dce9f8;margin-bottom:12px}
+.card-title{background:linear-gradient(90deg,#d8eaff,#c8e0ff);color:#092d94;font-size:20px;font-weight:800;padding:9px 18px;display:flex;align-items:center;gap:12px}
+.card-body{padding:13px 18px}
+.summary-row{display:grid;grid-template-columns:190px 18px 1fr;gap:7px;padding:8px 4px;border-bottom:1px solid #e5edf7;font-size:16px;line-height:1.3}.summary-row:last-child{border-bottom:0}.summary-row b{font-weight:800}.summary-row .colon{font-weight:bold}
+.rules table,.fees table{width:100%;border-collapse:collapse;font-size:15px}.rules th,.fees th{background:linear-gradient(90deg,#124c9c,#06295e);color:#fff;padding:9px 10px;text-align:center}.rules td,.fees td{border:1px solid #d7e2ef;padding:8px 10px}.rules td:last-child{text-align:center;font-weight:700}.rules tr:nth-child(even){background:#fff9dd}.rules-note{margin-top:9px;background:#fff5ca;border-radius:9px;padding:10px 12px;font-size:14px;line-height:1.45}
+.info{background:#fff4bc;border-radius:10px;padding:9px 12px;text-align:center;font-size:15px;font-weight:700;margin-bottom:10px}
+.fees th{background:#e4efff;color:#102d76}.fees td{text-align:right}.fees td:first-child{text-align:left}.fees .total-row{background:#ffe978;font-weight:800}.fees .apc-total{background:#0b4c9d;color:#fff;font-weight:800}.doi-head{display:flex;align-items:center;gap:10px;background:#e6f0ff;padding:8px 13px;font-weight:800;color:#092d94;margin-top:12px;border-radius:9px 9px 0 0}.doi-head input{width:20px;height:20px;accent-color:#0b4c9d}
+.payable{margin-top:12px;background:linear-gradient(90deg,#092c6d,#001b4e);color:#fff;border-radius:13px;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;font-size:20px;font-weight:800}.payable strong{color:#ffdf20;font-size:31px}.without{margin-top:7px;border:1px solid #9fc5f6;background:#e6f2ff;color:#091e6c;text-align:center;padding:9px;border-radius:9px;font-weight:800}
+.note{margin-top:13px;background:#e3f1ff;border:1px solid #a8cdf8;border-radius:12px;padding:13px 20px;display:flex;gap:15px;align-items:center;font-size:18px;font-weight:700}.note .i{font-size:27px;color:#0752bf}
+.actions{display:flex;justify-content:space-between;align-items:center;margin-top:14px}.btn{border:1px solid #9eb5d3;border-radius:12px;padding:14px 24px;font-size:17px;font-weight:800;background:#edf3fb;color:#111;cursor:pointer}.btn.primary{background:linear-gradient(#075dc0,#001e65);color:#fff;border:0;min-width:300px}
+@media(max-width:1050px){header{height:auto;flex-wrap:wrap}nav{gap:12px;flex-wrap:wrap}.columns{grid-template-columns:1fr}.progress{margin-left:0;margin-right:0}.summary-row{grid-template-columns:155px 12px 1fr}}
+@media(max-width:650px){main{padding:0 10px}.hero h1{font-size:28px}.hero p{font-size:15px}.progress{grid-template-columns:1fr;gap:10px}.progress:before{display:none}.step{display:flex;align-items:center;gap:8px;text-align:left}.bubble{margin:0;width:32px;height:32px;flex:none}.step-label{padding:5px 8px}.bar{font-size:17px}.summary-row{grid-template-columns:120px 10px 1fr;font-size:14px}.card-title{font-size:17px}.payable{font-size:16px}.payable strong{font-size:24px}.actions{gap:10px;flex-direction:column}.btn,.btn.primary{width:100%;min-width:0}.brand{min-width:0}.cin{display:none}nav{font-size:13px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><span class="logo">◈</span><div><strong>AXIARA®</strong><small>JOURNALS WING</small></div></div>
+  <div class="cin"><b>An Imprint of Axiara Private Limited</b><br>CIN: UXXXXXXXXXXXXXX</div>
+  <nav><a href="#">Home</a><a href="#">About⌄</a><a href="#">Journals⌄</a><a href="#">Author Guidelines</a><a class="active" href="#">Submission</a><a href="#">Payment</a><a href="#">Contact</a><a class="login" href="#">♙ Author Login</a></nav>
+</header>
+<main>
+  <section class="hero">
+    <h1>Manuscript Submission Portal</h1>
+    <p>Submit Your Research Article to Axiara Journals Wing</p>
+  </section>
+  <section class="progress" aria-label="Submission progress">
+    <div class="step done"><div class="bubble">✓</div><span class="step-label">Manuscript, Authors &amp; File Upload</span></div>
+    <div class="step current"><div class="bubble">2</div><span class="step-label">Payment Details (Review of Amount)</span></div>
+    <div class="step"><div class="bubble">3</div><span class="step-label">Payment, UTR &amp; Final Submission</span></div>
+  </section>
+  <div class="bar">▤ &nbsp; Step 2 of 3: Payment Details (Review of Amount)</div>
+  <div class="columns">
+    <div>
+      <section class="card">
+        <div class="card-title">▤ &nbsp; Submission Summary</div>
+        <div class="card-body">
+          <div class="summary-row"><b>Manuscript ID</b><span class="colon">:</span><span>AXJLSG-2026-0387</span></div>
+          <div class="summary-row"><b>Journal</b><span class="colon">:</span><span>International Journal of Law and<br>Social Governance</span></div>
+          <div class="summary-row"><b>Manuscript Title</b><span class="colon">:</span><span>The Legal Ontology of Digital Signatures<br>in the Algorithmic Age</span></div>
+          <div class="summary-row"><b>Manuscript Category</b><span class="colon">:</span><span>Research Article</span></div>
+          <div class="summary-row"><b>Number of Authors</b><span class="colon">:</span><span>3</span></div>
+          <div class="summary-row"><b>Corresponding Author</b><span class="colon">:</span><span>Dr. Satendra Rajput<br>(satendra@jnuj aipur.ac.in)</span></div>
+        </div>
+      </section>
+      <section class="card rules">
+        <div class="card-title">♧ &nbsp; Author-based APC Rules (Including GST @ 18%)</div>
+        <div class="card-body">
+          <table>
+            <thead><tr><th>Author Configuration</th><th>Total Fee<br>(APC + GST)</th></tr></thead>
+            <tbody>
+              <tr><td><b>Single Author</b> (Only 1 Author)</td><td>₹ 1,180.00<br><small>(₹ 1,000.00 + ₹ 180.00)</small></td></tr>
+              <tr><td><b>Two Authors</b> (1st + 2nd Author)</td><td>₹ 1,416.00<br><small>(₹ 1,180.00 + ₹ 236.00)</small></td></tr>
+              <tr><td><b>Three Authors</b> (1st + 2nd + 3rd Author)</td><td>₹ 1,534.00<br><small>(₹ 1,180.00 + ₹ 236.00 + ₹ 118.00)</small></td></tr>
+              <tr><td><b>More than Three Authors</b><br>(From 4th Author Onwards)</td><td>Add ₹ 118.00 per additional author<br><small>(₹ 100.00 + ₹ 18.00 GST)</small></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+    <div>
+      <section class="card">
+        <div class="card-title">▦ &nbsp; Payment Details</div>
+        <div class="card-body">
+          <div class="info">ⓘ &nbsp; Fee is calculated as: Base APC of ₹ 1,000 for 1st author + Additional Author Fee(s) + GST @ 18% (separately).</div>
+          <div class="fees">
+            <table>
+              <thead><tr><th>Particulars</th><th>APC (₹)</th><th>GST @ 18% (₹)</th><th>Total (₹)</th></tr></thead>
+              <tbody>
+                <tr><td>Base Article Processing Charge<br>(1st Author)</td><td>1,000.00</td><td>180.00</td><td><b>1,180.00</b></td></tr>
+                <tr><td>APC for Additional Author<br>(2nd Author)</td><td>200.00</td><td>36.00</td><td><b>236.00</b></td></tr>
+                <tr><td>APC for Additional Author<br>(3rd Author)</td><td>100.00</td><td>18.00</td><td><b>118.00</b></td></tr>
+                <tr class="total-row"><td>Total APC for 3 Authors</td><td>1,300.00</td><td>234.00</td><td>1,534.00</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="doi-head"><input id="doi" type="checkbox" checked><label for="doi">DOI Assignment (Optional)</label> ⓘ</div>
+          <div class="fees">
+            <table><tbody>
+              <tr><td>DOI Charge</td><td>200.00</td><td>36.00</td><td><b>236.00</b></td></tr>
+              <tr class="total-row"><td>DOI Amount (Including GST)</td><td>200.00</td><td>36.00</td><td>236.00</td></tr>
+            </tbody></table>
+          </div>
+          <div class="payable"><span>▤ &nbsp; Total Payable Amount<br><small>(APC + DOI, Including GST)</small></span><strong id="total">₹ 1,770.00</strong></div>
+          <div class="without" id="without">Without DOI Charge (Only APC, Including GST): &nbsp; ₹ 1,534.00</div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div class="note"><span class="i">ⓘ</span><span id="notice">If you do not opt for DOI, the total payable amount will be ₹ 1,534.00.</span></div>
+  <div class="actions"><button class="btn" type="button">← &nbsp; Edit Submission</button><button class="btn primary" type="button">Proceed to Payment &nbsp; →</button></div>
+</main>
+<script>
+const doi=document.getElementById('doi');
+const total=document.getElementById('total');
+const without=document.getElementById('without');
+const notice=document.getElementById('notice');
+function updateAmount(){
+  const amount=doi.checked?1770:1534;
+  total.textContent='₹ '+amount.toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});
+  without.style.display=doi.checked?'block':'none';
+  notice.textContent=doi.checked
+    ? 'If you do not opt for DOI, the total payable amount will be ₹ 1,534.00.'
+    : 'DOI assignment has not been selected. Your payable amount is ₹ 1,534.00.';
+}
+doi.addEventListener('change',updateAmount);
+updateAmount();
+</script>
+</body>
+</html>
