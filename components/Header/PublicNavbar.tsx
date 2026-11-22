@@ -62,12 +62,11 @@ const NAV_LINKS = [
     { label: "Editorial Board", href: "/editorial-board", icon: Users },
     { label: "Guidelines", href: "/guidelines", icon: FileText },
     { label: "Submission", href: "/submission", icon: Send },
-    { label: "Payment", href: "/payment", icon: CreditCard },
     // { label: "More", href: "/more", icon: Globe },
 ];
 
 const ABOUT_SUB_LINKS = [
-    { label: "About IJLSG", href: "/about", icon: Info },
+    { label: "About JIAS", href: "/about", icon: Info },
 ];
 const MORE_SUB_LINKS = [
     { label: "Terms & Conditions", href: "/more/terms-conditions", icon: FileText },
@@ -125,7 +124,7 @@ export function PublicNavbar() {
                             Peer-Reviewed • Open Access • Bi-Annual
                         </span>
                         <Badge variant="secondary" className="text-[9px] font-bold px-2 py-0 uppercase sm:hidden bg-primary/10 text-primary border-none">
-                            IJLSG
+                            JIAS
                         </Badge>
                     </div>
 
@@ -237,8 +236,11 @@ export function PublicNavbar() {
                                             </AvatarFallback>
                                         </Avatar>
                                     </Link>
+                                    {user?.role === "ADMIN" && (
+                                        <Link href="/admin/dashboard" className="hidden md:flex items-center gap-1.5 text-sm font-bold px-5 py-2.5 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 active:scale-95">Admin Hub</Link>
+                                    )}
                                     {user?.role !== "ADMIN" && user?.role !== "USER" && (
-                                        <Link href="/dashboard" className="hidden md:flex items-center gap-1.5 text-sm font-bold px-5 py-2.5 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 active:scale-95">Dashboard</Link>
+                                        <Link href="/dashboard" className="hidden md:flex items-center gap-1.5 text-sm font-bold px-5 py-2.5 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 active:scale-95">Editorial Hub</Link>
                                     )}
                                 </>
                             ) : (
@@ -284,7 +286,7 @@ export function PublicNavbar() {
                                                 <BookOpen className="w-5 h-5 text-primary-foreground" />
                                             </div>
                                             <div className="flex flex-col">
-                                                <span className="font-extrabold text-foreground leading-tight text-lg">IJLSG</span>
+                                                <span className="font-extrabold text-foreground leading-tight text-lg">JIAS</span>
                                                 <span className="text-muted-foreground text-[10px] font-semibold tracking-wider uppercase">Menu Directory</span>
                                             </div>
                                         </div>
@@ -362,9 +364,6 @@ export function PublicNavbar() {
 
                 </div>
             </nav >
-            {
-                loading && (<PreLoader />)
-            }
         </header >
     );
 }

@@ -539,7 +539,7 @@ export default function Step1ManuscriptUpload({ data, onChange, onNext }: Step1P
                 <button
                     type="button"
                     onClick={() => {
-                        localStorage.setItem("ijlsg_submission_draft", JSON.stringify(data));
+                        localStorage.setItem("jias_submission_draft", JSON.stringify(data));
                         alert("Submission draft saved to browser storage.");
                     }}
                     className="w-full sm:w-auto px-5 py-2.5 rounded-md border border-slate-300 dark:border-slate-700 font-semibold text-xs text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 hover:bg-slate-50"

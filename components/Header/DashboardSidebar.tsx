@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
     LayoutDashboard,
     Users,
@@ -20,11 +20,9 @@ import {
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-// import LogoutButton from "./LogoutButton"; 
 
 const SidebarLINKS = [
     { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-    // { label: "Editorial Board", href: "/editorial-board", icon: Users },
     { label: "Submissions", href: "/dashboard/submissions", icon: Send },
     { label: "Review Queue", href: "/dashboard/review-queue", icon: BookOpen },
     { label: "Archives & Volumes", href: "/dashboard/archives", icon: Archive },
@@ -32,7 +30,17 @@ const SidebarLINKS = [
 
 export default function DashboardSidebar() {
     const pathname = usePathname();
+    const router = useRouter();
     const [isCollapsed, setIsCollapsed] = useState(false);
+
+    const handleLogout = async () => {
+        try {
+            await fetch("/api/auth/signOut", { method: "POST" });
+        } finally {
+            router.push("/signin");
+            router.refresh();
+        }
+    };
 
     const NavContent = ({ mobile = false }) => (
         <div className="flex flex-col h-full py-6">
@@ -40,12 +48,12 @@ export default function DashboardSidebar() {
             {!isCollapsed || mobile ? (
                 <div className="px-6 mb-10">
                     <h2 className="text-2xl font-bold text-primary" style={{ fontFamily: "'Playfair Display', serif" }}>
-                        IJLSG <span className="text-[10px] uppercase tracking-tighter text-muted-foreground block">Management Hub</span>
+                        JIAS <span className="text-[10px] uppercase tracking-tighter text-muted-foreground block">Management Hub</span>
                     </h2>
                 </div>
             ) : (
                 <div className="flex justify-center mb-10">
-                    <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white font-bold">I</div>
+                    <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white font-bold">J</div>
                 </div>
             )}
 
@@ -73,16 +81,25 @@ export default function DashboardSidebar() {
 
             {/* Bottom Actions */}
             <div className={cn("px-3 space-y-1 pt-6 border-t border-border", isCollapsed && !mobile && "flex flex-col items-center")}>
-                <Link href="/dashboard/settings">
+                <Link href="/dashboard/profile">
                     <div className={cn(
                         "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-muted-foreground hover:bg-muted transition-all",
                         isCollapsed && !mobile && "justify-center px-0 w-full"
                     )}>
                         <Settings size={20} />
-                        {(!isCollapsed || mobile) && <span>Account Settings</span>}
+                        {(!isCollapsed || mobile) && <span>Account Profile</span>}
                     </div>
                 </Link>
-                {/* <LogoutButton collapsed={isCollapsed && !mobile} /> */}
+                <button
+                    onClick={handleLogout}
+                    className={cn(
+                        "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 text-red-600 hover:bg-red-50 dark:hover:bg-red-950/40 cursor-pointer w-full text-left",
+                        isCollapsed && !mobile && "justify-center px-0"
+                    )}
+                >
+                    <LogOut size={20} />
+                    {(!isCollapsed || mobile) && <span>Logout</span>}
+                </button>
             </div>
         </div>
     );

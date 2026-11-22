@@ -41,7 +41,7 @@ export default function SubmissionWizard() {
     const [formData, setFormData] = useState<SubmissionFormData>(INITIAL_FORM_DATA);
 
     useEffect(() => {
-        const saved = localStorage.getItem("ijlsg_submission_draft");
+        const saved = localStorage.getItem("jias_submission_draft");
         if (saved) {
             try {
                 const parsed = JSON.parse(saved);
@@ -80,7 +80,7 @@ export default function SubmissionWizard() {
 
     const handleFinish = () => {
         setCompletedSteps([1, 2, 3]);
-        localStorage.removeItem("ijlsg_submission_draft");
+        localStorage.removeItem("jias_submission_draft");
     };
 
     return (

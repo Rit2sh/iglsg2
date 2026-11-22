@@ -18,7 +18,7 @@ export default function MobileProfileNav() {
     return (
         <div className="flex items-center justify-between w-full">
             <h2 className="text-xl font-bold text-primary" style={{ fontFamily: "'Playfair Display', serif" }}>
-                IJLSG
+                JIAS
             </h2>
 
             <Sheet open={open} onOpenChange={setOpen}>

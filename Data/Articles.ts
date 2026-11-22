@@ -7,7 +7,7 @@ export const ARTICLES = [
         keywords: "Artificial Intelligence, Legal Reasoning, Algorithmic Transparency, Judicial Analytics, Administrative Law",
         category: "research",
 
-        journalName: "International Journal of Law and Social Governance",
+        journalName: "Journal of Intercontinental Academic Studies",
         volume: 1,
         issue: 1,
         publicationYear: 2026,
@@ -51,7 +51,7 @@ export const ARTICLES = [
         keywords: "Data Privacy, Digital Sovereignty, GDPR, Cross-Border Transfers, Surveillance Capitalism",
         category: "review",
 
-        journalName: "International Journal of Law and Social Governance",
+        journalName: "Journal of Intercontinental Academic Studies",
         volume: 1,
         issue: 1,
         publicationYear: 2026,
@@ -95,7 +95,7 @@ export const ARTICLES = [
         keywords: "Climate Litigation, Global South, Environmental Jurisprudence, Right to Life, Intergenerational Equity",
         category: "case-study",
 
-        journalName: "International Journal of Law and Social Governance",
+        journalName: "Journal of Intercontinental Academic Studies",
         volume: 1,
         issue: 2,
         publicationYear: 2026,
@@ -139,7 +139,7 @@ export const ARTICLES = [
         keywords: "Digital Evidence, Forensics, Cybercrime, Blockchain, Information Technology Act",
         category: "research",
 
-        journalName: "International Journal of Law and Social Governance",
+        journalName: "Journal of Intercontinental Academic Studies",
         volume: 2,
         issue: 1,
         publicationYear: 2026,
@@ -183,7 +183,7 @@ export const ARTICLES = [
         keywords: "Free Speech, Content Moderation, Platform Governance, Public Forum Doctrine, Constitutional Law",
         category: "editorial",
 
-        journalName: "International Journal of Law and Social Governance",
+        journalName: "Journal of Intercontinental Academic Studies",
         volume: 1,
         issue: 2,
         publicationYear: 2026,

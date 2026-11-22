@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-
 import { NavDocuments } from "@/components/Dashboard/nav-documents"
 import { NavMain } from "@/components/Dashboard/nav-main"
 import { NavSecondary } from "@/components/Dashboard/nav-secondary"
@@ -15,164 +14,87 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { LayoutDashboardIcon, ListIcon, ChartBarIcon, FolderIcon, UsersIcon, CameraIcon, FileTextIcon, Settings2Icon, CircleHelpIcon, SearchIcon, DatabaseIcon, FileChartColumnIcon, FileIcon, CommandIcon } from "lucide-react"
+import {
+  LayoutDashboard,
+  ListOrdered,
+  Users,
+  Archive,
+  BookOpen,
+  Settings,
+  HelpCircle,
+  Search,
+  Globe,
+  Send,
+  ShieldCheck,
+  Building
+} from "lucide-react"
 import Link from "next/link"
 
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    name: "JIAS Administrator",
+    email: "admin@ijlsg.org",
+    avatar: "https://avatar.vercel.sh/admin@ijlsg.org?rounded=60",
   },
   navMain: [
     {
-      title: "Dashboard",
-      url: "#",
-      icon: (
-        <LayoutDashboardIcon
-        />
-      ),
+      title: "Admin Dashboard",
+      url: "/admin/dashboard",
+      icon: <LayoutDashboard className="size-4" />,
     },
     {
-      title: "Lifecycle",
-      url: "#",
-      icon: (
-        <ListIcon
-        />
-      ),
+      title: "Manuscript Queue",
+      url: "/dashboard/submissions",
+      icon: <ListOrdered className="size-4" />,
     },
     {
-      title: "Analytics",
-      url: "#",
-      icon: (
-        <ChartBarIcon
-        />
-      ),
+      title: "Review Queue",
+      url: "/dashboard/review-queue",
+      icon: <Users className="size-4" />,
     },
     {
-      title: "Projects",
-      url: "#",
-      icon: (
-        <FolderIcon
-        />
-      ),
+      title: "Editorial Archives",
+      url: "/dashboard/archives",
+      icon: <Archive className="size-4" />,
     },
     {
-      title: "Team",
-      url: "#",
-      icon: (
-        <UsersIcon
-        />
-      ),
-    },
-  ],
-  navClouds: [
-    {
-      title: "Capture",
-      icon: (
-        <CameraIcon
-        />
-      ),
-      isActive: true,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Proposal",
-      icon: (
-        <FileTextIcon
-        />
-      ),
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Prompts",
-      icon: (
-        <FileTextIcon
-        />
-      ),
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
+      title: "Editorial Oversight",
+      url: "/dashboard",
+      icon: <BookOpen className="size-4" />,
     },
   ],
   navSecondary: [
     {
-      title: "Settings",
-      url: "#",
-      icon: (
-        <Settings2Icon
-        />
-      ),
+      title: "Editorial Profile",
+      url: "/dashboard/profile",
+      icon: <Settings className="size-4" />,
     },
     {
-      title: "Get Help",
-      url: "#",
-      icon: (
-        <CircleHelpIcon
-        />
-      ),
+      title: "Author Guidelines",
+      url: "/guidelines",
+      icon: <HelpCircle className="size-4" />,
     },
     {
-      title: "Search",
-      url: "#",
-      icon: (
-        <SearchIcon
-        />
-      ),
+      title: "Browse Archives",
+      url: "/archives",
+      icon: <Search className="size-4" />,
     },
   ],
   documents: [
     {
-      name: "Data Library",
-      url: "#",
-      icon: (
-        <DatabaseIcon
-        />
-      ),
+      name: "Public Portal",
+      url: "/",
+      icon: <Globe className="size-4" />,
     },
     {
-      name: "Reports",
-      url: "#",
-      icon: (
-        <FileChartColumnIcon
-        />
-      ),
+      name: "Submit Paper",
+      url: "/submission",
+      icon: <Send className="size-4" />,
     },
     {
-      name: "Word Assistant",
-      url: "#",
-      icon: (
-        <FileIcon
-        />
-      ),
+      name: "Editorial Board",
+      url: "/editorial-board",
+      icon: <ShieldCheck className="size-4" />,
     },
   ],
 }
@@ -187,9 +109,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               asChild
               className="data-[slot=sidebar-menu-button]:p-1.5!"
             >
-              <Link href="#">
-                <CommandIcon className="size-5!" />
-                <span className="text-base font-semibold">Acme Inc.</span>
+              <Link href="/admin/dashboard" className="flex items-center gap-2">
+                <div className="w-7 h-7 rounded-lg bg-primary text-primary-foreground flex items-center justify-center font-bold text-xs">
+                  J
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-sm font-bold leading-none">JIAS Admin</span>
+                  <span className="text-[10px] text-muted-foreground font-medium">Intercontinental Studies</span>
+                </div>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

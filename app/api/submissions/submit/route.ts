@@ -31,12 +31,12 @@ export async function POST(req: NextRequest) {
                 const emailHtml = `
                     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #c8def8; border-radius: 12px; background: #fdfefe;">
                         <div style="background: #061a43; padding: 15px 20px; border-radius: 8px; color: #fff;">
-                            <h2 style="margin: 0; color: #ffd329;">AXIARA® JOURNALS WING</h2>
-                            <p style="margin: 4px 0 0; font-size: 13px; color: #c8def8;">Manuscript Submission & Payment Acknowledgment</p>
+                            <h2 style="margin: 0; color: #ffd329;">JOURNAL OF INTERCONTINENTAL ACADEMIC STUDIES</h2>
+                            <p style="margin: 4px 0 0; font-size: 13px; color: #c8def8;">Manuscript Submission & Payment Acknowledgment (JIAS)</p>
                         </div>
                         <div style="padding: 20px 0;">
                             <p>Dear Author,</p>
-                            <p>Thank you for submitting your research article to <b>Axiara Journals</b>. Your submission has been registered with the following details:</p>
+                            <p>Thank you for submitting your research article to the <b>Journal of Intercontinental Academic Studies (JIAS)</b>. Your submission has been registered with the following details:</p>
                             
                             <table style="width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 13px;">
                                 <tr style="border-bottom: 1px solid #e2e8f0;">
@@ -62,8 +62,8 @@ export async function POST(req: NextRequest) {
                             </p>
                         </div>
                         <div style="border-top: 1px solid #cbd5e1; padding-top: 12px; font-size: 11px; color: #94a3b8; text-align: center;">
-                            Axiara Journals Wing &bull; An Imprint of Axiara Private Limited<br>
-                            For inquiries: editorial@axiara.org &bull; http://localhost:3000
+                            Journal of Intercontinental Academic Studies (JIAS) &bull; Published by Axiara Private Limited<br>
+                            For inquiries: editor@ijlsg.org
                         </div>
                     </div>
                 `;
@@ -80,10 +80,10 @@ export async function POST(req: NextRequest) {
                         Authorization: `Bearer ${resendApiKey}`,
                     },
                     body: JSON.stringify({
-                        from: "IJLSG Journals <onboarding@resend.dev>",
-                        to: [adminEmail],
+                        from: "JIAS Journals <onboarding@resend.dev>",
+                        to: recipients,
                         reply_to: correspondingEmail,
-                        subject: `[IJLSG] Manuscript Received: ${manuscriptId}`,
+                        subject: `[JIAS] Manuscript Received: ${manuscriptId}`,
                         html: emailHtml,
                     }),
                 });

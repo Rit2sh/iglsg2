@@ -28,6 +28,15 @@ export default function DashboardTopBar() {
     const { user } = useAuth();
     const router = useRouter();
 
+    const handleLogout = async () => {
+        try {
+            await fetch("/api/auth/signOut", { method: "POST" });
+        } finally {
+            router.push("/signin");
+            router.refresh();
+        }
+    };
+
     useEffect(() => {
         if (user?.role == "USER") {
             router.push("/");
@@ -95,7 +104,7 @@ export default function DashboardTopBar() {
                             <Settings size={16} /> Preferences
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem className="rounded-lg gap-2 cursor-pointer py-2 text-red-600 focus:text-red-600 focus:bg-red-50 dark:focus:bg-red-950">
+                        <DropdownMenuItem onClick={handleLogout} className="rounded-lg gap-2 cursor-pointer py-2 text-red-600 focus:text-red-600 focus:bg-red-50 dark:focus:bg-red-950">
                             <LogOut size={16} /> Logout Hub
                         </DropdownMenuItem>
                     </DropdownMenuContent>

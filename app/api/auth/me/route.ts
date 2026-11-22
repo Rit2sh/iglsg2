@@ -2,62 +2,69 @@ import { cookies } from "next/headers";
 import prisma from "@/lib/prisma";
 import { verifyAccessToken } from "@/lib/auth/jwt";
 import { NextResponse } from "next/server";
+import { findSystemAccountById } from "@/lib/auth/systemUsers";
 
 export async function GET() {
     try {
         const token = (await cookies()).get("accessToken")?.value;
-        const refreshToken = (await cookies()).get("refreshToken")?.value;
 
         if (!token) return NextResponse.json({ user: null, sessionId: null });
 
         const decoded: any = verifyAccessToken(token);
-        if (!decoded) return NextResponse.json({ user: null, sessionId: null });
+        if (!decoded || !decoded.id) return NextResponse.json({ user: null, sessionId: null });
 
-        const session = await prisma.session.findUnique({
-            where: { id: decoded.sessionId },
-            select: {
-                id: true,
-                isActive: true,
-                refreshTokens: {
-                    where: {
-                        token: refreshToken,
-                    },
-                    select: {
-                        revoked: true,
-                        expiresAt: true,
-                    },
+        // Check if user is a system account
+        const systemAcc = findSystemAccountById(decoded.id);
+        if (systemAcc) {
+            return NextResponse.json({
+                user: {
+                    id: systemAcc.id,
+                    email: systemAcc.email,
+                    firstName: systemAcc.firstName,
+                    lastName: systemAcc.lastName,
+                    role: systemAcc.role,
+                    occupation: systemAcc.designation,
+                    institute: systemAcc.institution,
                 },
-            }
-        });
+                sessionId: decoded.sessionId,
+            });
+        }
 
-        // if (!session || !session.isActive || refreshToken.revoked || refreshToken.expiresAt) {
-        //     const res = NextResponse.json({ user: null, sessionId: null });
-        //     res.cookies.set("accessToken", "", { expires: new Date(0) });
-        //     res.cookies.set("refreshToken", "", { expires: new Date(0) });
-        //     return res;
-        // }
+        // Standard database lookup
+        try {
+            const user = await prisma.user.findUnique({
+                where: { id: decoded.id },
+                select: {
+                    id: true,
+                    email: true,
+                    firstName: true,
+                    lastName: true,
+                    middleName: true,
+                    role: true,
+                    avatar: true,
+                    mobileNumber: true,
+                    occupation: true,
+                    institute: true,
+                    nationality: true,
+                    address: true,
+                    gender: true,
+                },
+            });
 
-        const user = await prisma.user.findUnique({
-            where: { id: decoded.id },
-            select: {
-                id: true,
-                email: true,
-                firstName: true,
-                lastName: true,
-                middleName: true,
-                role: true,
-                avatar: true,
-                mobileNumber: true,
-                occupation: true,
-                institute: true,
-                nationality: true,
-                address: true,
-                gender: true,
-            }
-        });
-
-        return NextResponse.json({ user });
-    } catch (error) {
+            return NextResponse.json({ user, sessionId: decoded.sessionId });
+        } catch (dbErr) {
+            // Fallback to basic decoded token data if database is temporarily unavailable
+            return NextResponse.json({
+                user: {
+                    id: decoded.id,
+                    role: decoded.role || "USER",
+                    firstName: "Authenticated",
+                    lastName: "User",
+                },
+                sessionId: decoded.sessionId,
+            });
+        }
+    } catch {
         return NextResponse.json({ user: null });
     }
 }

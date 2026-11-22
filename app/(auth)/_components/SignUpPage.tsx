@@ -20,7 +20,6 @@ import {
     ArrowRight,
     Loader2,
     ShieldCheck,
-    Star,
     AlertCircle,
 } from "lucide-react";
 
@@ -189,7 +188,7 @@ export default function SignUpPage() {
                                     </h1>
                                 </div>
                                 <p className="text-[13px] text-[#64748B] dark:text-[#94A3B8] ml-7">
-                                    Fill in your details to get started with Newsroom
+                                    Fill in your details to create your author / reviewer account
                                 </p>
                             </div>
 
@@ -542,63 +541,51 @@ function LeftPanel() {
                     className="text-xl font-bold text-white tracking-wide"
                     style={{ fontFamily: "'Playfair Display', serif" }}
                 >
-                    IJLSG
+                    JIAS
                 </Link>
             </div>
 
             {/* Copy block */}
             <div className="relative space-y-5">
-                <Badge className="bg-white/15 hover:bg-white/20 text-white border-0 text-[11px] font-medium px-3 py-1 gap-1.5">
-                    <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-                    Trusted by 50,000+ journalists
+                <Badge className="bg-white/15 text-white border-0 text-[10.5px] font-semibold px-2.5 py-0.5 uppercase tracking-wider mb-2">
+                    Journal of Intercontinental Academic Studies
                 </Badge>
 
                 <h2
                     className="text-[32px] font-bold text-white leading-tight"
                     style={{ fontFamily: "'Playfair Display', serif" }}
                 >
-                    Start breaking<br />stories today.
+                    Research Publishing<br />Platform
                 </h2>
 
                 <p className="text-[13.5px] text-white/65 leading-relaxed">
-                    Join thousands of reporters, editors, and publishers who rely on
-                    IJLSG for real-time collaboration and publishing.
+                    Join authors, editors, and peer-reviewers collaborating on interdisciplinary academic scholarship.
                 </p>
 
                 {/* Feature pills */}
                 <div className="flex flex-wrap gap-2 pt-1">
-                    {["Real-time editing", "Secure publishing", "Team collaboration"].map((f) => (
+                    {["Peer Review System", "Double-Blind Evaluation", "Secure Publishing"].map((f) => (
                         <span
                             key={f}
-                            className="flex items-center gap-1.5 text-[11px] font-medium text-white/75 bg-white/10 border border-white/15 rounded-full px-3 py-1"
+                            className="text-[11px] font-medium text-white/75 bg-white/10 border border-white/15 rounded-full px-3 py-1"
                         >
-                            <CheckCircle2 className="w-3 h-3 text-[#0EA5E9]" />
                             {f}
                         </span>
                     ))}
                 </div>
             </div>
 
-            {/* Testimonial card */}
-            <div className="relative bg-white/10 border border-white/15 rounded-2xl p-5 space-y-3">
-                <div className="flex gap-0.5">
-                    {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />
-                    ))}
-                </div>
-                <p className="text-[13px] text-white/80 leading-relaxed">
-                    {'"'} IJLSG transformed how our team collaborates on breaking stories —
-                    it{"'"}s simply indispensable. {'"'}
+            {/* Informational card */}
+            <div className="relative bg-white/10 border border-white/15 rounded-2xl p-5 space-y-2">
+                <p className="text-[10px] uppercase font-bold tracking-widest text-[#7DD3FC]">
+                    Indexed &amp; Open Access
                 </p>
-                <div className="flex items-center gap-3 pt-1">
-                    <div className="w-8 h-8 rounded-full bg-linear-to-br from-[#0EA5E9] to-[#4F46E5] flex items-center justify-center text-white text-[11px] font-bold shrink-0">
-                        SC
-                    </div>
-                    <div>
-                        <p className="text-[12.5px] font-semibold text-white">Sarah Chen</p>
-                        <p className="text-[11px] text-white/50">Senior Editor, The Daily Post</p>
-                    </div>
-                </div>
+                <p className="text-[13px] text-white/85 leading-relaxed">
+                    Dedicated to rigorous academic standards, ethical publishing, and global research accessibility.
+                </p>
+                <p className="text-[11px] text-white/50 pt-1">
+                    ISSN (Online) &bull; Verified Academic Submissions
+                </p>
             </div>
         </div>
     );

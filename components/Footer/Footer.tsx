@@ -54,7 +54,6 @@ const FOOTER_SECTIONS: FooterSection[] = [
         title: "For Authors",
         links: [
             { label: "Submit Manuscript", href: "/submission", icon: Send },
-            { label: "Publication Fees & Payment", href: "/payment", icon: CreditCard },
             { label: "Author Guidelines", href: "/guidelines", icon: FileText },
             { label: "Review & Ethics", href: "/more/ethics", icon: ShieldCheck },
             { label: "Editorial Board", href: "/editorial-board", icon: Users },
@@ -151,19 +150,19 @@ export default function Footer() {
                                     className="text-[15px] font-bold text-white leading-tight"
                                     style={{ fontFamily: "'Playfair Display', serif" }}
                                 >
-                                    IJLSG
+                                    JIAS
                                 </p>
                                 <p className="text-[10.5px] text-white/45 font-medium">
-                                    Law & Social Governance
+                                    Intercontinental Academic Studies
                                 </p>
                             </div>
                         </Link>
 
                         {/* Description */}
                         <p className="text-[13px] text-white/55 leading-relaxed max-w-sm">
-                            The <span className="text-white/80 font-medium">International Journal of Law and
-                                Social Governance</span> is a peer-reviewed, open-access academic journal
-                            advancing interdisciplinary research in law, governance, and public policy.
+                            The <span className="text-white/80 font-medium">Journal of Intercontinental
+                                Academic Studies</span> is a peer-reviewed, open-access academic journal
+                            advancing interdisciplinary research across academic disciplines and global governance.
                         </p>
 
                         {/* Journal details */}
@@ -237,7 +236,7 @@ export default function Footer() {
 
                     <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-4 gap-y-1">
                         <p className="text-[12px] text-white/35">
-                            © {currentYear} International Journal of Law and Social Governance. All rights reserved.
+                            © {currentYear} Journal of Intercontinental Academic Studies. All rights reserved.
                         </p>
                     </div>
 

@@ -92,7 +92,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
-import { GripVerticalIcon, CircleCheckIcon, LoaderIcon, EllipsisVerticalIcon, Columns3Icon, ChevronDownIcon, PlusIcon, ChevronsLeftIcon, ChevronLeftIcon, ChevronRightIcon, ChevronsRightIcon, TrendingUpIcon } from "lucide-react"
+import { GripVerticalIcon, EllipsisVerticalIcon, Columns3Icon, ChevronDownIcon, PlusIcon, ChevronsLeftIcon, ChevronLeftIcon, ChevronRightIcon, ChevronsRightIcon } from "lucide-react"
 
 export const schema = z.object({
   id: z.number(),
@@ -178,17 +178,15 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
   {
     accessorKey: "status",
     header: "Status",
-    cell: ({ row }) => (
-      <Badge variant="outline" className="px-1.5 text-muted-foreground">
-        {row.original.status === "Done" ? (
-          <CircleCheckIcon className="fill-green-500 dark:fill-green-400" />
-        ) : (
-          <LoaderIcon
-          />
-        )}
-        {row.original.status}
-      </Badge>
-    ),
+    cell: ({ row }) => {
+      const isDone = row.original.status === "Done"
+      return (
+        <Badge variant="outline" className="gap-1.5 px-2 py-0.5 font-normal text-xs text-muted-foreground">
+          <span className={`inline-block size-1.5 rounded-full ${isDone ? "bg-emerald-500" : "bg-amber-500"}`} />
+          {row.original.status}
+        </Badge>
+      )
+    },
   },
   {
     accessorKey: "target",
@@ -708,15 +706,12 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                 </AreaChart>
               </ChartContainer>
               <Separator />
-              <div className="grid gap-2">
-                <div className="flex gap-2 leading-none font-medium">
-                  Trending up by 5.2% this month{" "}
-                  <TrendingUpIcon className="size-4" />
+              <div className="grid gap-1.5">
+                <div className="leading-none font-medium text-sm text-foreground">
+                  Manuscript Cycle Progression
                 </div>
-                <div className="text-muted-foreground">
-                  Showing total visitors for the last 6 months. This is just
-                  some random text to test the layout. It spans multiple lines
-                  and should wrap around.
+                <div className="text-xs text-muted-foreground leading-relaxed">
+                  Historical editorial reviews and manuscript progression recorded across published volumes.
                 </div>
               </div>
               <Separator />

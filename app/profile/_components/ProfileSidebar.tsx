@@ -2,10 +2,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
     User, Shield, Activity, Settings, FileText, ClipboardCheck,
-    Home,
+    Home, LogOut
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -13,7 +13,7 @@ const menuItems = [
     { title: "Home", href: "/", icon: Home },
     { title: "Profile Overview", href: "/profile", icon: User },
     { title: "My Submissions", href: "/profile/article", icon: FileText },
-    { title: "Review Queue", href: "/profile/reviews", icon: ClipboardCheck },
+    { title: "Review Queue", href: "/dashboard/review-queue", icon: ClipboardCheck },
     { title: "Security & Devices", href: "/profile/security", icon: Shield },
     { title: "Activity Logs", href: "/profile/activity", icon: Activity },
     { title: "Account Settings", href: "/profile/settings", icon: Settings },
@@ -21,6 +21,16 @@ const menuItems = [
 
 export default function ProfileSidebar({ isMobile }: { isMobile?: boolean }) {
     const pathname = usePathname();
+    const router = useRouter();
+
+    const handleLogout = async () => {
+        try {
+            await fetch("/api/auth/signOut", { method: "POST" });
+        } finally {
+            router.push("/signin");
+            router.refresh();
+        }
+    };
 
     return (
         <aside className={cn(
@@ -33,7 +43,7 @@ export default function ProfileSidebar({ isMobile }: { isMobile?: boolean }) {
                 {!isMobile && (
                     <h2 className="text-2xl font-bold tracking-tight mb-10 text-primary"
                         style={{ fontFamily: "'Playfair Display', serif" }}>
-                        IJLSG
+                        JIAS
                     </h2>
                 )}
 
@@ -59,7 +69,14 @@ export default function ProfileSidebar({ isMobile }: { isMobile?: boolean }) {
                 </nav>
             </div>
 
-            <div className="pt-6 border-t border-border/50">
+            <div className="pt-6 border-t border-border/50 space-y-2">
+                <button
+                    onClick={handleLogout}
+                    className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-red-600 hover:bg-red-50 dark:hover:bg-red-950/40 w-full text-left transition-colors cursor-pointer"
+                >
+                    <LogOut size={18} />
+                    Log Out
+                </button>
                 <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold px-4">
                     Journal Systems
                 </p>

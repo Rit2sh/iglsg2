@@ -18,8 +18,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: " IJLSG",
-  description: "International Journal of Law & Social Governance",
+  title: "JIAS | Journal of Intercontinental Academic Studies",
+  description: "Journal of Intercontinental Academic Studies - Peer-Reviewed International Journal",
 };
 
 export default function RootLayout({

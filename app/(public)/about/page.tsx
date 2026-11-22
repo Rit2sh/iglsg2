@@ -11,7 +11,6 @@ import {
     Quote,
     ArrowRight,
     CheckCircle2,
-    Star,
     Layers,
     Scale,
     Lightbulb,
@@ -147,7 +146,7 @@ const STATS: Stat[] = [
     { icon: Globe, value: "18+", label: "Countries Reached", color: "text-[#0EA5E9] dark:text-[#22D3EE] bg-sky-50 dark:bg-[#0EA5E9]/20" },
     { icon: BarChart3, value: "120+", label: "Total Citations", color: "text-[#22C55E] dark:text-[#4ADE80] bg-green-50 dark:bg-[#22C55E]/20" },
     { icon: Clock, value: "21", label: "Avg. Review Days", color: "text-[#F59E0B] dark:text-[#FBBF24] bg-amber-50 dark:bg-[#F59E0B]/20" },
-    { icon: Star, value: "98%", label: "Author Satisfaction", color: "text-[#EF4444] dark:text-[#F87171] bg-red-50 dark:bg-[#EF4444]/20" },
+    { icon: ShieldCheck, value: "100%", label: "Peer-Reviewed", color: "text-[#0284C7] dark:text-[#38BDF8] bg-sky-50 dark:bg-[#0284C7]/20" },
 ];
 
 const REVIEW_STEPS: ReviewStep[] = [
@@ -264,8 +263,8 @@ export default function AboutPage() {
                     </h1>
 
                     <p className="text-[15px] sm:text-[17px] text-white/70 max-w-2xl mx-auto leading-relaxed mb-8">
-                        International Journal of Law and Social Governance (IJLSG) — a peer-reviewed,
-                        open-access platform advancing interdisciplinary legal scholarship globally.
+                        Journal of Intercontinental Academic Studies (JIAS) — a peer-reviewed,
+                        open-access platform advancing interdisciplinary scholarship globally.
                     </p>
 
                     {/* Stat strip */}
@@ -299,9 +298,9 @@ export default function AboutPage() {
                                 A Premier Platform for Legal Scholarship
                             </h2>
                             <p className="text-[14px] text-[#64748B] dark:text-[#94A3B8] leading-relaxed">
-                                The <span className="text-[#1E3A8A] dark:text-[#3B82F6] font-semibold">International Journal of Law and Social Governance (IJLSG)</span> is
+                                The <span className="text-[#1E3A8A] dark:text-[#3B82F6] font-semibold">Journal of Intercontinental Academic Studies (JIAS)</span> is
                                 a peer-reviewed, open-access academic journal dedicated to fostering high-quality research
-                                at the intersection of law, governance, public policy, and socio-legal studies.
+                                across interdisciplinary studies, governance, public policy, and socio-economic frameworks.
                             </p>
                             <p className="text-[14px] text-[#64748B] dark:text-[#94A3B8] leading-relaxed">
                                 The journal provides a rigorous yet inclusive platform for scholars, practitioners,
@@ -353,22 +352,17 @@ export default function AboutPage() {
                         What We Stand For
                     </h2>
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {AIMS.map(({ icon: Icon, title, desc }) => (
+                        {AIMS.map(({ title, desc }) => (
                             <div
                                 key={title}
-                                className="flex flex-col gap-3 p-4 rounded-xl bg-[#F8FAFC] dark:bg-[#020617] border border-[#E2E8F0] dark:border-[#1E293B] hover:border-[#1E3A8A]/30 dark:hover:border-[#3B82F6]/30 hover:-translate-y-0.5 transition-all group"
+                                className="flex flex-col gap-2 p-4 rounded-xl bg-[#F8FAFC] dark:bg-[#020617] border border-[#E2E8F0] dark:border-[#1E293B] hover:border-[#1E3A8A]/30 dark:hover:border-[#3B82F6]/30 border-l-4 border-l-[#1E3A8A] dark:border-l-[#3B82F6] transition-all"
                             >
-                                <div className="w-9 h-9 rounded-xl bg-[#EFF6FF] dark:bg-[#1E3A8A]/20 flex items-center justify-center group-hover:bg-[#1E3A8A] dark:group-hover:bg-[#3B82F6] transition-colors">
-                                    <Icon className="w-4 h-4 text-[#1E3A8A] dark:text-[#3B82F6] group-hover:text-white transition-colors" />
-                                </div>
-                                <div>
-                                    <p className="text-[13.5px] font-bold text-[#0F172A] dark:text-[#F1F5F9] mb-1">
-                                        {title}
-                                    </p>
-                                    <p className="text-[12px] text-[#64748B] dark:text-[#94A3B8] leading-relaxed">
-                                        {desc}
-                                    </p>
-                                </div>
+                                <p className="text-[13.5px] font-bold text-[#0F172A] dark:text-[#F1F5F9]">
+                                    {title}
+                                </p>
+                                <p className="text-[12px] text-[#64748B] dark:text-[#94A3B8] leading-relaxed">
+                                    {desc}
+                                </p>
                             </div>
                         ))}
                     </div>
@@ -376,18 +370,15 @@ export default function AboutPage() {
 
                 {/* STATS GRID ─────────────────────────────────────────── */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-                    {STATS.map(({ icon: Icon, value, label, color }) => (
+                    {STATS.map(({ value, label }) => (
                         <div
                             key={label}
-                            className="bg-white dark:bg-[#0F172A] rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] p-4 text-center shadow-[0_1px_8px_rgba(15,23,42,.05)]"
+                            className="bg-white dark:bg-[#0F172A] rounded-xl border border-[#E2E8F0] dark:border-[#1E293B] p-4 text-center shadow-[0_1px_4px_rgba(15,23,42,.04)]"
                         >
-                            <div className={cn("w-9 h-9 rounded-xl flex items-center justify-center mx-auto mb-2.5", color)}>
-                                <Icon className="w-4 h-4" />
-                            </div>
-                            <p className="text-[20px] font-bold text-[#0F172A] dark:text-[#F1F5F9] leading-none">
+                            <p className="text-[22px] font-bold text-[#1E3A8A] dark:text-[#38BDF8] leading-none tracking-tight">
                                 {value}
                             </p>
-                            <p className="text-[11px] text-[#64748B] dark:text-[#94A3B8] mt-1 leading-tight">
+                            <p className="text-[11px] font-medium text-[#64748B] dark:text-[#94A3B8] mt-2 leading-tight">
                                 {label}
                             </p>
                         </div>
@@ -406,9 +397,9 @@ export default function AboutPage() {
                                 Axiara Private Limited
                             </h2>
                             <p className="text-[14px] text-[#64748B] dark:text-[#94A3B8] leading-relaxed mb-4">
-                                IJLSG is published by <span className="text-[#0F172A] dark:text-[#F1F5F9] font-semibold">Axiara Private Limited</span> —
-                                an organization committed to advancing knowledge, research, and innovation in the
-                                fields of law, governance, and social transformation.
+                                JIAS is published by <span className="text-[#0F172A] dark:text-[#F1F5F9] font-semibold">Axiara Private Limited</span> —
+                                an organization committed to advancing knowledge, research, and innovation across
+                                interdisciplinary academia, global governance, and social transformation.
                             </p>
                             <p className="text-[14px] text-[#64748B] dark:text-[#94A3B8] leading-relaxed">
                                 The Foundation operates with a mission to democratize access to legal knowledge
@@ -430,34 +421,29 @@ export default function AboutPage() {
                         </div>
 
                         {/* Contact card */}
-                        <div className="bg-[#F8FAFC] dark:bg-[#020617] rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] p-5 space-y-4">
-                            <p className="text-[11px] font-bold text-[#94A3B8] uppercase tracking-widest">
+                        <div className="bg-[#F8FAFC] dark:bg-[#020617] rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] p-5 space-y-3">
+                            <p className="text-[11px] font-bold text-[#94A3B8] uppercase tracking-widest mb-2">
                                 Contact Details
                             </p>
                             {[
-                                { icon: Building2, label: "Organisation", value: "Axiara Private Limited" },
-                                { icon: MapPin, label: "Country", value: "India" },
-                                { icon: Mail, label: "Email", value: "[EMAIL_ADDRESS]", href: "mailto:[EMAIL_ADDRESS]" },
-                                { icon: Globe, label: "Website", value: "www.ijlsg.org", href: "https://www.ijlsg.org" },
-                            ].map(({ icon: Icon, label, value, href }) => (
-                                <div key={label} className="flex items-center gap-3">
-                                    <div className="w-8 h-8 rounded-lg bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[#1E293B] flex items-center justify-center shrink-0">
-                                        <Icon className="w-3.5 h-3.5 text-[#1E3A8A] dark:text-[#3B82F6]" />
-                                    </div>
-                                    <div>
-                                        <p className="text-[10.5px] text-[#94A3B8] font-medium">{label}</p>
-                                        {href ? (
-                                            <Link
-                                                href={href}
-                                                className="text-[13px] font-semibold text-[#0EA5E9] dark:text-[#22D3EE] hover:underline flex items-center gap-1"
-                                            >
-                                                {value}
-                                                <ExternalLink className="w-3 h-3" />
-                                            </Link>
-                                        ) : (
-                                            <p className="text-[13px] font-semibold text-[#0F172A] dark:text-[#F1F5F9]">{value}</p>
-                                        )}
-                                    </div>
+                                { label: "Organisation", value: "Axiara Private Limited" },
+                                { label: "Country", value: "India" },
+                                { label: "Email", value: "[EMAIL_ADDRESS]", href: "mailto:[EMAIL_ADDRESS]" },
+                                { label: "Website", value: "www.ijlsg.org", href: "https://www.ijlsg.org" },
+                            ].map(({ label, value, href }) => (
+                                <div key={label} className="flex items-center justify-between py-1.5 border-b border-[#E2E8F0] dark:border-[#1E293B] last:border-0">
+                                    <span className="text-[11.5px] text-[#94A3B8] font-medium">{label}</span>
+                                    {href ? (
+                                        <Link
+                                            href={href}
+                                            className="text-[13px] font-semibold text-[#0EA5E9] dark:text-[#22D3EE] hover:underline flex items-center gap-1"
+                                        >
+                                            {value}
+                                            <ExternalLink className="w-3 h-3" />
+                                        </Link>
+                                    ) : (
+                                        <span className="text-[13px] font-semibold text-[#0F172A] dark:text-[#F1F5F9]">{value}</span>
+                                    )}
                                 </div>
                             ))}
                         </div>
@@ -556,7 +542,7 @@ export default function AboutPage() {
                         <p className="text-[12.5px] text-[#166534] dark:text-[#4ADE80] leading-relaxed">
                             <span className="font-bold">Ethics & Integrity:</span> All submissions are screened
                             for plagiarism using industry-standard tools. Authors must declare conflicts of
-                            interest and confirm ethical compliance. IJLSG follows COPE guidelines strictly.
+                            interest and confirm ethical compliance. JIAS follows COPE guidelines strictly.
                         </p>
                     </div>
                 </Card>
@@ -580,7 +566,7 @@ export default function AboutPage() {
                                 Ready to Submit Your Research?
                             </h3>
                             <p className="text-[14px] text-white/65 max-w-xl">
-                                Join hundreds of scholars contributing to IJLSG. Our editorial team provides
+                                Join hundreds of scholars contributing to JIAS. Our editorial team provides
                                 constructive feedback and a transparent review process.
                             </p>
                         </div>
