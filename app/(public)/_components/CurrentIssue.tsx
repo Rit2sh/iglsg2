@@ -1,85 +1,70 @@
 import { Button } from '@/components/ui/button'
-import { Archive, BookOpen, Calendar, BookMarked, ExternalLink, FileText } from 'lucide-react'
+import { Archive, BookOpen, ExternalLink } from 'lucide-react'
 import SectionTitle from './SectionTitle'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { ARTICLES } from '@/Data/Articles'
 import Link from 'next/link'
 
-
 export default function CurrentIssue() {
 
     return (
         <Card className="border-0 shadow-none p-4">
             <SectionTitle
-                icon={BookMarked}
                 action={{ label: "View Full Issue", href: "/current-issue" }}
             >
                 Current Issue
             </SectionTitle>
 
             {/* Volume tag */}
-            <div className="flex items-center gap-2 p-3 rounded-xl bg-[#EFF6FF] dark:bg-[#1E3A8A]/15 border border-[#DBEAFE] dark:border-[#1E3A8A]/30">
-                <Calendar className="w-4 h-4 text-[#1E3A8A] dark:text-[#3B82F6] shrink-0" />
+            <div className="flex items-center justify-between p-3 rounded-lg bg-[#F8FAFC] dark:bg-[#020617] border border-[#E2E8F0] dark:border-[#1E293B] mb-5">
                 <div>
-                    <p className="text-[12px] font-bold text-[#1E3A8A] dark:text-[#3B82F6]">Vol. 1 (2026) No. 1</p>
-                    <p className="text-[11px] text-[#64748B] dark:text-[#94A3B8]">Published January 2026</p>
+                    <span className="text-[12.5px] font-bold text-[#0F172A] dark:text-[#F1F5F9]">Vol. 1 (2026) No. 1</span>
+                    <span className="text-[11.5px] text-[#64748B] dark:text-[#94A3B8] ml-2">Published January 2026</span>
                 </div>
-            </div>
-            <div className="flex items-center gap-2 p-3 rounded-xl bg-[#EFF6FF] dark:bg-[#1E3A8A]/15 border border-[#DBEAFE] dark:border-[#1E3A8A]/30">
-                <Calendar className="w-4 h-4 text-[#1E3A8A] dark:text-[#3B82F6] shrink-0" />
-                <div>
-                    <p className="text-[12px] font-bold text-[#1E3A8A] dark:text-[#3B82F6]">Vol. 2 (2026) No. 2</p>
-                    <p className="text-[11px] text-[#64748B] dark:text-[#94A3B8]">Published January 2026</p>
-                </div>
+                <Badge variant="outline" className="text-[10px] font-semibold text-[#1E3A8A] dark:text-[#38BDF8] border-[#1E3A8A]/20">
+                    Open Access
+                </Badge>
             </div>
 
             {/* Editorial */}
             <div className="mb-5">
-                <div className="flex items-center gap-2 mb-3">
+                <div className="flex items-center gap-2 mb-2">
                     <Badge
                         variant="outline"
-                        className="text-[10.5px] font-semibold border-[#4F46E5]/30 text-[#4F46E5] dark:border-[#6366F1]/40 dark:text-[#818CF8] px-2 py-0"
+                        className="text-[10px] font-semibold border-[#4F46E5]/30 text-[#4F46E5] dark:border-[#6366F1]/40 dark:text-[#818CF8] px-2 py-0"
                     >
                         Editorial
                     </Badge>
                 </div>
-                <div className="flex items-start gap-3 p-3.5 rounded-xl bg-[#F8FAFC] dark:bg-[#020617] border border-[#E2E8F0] dark:border-[#1E293B]">
-                    <div className="w-8 h-8 rounded-lg bg-linear-to-br from-[#4F46E5] to-[#1E3A8A] flex items-center justify-center shrink-0 mt-0.5">
-                        <span className="text-white text-[11px] font-bold">SR</span>
-                    </div>
-                    <div>
-                        <p className="text-[13px] font-semibold text-[#0F172A] dark:text-[#F1F5F9]">
-                            Law, Democracy and Social Transformation
-                        </p>
-                        <p className="text-[11.5px] text-[#64748B] dark:text-[#94A3B8] mt-0.5">
-                            Prof. Dr. Satendra Rajput
-                        </p>
-                    </div>
+                <div className="p-3.5 rounded-lg bg-[#F8FAFC] dark:bg-[#020617] border border-[#E2E8F0] dark:border-[#1E293B]">
+                    <p className="text-[13px] font-semibold text-[#0F172A] dark:text-[#F1F5F9]">
+                        Law, Democracy and Social Transformation
+                    </p>
+                    <p className="text-[11.5px] text-[#64748B] dark:text-[#94A3B8] mt-0.5">
+                        Prof. Dr. Satendra Rajput
+                    </p>
                 </div>
             </div>
 
             {/* Articles */}
             <div>
-                <div className="flex items-center gap-2 mb-3">
+                <div className="flex items-center gap-2 mb-2">
                     <Badge
                         variant="outline"
-                        className="text-[10.5px] font-semibold border-[#0EA5E9]/30 text-[#0EA5E9] dark:border-[#22D3EE]/40 dark:text-[#22D3EE] px-2 py-0"
+                        className="text-[10px] font-semibold border-[#0EA5E9]/30 text-[#0EA5E9] dark:border-[#22D3EE]/40 dark:text-[#22D3EE] px-2 py-0"
                     >
                         Articles
                     </Badge>
                 </div>
-                <div className="space-y-2.5">
+                <div className="space-y-2">
                     {ARTICLES.map((article, i) => (
                         <div
                             key={i}
-                            className="flex items-start gap-3 p-3.5 rounded-xl bg-[#F8FAFC] dark:bg-[#020617] border border-[#E2E8F0] dark:border-[#1E293B] hover:border-[#0EA5E9]/30 dark:hover:border-[#22D3EE]/30 transition-colors cursor-pointer group"
+                            className="flex items-start justify-between gap-3 p-3.5 rounded-lg bg-[#F8FAFC] dark:bg-[#020617] border border-[#E2E8F0] dark:border-[#1E293B] hover:border-[#1E3A8A]/30 dark:hover:border-[#38BDF8]/30 transition-colors cursor-pointer group"
                         >
-                            <div className="w-8 h-8 rounded-lg bg-[#EFF6FF] dark:bg-[#1E293B] flex items-center justify-center shrink-0 mt-0.5">
-                                <FileText className="w-3.5 h-3.5 text-[#0EA5E9] dark:text-[#22D3EE]" />
-                            </div>
                             <div className="flex-1 min-w-0">
-                                <p className="text-[13px] font-semibold text-[#0F172A] dark:text-[#F1F5F9] group-hover:text-[#1E3A8A] dark:group-hover:text-[#3B82F6] transition-colors">
+                                <p className="text-[13px] font-semibold text-[#0F172A] dark:text-[#F1F5F9] group-hover:text-[#1E3A8A] dark:group-hover:text-[#38BDF8] transition-colors leading-snug">
                                     {article.title}
                                 </p>
                                 <div className="flex items-center gap-2 mt-1">
@@ -90,7 +75,7 @@ export default function CurrentIssue() {
                                     <span className="text-[11px] text-[#94A3B8]">{article.pageStart}</span>
                                 </div>
                             </div>
-                            <ExternalLink className="w-3.5 h-3.5 text-[#CBD5E1] group-hover:text-[#0EA5E9] shrink-0 mt-1 transition-colors" />
+                            <ExternalLink className="w-3.5 h-3.5 text-[#94A3B8] group-hover:text-[#1E3A8A] dark:group-hover:text-[#38BDF8] shrink-0 mt-0.5 transition-colors" />
                         </div>
                     ))}
                 </div>

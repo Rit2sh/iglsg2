@@ -352,22 +352,17 @@ export default function AboutPage() {
                         What We Stand For
                     </h2>
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {AIMS.map(({ icon: Icon, title, desc }) => (
+                        {AIMS.map(({ title, desc }) => (
                             <div
                                 key={title}
-                                className="flex flex-col gap-3 p-4 rounded-xl bg-[#F8FAFC] dark:bg-[#020617] border border-[#E2E8F0] dark:border-[#1E293B] hover:border-[#1E3A8A]/30 dark:hover:border-[#3B82F6]/30 hover:-translate-y-0.5 transition-all group"
+                                className="flex flex-col gap-2 p-4 rounded-xl bg-[#F8FAFC] dark:bg-[#020617] border border-[#E2E8F0] dark:border-[#1E293B] hover:border-[#1E3A8A]/30 dark:hover:border-[#3B82F6]/30 border-l-4 border-l-[#1E3A8A] dark:border-l-[#3B82F6] transition-all"
                             >
-                                <div className="w-9 h-9 rounded-xl bg-[#EFF6FF] dark:bg-[#1E3A8A]/20 flex items-center justify-center group-hover:bg-[#1E3A8A] dark:group-hover:bg-[#3B82F6] transition-colors">
-                                    <Icon className="w-4 h-4 text-[#1E3A8A] dark:text-[#3B82F6] group-hover:text-white transition-colors" />
-                                </div>
-                                <div>
-                                    <p className="text-[13.5px] font-bold text-[#0F172A] dark:text-[#F1F5F9] mb-1">
-                                        {title}
-                                    </p>
-                                    <p className="text-[12px] text-[#64748B] dark:text-[#94A3B8] leading-relaxed">
-                                        {desc}
-                                    </p>
-                                </div>
+                                <p className="text-[13.5px] font-bold text-[#0F172A] dark:text-[#F1F5F9]">
+                                    {title}
+                                </p>
+                                <p className="text-[12px] text-[#64748B] dark:text-[#94A3B8] leading-relaxed">
+                                    {desc}
+                                </p>
                             </div>
                         ))}
                     </div>
@@ -375,18 +370,15 @@ export default function AboutPage() {
 
                 {/* STATS GRID ─────────────────────────────────────────── */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-                    {STATS.map(({ icon: Icon, value, label, color }) => (
+                    {STATS.map(({ value, label }) => (
                         <div
                             key={label}
-                            className="bg-white dark:bg-[#0F172A] rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] p-4 text-center shadow-[0_1px_8px_rgba(15,23,42,.05)]"
+                            className="bg-white dark:bg-[#0F172A] rounded-xl border border-[#E2E8F0] dark:border-[#1E293B] p-4 text-center shadow-[0_1px_4px_rgba(15,23,42,.04)]"
                         >
-                            <div className={cn("w-9 h-9 rounded-xl flex items-center justify-center mx-auto mb-2.5", color)}>
-                                <Icon className="w-4 h-4" />
-                            </div>
-                            <p className="text-[20px] font-bold text-[#0F172A] dark:text-[#F1F5F9] leading-none">
+                            <p className="text-[22px] font-bold text-[#1E3A8A] dark:text-[#38BDF8] leading-none tracking-tight">
                                 {value}
                             </p>
-                            <p className="text-[11px] text-[#64748B] dark:text-[#94A3B8] mt-1 leading-tight">
+                            <p className="text-[11px] font-medium text-[#64748B] dark:text-[#94A3B8] mt-2 leading-tight">
                                 {label}
                             </p>
                         </div>
@@ -429,34 +421,29 @@ export default function AboutPage() {
                         </div>
 
                         {/* Contact card */}
-                        <div className="bg-[#F8FAFC] dark:bg-[#020617] rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] p-5 space-y-4">
-                            <p className="text-[11px] font-bold text-[#94A3B8] uppercase tracking-widest">
+                        <div className="bg-[#F8FAFC] dark:bg-[#020617] rounded-2xl border border-[#E2E8F0] dark:border-[#1E293B] p-5 space-y-3">
+                            <p className="text-[11px] font-bold text-[#94A3B8] uppercase tracking-widest mb-2">
                                 Contact Details
                             </p>
                             {[
-                                { icon: Building2, label: "Organisation", value: "Axiara Private Limited" },
-                                { icon: MapPin, label: "Country", value: "India" },
-                                { icon: Mail, label: "Email", value: "[EMAIL_ADDRESS]", href: "mailto:[EMAIL_ADDRESS]" },
-                                { icon: Globe, label: "Website", value: "www.ijlsg.org", href: "https://www.ijlsg.org" },
-                            ].map(({ icon: Icon, label, value, href }) => (
-                                <div key={label} className="flex items-center gap-3">
-                                    <div className="w-8 h-8 rounded-lg bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[#1E293B] flex items-center justify-center shrink-0">
-                                        <Icon className="w-3.5 h-3.5 text-[#1E3A8A] dark:text-[#3B82F6]" />
-                                    </div>
-                                    <div>
-                                        <p className="text-[10.5px] text-[#94A3B8] font-medium">{label}</p>
-                                        {href ? (
-                                            <Link
-                                                href={href}
-                                                className="text-[13px] font-semibold text-[#0EA5E9] dark:text-[#22D3EE] hover:underline flex items-center gap-1"
-                                            >
-                                                {value}
-                                                <ExternalLink className="w-3 h-3" />
-                                            </Link>
-                                        ) : (
-                                            <p className="text-[13px] font-semibold text-[#0F172A] dark:text-[#F1F5F9]">{value}</p>
-                                        )}
-                                    </div>
+                                { label: "Organisation", value: "Axiara Private Limited" },
+                                { label: "Country", value: "India" },
+                                { label: "Email", value: "[EMAIL_ADDRESS]", href: "mailto:[EMAIL_ADDRESS]" },
+                                { label: "Website", value: "www.ijlsg.org", href: "https://www.ijlsg.org" },
+                            ].map(({ label, value, href }) => (
+                                <div key={label} className="flex items-center justify-between py-1.5 border-b border-[#E2E8F0] dark:border-[#1E293B] last:border-0">
+                                    <span className="text-[11.5px] text-[#94A3B8] font-medium">{label}</span>
+                                    {href ? (
+                                        <Link
+                                            href={href}
+                                            className="text-[13px] font-semibold text-[#0EA5E9] dark:text-[#22D3EE] hover:underline flex items-center gap-1"
+                                        >
+                                            {value}
+                                            <ExternalLink className="w-3 h-3" />
+                                        </Link>
+                                    ) : (
+                                        <span className="text-[13px] font-semibold text-[#0F172A] dark:text-[#F1F5F9]">{value}</span>
+                                    )}
                                 </div>
                             ))}
                         </div>
