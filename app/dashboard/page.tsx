@@ -4,8 +4,7 @@ import {
     Clock,
     FileCheck,
     Users,
-    AlertCircle,
-    TrendingUp
+    AlertCircle
 } from "lucide-react";
 import StatsGrid from "./_components/StatsGrid";
 import ActiveQueue from "./_components/ActiveQueue";
@@ -30,8 +29,7 @@ export default async function BoardDashboardPage() {
                         style={{ fontFamily: "'Playfair Display', serif" }}>
                         Editorial Oversight
                     </h1>
-                    <p className="text-muted-foreground flex items-center gap-2">
-                        <TrendingUp size={16} className="text-emerald-500" />
+                    <p className="text-muted-foreground text-sm">
                         Monitoring {manuscripts.data?.length || 0} active peer-review cycles.
                     </p>
                 </div>

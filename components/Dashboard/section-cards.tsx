@@ -9,7 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { TrendingUpIcon, TrendingDownIcon } from "lucide-react"
 
 export function SectionCards() {
   return (
@@ -21,19 +20,16 @@ export function SectionCards() {
             248
           </CardTitle>
           <CardAction>
-            <Badge variant="outline">
-              <TrendingUpIcon
-              />
+            <Badge variant="outline" className="font-semibold text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-900/50 bg-emerald-50/50 dark:bg-emerald-950/20">
               +14.5%
             </Badge>
           </CardAction>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            Active editorial cycles{" "}
-            <TrendingUpIcon className="size-4" />
+          <div className="line-clamp-1 font-medium text-slate-900 dark:text-slate-100">
+            Active editorial cycles
           </div>
-          <div className="text-muted-foreground">
+          <div className="text-muted-foreground text-xs">
             Submissions across all disciplines
           </div>
         </CardFooter>
@@ -45,19 +41,16 @@ export function SectionCards() {
             38
           </CardTitle>
           <CardAction>
-            <Badge variant="outline">
-              <TrendingDownIcon
-              />
+            <Badge variant="outline" className="font-semibold text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/20">
               -8%
             </Badge>
           </CardAction>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            Pending reviewer verdict{" "}
-            <TrendingDownIcon className="size-4" />
+          <div className="line-clamp-1 font-medium text-slate-900 dark:text-slate-100">
+            Pending reviewer verdict
           </div>
-          <div className="text-muted-foreground">
+          <div className="text-muted-foreground text-xs">
             Average turnaround: 21 days
           </div>
         </CardFooter>
@@ -69,19 +62,18 @@ export function SectionCards() {
             186
           </CardTitle>
           <CardAction>
-            <Badge variant="outline">
-              <TrendingUpIcon
-              />
+            <Badge variant="outline" className="font-semibold text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-900/50 bg-emerald-50/50 dark:bg-emerald-950/20">
               +18.2%
             </Badge>
           </CardAction>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            Indexed in Google Scholar{" "}
-            <TrendingUpIcon className="size-4" />
+          <div className="line-clamp-1 font-medium text-slate-900 dark:text-slate-100">
+            Indexed in Google Scholar
           </div>
-          <div className="text-muted-foreground">Open-access research papers</div>
+          <div className="text-muted-foreground text-xs">
+            Open-access research papers
+          </div>
         </CardFooter>
       </Card>
       <Card className="@container/card">
@@ -91,19 +83,18 @@ export function SectionCards() {
             ₹4,85,000
           </CardTitle>
           <CardAction>
-            <Badge variant="outline">
-              <TrendingUpIcon
-              />
+            <Badge variant="outline" className="font-semibold text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-900/50 bg-emerald-50/50 dark:bg-emerald-950/20">
               +12.4%
             </Badge>
           </CardAction>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            Verified settlements{" "}
-            <TrendingUpIcon className="size-4" />
+          <div className="line-clamp-1 font-medium text-slate-900 dark:text-slate-100">
+            Verified settlements
           </div>
-          <div className="text-muted-foreground">Direct UPI &amp; Bank UTR records</div>
+          <div className="text-muted-foreground text-xs">
+            Direct UPI &amp; Bank UTR records
+          </div>
         </CardFooter>
       </Card>
     </div>

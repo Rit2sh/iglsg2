@@ -364,9 +364,6 @@ export function PublicNavbar() {
 
                 </div>
             </nav >
-            {
-                loading && (<PreLoader />)
-            }
         </header >
     );
 }

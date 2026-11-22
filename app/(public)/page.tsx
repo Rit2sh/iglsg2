@@ -126,8 +126,7 @@ export default function HomePage() {
                         {/* LEFT — Journal meta */}
                         <div className="space-y-5">
                             <div>
-                                <Badge className="bg-white/15 hover:bg-white/20 text-white border-0 text-[10.5px] font-semibold px-2.5 py-0.5 gap-1.5 mb-3">
-                                    <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+                                <Badge className="bg-white/15 text-white border-0 text-[10px] font-bold px-2.5 py-0.5 uppercase tracking-wider mb-3">
                                     Peer-Reviewed Journal
                                 </Badge>
                                 <h1

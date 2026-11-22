@@ -11,7 +11,6 @@ import {
     Quote,
     ArrowRight,
     CheckCircle2,
-    Star,
     Layers,
     Scale,
     Lightbulb,
@@ -147,7 +146,7 @@ const STATS: Stat[] = [
     { icon: Globe, value: "18+", label: "Countries Reached", color: "text-[#0EA5E9] dark:text-[#22D3EE] bg-sky-50 dark:bg-[#0EA5E9]/20" },
     { icon: BarChart3, value: "120+", label: "Total Citations", color: "text-[#22C55E] dark:text-[#4ADE80] bg-green-50 dark:bg-[#22C55E]/20" },
     { icon: Clock, value: "21", label: "Avg. Review Days", color: "text-[#F59E0B] dark:text-[#FBBF24] bg-amber-50 dark:bg-[#F59E0B]/20" },
-    { icon: Star, value: "98%", label: "Author Satisfaction", color: "text-[#EF4444] dark:text-[#F87171] bg-red-50 dark:bg-[#EF4444]/20" },
+    { icon: ShieldCheck, value: "100%", label: "Peer-Reviewed", color: "text-[#0284C7] dark:text-[#38BDF8] bg-sky-50 dark:bg-[#0284C7]/20" },
 ];
 
 const REVIEW_STEPS: ReviewStep[] = [

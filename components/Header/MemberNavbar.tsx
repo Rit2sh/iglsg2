@@ -277,9 +277,6 @@ export function MemberNavbar() {
 
                 </div>
             </nav>
-            {
-                loading && (<PreLoader />)
-            }
         </header>
     );
 }
