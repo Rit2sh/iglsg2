@@ -2,7 +2,6 @@
 
 import React from "react";
 import { Check } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 interface WizardProgressProps {
     currentStep: 1 | 2 | 3;
@@ -16,59 +15,49 @@ export default function WizardProgress({
     completedSteps,
 }: WizardProgressProps) {
     const steps = [
-        { num: 1, label: "Manuscript, Authors & File Upload" },
-        { num: 2, label: "Payment Details (Review of Amount)" },
-        { num: 3, label: "Axiara Payment Portal & Final Submission" },
+        { num: 1, label: "1. Manuscript & Authors" },
+        { num: 2, label: "2. Payment Details Review" },
+        { num: 3, label: "3. Payment & Final Submission" },
     ];
 
     return (
-        <section className="relative my-6 px-4 md:px-12" aria-label="Submission progress">
-            {/* Connecting line */}
-            <div className="hidden sm:block absolute left-[16%] right-[16%] top-[19px] h-[3px] bg-[#0c2556]/20 dark:bg-blue-900/40 z-0" />
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-2 relative z-10">
+        <nav aria-label="Submission progress" className="my-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 border border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden bg-white dark:bg-slate-900 divide-y sm:divide-y-0 sm:divide-x divide-slate-200 dark:divide-slate-800">
                 {steps.map((s) => {
                     const isDone = completedSteps.includes(s.num);
                     const isCurrent = currentStep === s.num;
                     const canClick = isDone || isCurrent;
 
                     return (
-                        <div
+                        <button
                             key={s.num}
+                            type="button"
+                            disabled={!canClick}
                             onClick={() => canClick && onStepClick?.(s.num as 1 | 2 | 3)}
-                            className={cn(
-                                "flex sm:flex-col items-center gap-3 sm:gap-1.5 text-left sm:text-center transition-all",
-                                canClick ? "cursor-pointer" : "opacity-60 cursor-not-allowed"
-                            )}
+                            className={`p-3.5 text-left flex items-center gap-3 text-sm font-semibold select-none ${
+                                isCurrent
+                                    ? "bg-[#061a43] text-white"
+                                    : isDone
+                                    ? "bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-100"
+                                    : "bg-white dark:bg-slate-900 text-slate-400 dark:text-slate-500 cursor-not-allowed"
+                            }`}
                         >
-                            <div
-                                className={cn(
-                                    "w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm border-2 transition-all shadow-sm",
-                                    isDone
-                                        ? "bg-emerald-600 border-emerald-600 text-white shadow-emerald-500/20"
-                                        : isCurrent
-                                        ? "bg-[#092d68] border-[#092d68] text-[#ffe66b] ring-4 ring-blue-100 dark:ring-blue-950"
-                                        : "bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-400"
-                                )}
-                            >
-                                {isDone ? <Check className="w-5 h-5 stroke-[3]" /> : s.num}
-                            </div>
                             <span
-                                className={cn(
-                                    "text-xs md:text-sm font-semibold tracking-tight transition-all rounded-full px-3 py-1",
+                                className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${
                                     isCurrent
-                                        ? "bg-[#092d68] text-white"
+                                        ? "bg-white text-[#061a43]"
                                         : isDone
-                                        ? "text-emerald-700 dark:text-emerald-400 font-bold"
-                                        : "text-slate-600 dark:text-slate-400"
-                                )}
+                                        ? "bg-emerald-600 text-white"
+                                        : "border border-slate-300 dark:border-slate-700 text-slate-400"
+                                }`}
                             >
-                                {s.label}
+                                {isDone ? <Check className="w-4 h-4 stroke-[2.5]" /> : s.num}
                             </span>
-                        </div>
+                            <span className="truncate">{s.label}</span>
+                        </button>
                     );
                 })}
             </div>
-        </section>
+        </nav>
     );
 }

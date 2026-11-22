@@ -1,23 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-    QrCode,
-    CreditCard,
-    Building2,
-    ArrowLeftRight,
-    Copy,
-    Check,
-    Upload,
-    CheckCircle2,
-    ArrowLeft,
-    Send,
-    Download,
-    Printer,
-    FileCheck,
-    ShieldCheck,
-    AlertCircle,
-} from "lucide-react";
 import { JOURNALS, calculateFees, formatINR } from "@/lib/submission/journals";
 import { SubmissionFormData } from "@/lib/submission/types";
 
@@ -53,8 +36,6 @@ export default function Step3PaymentFinalSubmission({
     );
 
     const isFullyWaived = fees.isFullyWaived;
-
-    // Default payment date to today (YYYY-MM-DD)
     const todayStr = new Date().toISOString().slice(0, 10);
     const paymentDateVal = data.paymentDate || todayStr;
 
@@ -62,7 +43,7 @@ export default function Step3PaymentFinalSubmission({
         try {
             await navigator.clipboard.writeText("axiara.journals@upi");
             setCopiedUpi(true);
-            setTimeout(() => setCopiedUpi(false), 2500);
+            setTimeout(() => setCopiedUpi(false), 2000);
         } catch {
             setCopiedUpi(true);
         }
@@ -74,11 +55,11 @@ export default function Step3PaymentFinalSubmission({
 
         const validTypes = ["application/pdf", "image/jpeg", "image/png", "image/webp"];
         if (!validTypes.includes(file.type)) {
-            alert("Please upload a PDF, JPG, or PNG payment receipt.");
+            alert("Upload a PDF, JPG, or PNG payment receipt.");
             return;
         }
         if (file.size > 5 * 1024 * 1024) {
-            alert("Payment receipt must not exceed 5 MB.");
+            alert("Payment receipt size must not exceed 5 MB.");
             return;
         }
 
@@ -94,17 +75,17 @@ export default function Step3PaymentFinalSubmission({
         setErrorMsg("");
 
         if (!data.declarationAccepted) {
-            setErrorMsg("Please accept the mandatory payment and ethical declaration to continue.");
+            setErrorMsg("Accept the mandatory submission and ethical declaration to continue.");
             return;
         }
 
         if (!isFullyWaived) {
             if (!data.utrNumber?.trim()) {
-                setErrorMsg("Please enter your Transaction / UTR reference number.");
+                setErrorMsg("Enter your banking UTR / Transaction Reference Number.");
                 return;
             }
             if (!data.receiptFileName) {
-                setErrorMsg("Please upload your payment receipt document.");
+                setErrorMsg("Upload the payment receipt proof.");
                 return;
             }
         }
@@ -130,12 +111,10 @@ export default function Step3PaymentFinalSubmission({
                 setSubmitted(true);
                 onFinish({ success: true, manuscriptId: result.manuscriptId || data.manuscriptId });
             } else {
-                // If API fails or offline, fallback to successful local submission simulation
                 setSubmitted(true);
                 onFinish({ success: true, manuscriptId: data.manuscriptId });
             }
         } catch {
-            // Safe fallback simulation
             setSubmitted(true);
             onFinish({ success: true, manuscriptId: data.manuscriptId });
         } finally {
@@ -145,48 +124,50 @@ export default function Step3PaymentFinalSubmission({
 
     if (submitted) {
         return (
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 md:p-12 text-center max-w-2xl mx-auto shadow-xl space-y-6">
-                <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-inner">
-                    <CheckCircle2 className="w-10 h-10" />
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-8 md:p-12 text-center max-w-2xl mx-auto shadow-sm space-y-6">
+                <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 rounded-full flex items-center justify-center mx-auto text-xl font-bold">
+                    &#10003;
                 </div>
 
                 <div className="space-y-2">
-                    <span className="text-xs font-bold uppercase tracking-widest text-emerald-600 bg-emerald-50 dark:bg-emerald-950/60 px-3 py-1 rounded-full">
-                        Manuscript Successfully Received
+                    <span className="text-xs font-semibold uppercase tracking-wider text-emerald-700 bg-emerald-50 dark:bg-emerald-950/60 px-3 py-1 rounded">
+                        Submission Received
                     </span>
-                    <h2 className="text-2xl md:text-3xl font-extrabold text-[#061a43] dark:text-white">
-                        Submission &amp; Payment Confirmed
+                    <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
+                        Manuscript &amp; Payment Acknowledged
                     </h2>
                     <p className="text-slate-600 dark:text-slate-400 text-sm max-w-md mx-auto">
-                        Your research manuscript has been logged into the Axiara peer-review queue under reference number:
+                        Your manuscript has been logged into the editorial review queue under reference ID:
                     </p>
-                    <div className="p-3 bg-[#fff1a8] text-[#0b246c] font-mono font-extrabold text-xl rounded-xl inline-block shadow-sm">
+                    <div className="p-3 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 font-mono font-bold text-xl rounded border border-slate-300 dark:border-slate-700 inline-block">
                         {data.manuscriptId}
                     </div>
                 </div>
 
-                <div className="bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl p-4 text-xs text-left space-y-2">
+                <div className="bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded p-4 text-xs text-left space-y-2">
                     <div className="flex justify-between py-1 border-b border-slate-200 dark:border-slate-700">
-                        <span className="text-slate-500 font-semibold">Journal:</span>
-                        <span className="font-bold">{journal.name}</span>
+                        <span className="text-slate-500 font-medium">Journal:</span>
+                        <span className="font-semibold text-slate-800 dark:text-slate-200">{journal.name}</span>
                     </div>
                     <div className="flex justify-between py-1 border-b border-slate-200 dark:border-slate-700">
-                        <span className="text-slate-500 font-semibold">Title:</span>
-                        <span className="font-bold truncate max-w-[280px]">{data.title}</span>
+                        <span className="text-slate-500 font-medium">Title:</span>
+                        <span className="font-semibold text-slate-800 dark:text-slate-200 truncate max-w-[280px]">
+                            {data.title}
+                        </span>
                     </div>
                     <div className="flex justify-between py-1 border-b border-slate-200 dark:border-slate-700">
-                        <span className="text-slate-500 font-semibold">Lead Author:</span>
-                        <span className="font-bold">{data.authors[0]?.name}</span>
+                        <span className="text-slate-500 font-medium">Lead Author:</span>
+                        <span className="font-semibold text-slate-800 dark:text-slate-200">{data.authors[0]?.name}</span>
                     </div>
                     <div className="flex justify-between py-1 border-b border-slate-200 dark:border-slate-700">
-                        <span className="text-slate-500 font-semibold">Publication Fee Status:</span>
-                        <span className="font-bold text-emerald-600">
-                            {isFullyWaived ? "100% Fee Waiver Approved" : `Paid (${formatINR(fees.netPayable)}) - UTR Recorded`}
+                        <span className="text-slate-500 font-medium">Fee Status:</span>
+                        <span className="font-semibold text-emerald-700 dark:text-emerald-400">
+                            {isFullyWaived ? "100% Fee Waiver Applied" : `Paid (${formatINR(fees.netPayable)}) - Proof Submitted`}
                         </span>
                     </div>
                     <div className="flex justify-between py-1">
-                        <span className="text-slate-500 font-semibold">Editorial Screening:</span>
-                        <span className="font-bold text-blue-600">Expected within 48–72 hours</span>
+                        <span className="text-slate-500 font-medium">Initial Desk Screening:</span>
+                        <span className="font-semibold text-slate-800 dark:text-slate-200">48 to 72 hours</span>
                     </div>
                 </div>
 
@@ -194,13 +175,13 @@ export default function Step3PaymentFinalSubmission({
                     <button
                         type="button"
                         onClick={() => window.print()}
-                        className="w-full sm:w-auto px-5 py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 font-bold text-xs rounded-xl flex items-center justify-center gap-2"
+                        className="w-full sm:w-auto px-5 py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-xs rounded border border-slate-300 dark:border-slate-700"
                     >
-                        <Printer className="w-4 h-4" /> Print Acknowledgment
+                        Print Submission Acknowledgment
                     </button>
                     <a
                         href="/"
-                        className="w-full sm:w-auto px-6 py-2.5 bg-[#092d68] hover:bg-[#001d51] text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow-md"
+                        className="w-full sm:w-auto px-6 py-2.5 bg-[#061a43] hover:bg-[#00245d] text-white font-semibold text-xs rounded"
                     >
                         Return to Journal Homepage
                     </a>
@@ -212,48 +193,53 @@ export default function Step3PaymentFinalSubmission({
     return (
         <form onSubmit={handleSubmit} className="space-y-6">
             {/* Header bar */}
-            <div className="bg-gradient-to-r from-[#0a3479] to-[#001d51] text-white rounded-xl px-5 py-3.5 shadow-md flex items-center justify-between">
-                <span className="font-extrabold text-lg md:text-xl flex items-center gap-2">
-                    <span>▣</span> Step 3 of 3: Payment, UTR &amp; Final Submission
-                </span>
-                <span className="text-xs bg-[#ffe66b] text-[#061a43] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+            <div className="bg-[#061a43] text-white rounded-lg px-6 py-4 flex items-center justify-between">
+                <div>
+                    <h2 className="text-base font-bold tracking-tight">
+                        Step 3: Payment, UTR &amp; Final Submission
+                    </h2>
+                    <p className="text-xs text-slate-300">
+                        Complete publication fee payment and submit the UTR transaction proof.
+                    </p>
+                </div>
+                <span className="text-xs font-mono font-semibold bg-white/10 text-white px-2.5 py-1 rounded">
                     {data.manuscriptId}
                 </span>
             </div>
 
             {/* Manuscript Summary Strip */}
-            <div className="bg-[#edf6ff] dark:bg-slate-900 border border-[#c8def8] dark:border-blue-900 rounded-2xl p-4 shadow-sm grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
-                <div className="border-b sm:border-b-0 sm:border-r border-blue-200 dark:border-slate-800 pb-2 sm:pb-0 sm:pr-3">
-                    <span className="text-slate-500 font-bold uppercase block mb-1">Journal</span>
-                    <span className="font-extrabold text-[#0b246c] dark:text-blue-300 line-clamp-1">
+            <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+                <div className="border-b sm:border-b-0 sm:border-r border-slate-200 dark:border-slate-800 pb-3 sm:pb-0 sm:pr-4">
+                    <span className="text-slate-500 font-semibold uppercase block mb-1">Journal</span>
+                    <span className="font-bold text-slate-900 dark:text-slate-100 line-clamp-1">
                         {journal.name}
                     </span>
                     <span className="text-[11px] text-slate-500">{journal.issn}</span>
                 </div>
-                <div className="border-b sm:border-b-0 lg:border-r border-blue-200 dark:border-slate-800 pb-2 sm:pb-0 sm:pr-3">
-                    <span className="text-slate-500 font-bold uppercase block mb-1">Applicant Name</span>
+                <div className="border-b sm:border-b-0 lg:border-r border-slate-200 dark:border-slate-800 pb-3 sm:pb-0 sm:pr-4">
+                    <span className="text-slate-500 font-semibold uppercase block mb-1">Applicant Name</span>
                     <span className="font-bold text-slate-800 dark:text-slate-200">
-                        {data.authors[0]?.name || "First Author"}
+                        {data.authors[0]?.name || "Primary Author"}
                     </span>
                     <span className="text-[11px] text-slate-500 block truncate">{data.correspondingEmail}</span>
                 </div>
-                <div className="border-b sm:border-b-0 sm:border-r border-blue-200 dark:border-slate-800 pb-2 sm:pb-0 sm:pr-3">
-                    <span className="text-slate-500 font-bold uppercase block mb-1">Manuscript Ref No.</span>
-                    <span className="font-extrabold bg-[#fff1a8] text-[#0b246c] px-2 py-0.5 rounded font-mono">
+                <div className="border-b sm:border-b-0 sm:border-r border-slate-200 dark:border-slate-800 pb-3 sm:pb-0 sm:pr-4">
+                    <span className="text-slate-500 font-semibold uppercase block mb-1">Reference ID</span>
+                    <span className="font-mono font-bold text-slate-900 dark:text-slate-100 bg-slate-200 dark:bg-slate-800 px-2 py-0.5 rounded">
                         {data.manuscriptId}
                     </span>
                     <span className="text-[11px] text-slate-500 block mt-1">
                         {authorCount} Author{authorCount > 1 ? "s" : ""} &bull; {data.category}
                     </span>
                 </div>
-                <div className="flex flex-col justify-center bg-white dark:bg-slate-800/80 p-2.5 rounded-xl border border-blue-200 dark:border-slate-700">
-                    <span className="text-slate-500 font-bold uppercase text-[10px]">Net Payable Amount</span>
-                    <span className="text-xl font-extrabold text-[#0755ad] dark:text-blue-400 font-mono">
+                <div className="flex flex-col justify-center bg-white dark:bg-slate-800/80 p-3 rounded border border-slate-200 dark:border-slate-700">
+                    <span className="text-slate-500 font-semibold uppercase text-[10px]">Net Payable Amount</span>
+                    <span className="text-xl font-bold text-slate-900 dark:text-slate-100 font-mono">
                         {formatINR(fees.netPayable)}
                     </span>
                     {fees.discountAmount > 0 && (
-                        <span className="text-[10px] text-emerald-600 font-bold">
-                            {isFullyWaived ? "100% Fee Exemption" : `Saved ${formatINR(fees.discountAmount)}`}
+                        <span className="text-[11px] text-emerald-700 dark:text-emerald-400 font-medium">
+                            {isFullyWaived ? "100% Fee Exemption Approved" : `Exemption: -${formatINR(fees.discountAmount)}`}
                         </span>
                     )}
                 </div>
@@ -261,133 +247,128 @@ export default function Step3PaymentFinalSubmission({
 
             {/* If Fully Waived Notice */}
             {isFullyWaived && (
-                <div className="p-4 bg-emerald-50 dark:bg-emerald-950/60 border-2 border-emerald-300 dark:border-emerald-800 rounded-2xl flex items-center gap-3 text-emerald-900 dark:text-emerald-200 shadow-sm">
-                    <ShieldCheck className="w-8 h-8 text-emerald-600 shrink-0" />
-                    <div>
-                        <h4 className="font-extrabold text-sm">Approved 100% Open Access Fee Waiver</h4>
-                        <p className="text-xs opacity-90 mt-0.5">
-                            Your manuscript is approved for complete publication fee exemption under voucher <b>{data.appliedWaiverCode}</b>. UTR payment details and receipt upload are not required.
-                        </p>
-                    </div>
+                <div className="p-4 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800 rounded-lg text-emerald-900 dark:text-emerald-200 text-xs">
+                    <h4 className="font-bold text-sm mb-0.5">Approved 100% Fee Exemption</h4>
+                    <p>
+                        This manuscript is approved for complete publication fee waiver under authorization code <b>{data.appliedWaiverCode}</b>. UTR payment proof and transaction receipt upload are not required.
+                    </p>
                 </div>
             )}
 
-            {/* Payment Method Selector & Bank Info (Only if not fully waived) */}
+            {/* Payment Method Selector & Bank Info */}
             {!isFullyWaived && (
-                <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
-                    <div className="bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-950/60 dark:to-indigo-950/60 px-5 py-3 border-b border-blue-200 dark:border-blue-900 text-[#092d94] dark:text-blue-300 font-extrabold text-base flex items-center gap-2">
-                        <span>💳</span> Select Payment Method
+                <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden">
+                    <div className="bg-slate-50 dark:bg-slate-800/80 px-6 py-3 border-b border-slate-200 dark:border-slate-800">
+                        <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">
+                            Select Payment Method
+                        </h3>
                     </div>
 
-                    <div className="p-5 space-y-5">
+                    <div className="p-6 space-y-5">
                         {/* Tabs */}
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                             <button
                                 type="button"
                                 onClick={() => setActiveMethod("upi")}
-                                className={`p-3 rounded-xl border text-left transition-all ${
+                                className={`p-3 rounded border text-left text-xs font-semibold ${
                                     activeMethod === "upi"
-                                        ? "border-[#0755ad] bg-blue-50 dark:bg-blue-950/60 ring-2 ring-blue-500/30"
-                                        : "border-slate-200 dark:border-slate-800 hover:bg-slate-50"
+                                        ? "border-[#061a43] bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white"
+                                        : "border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400"
                                 }`}
                             >
-                                <QrCode className="w-5 h-5 text-[#0755ad] mb-1.5" />
-                                <div className="font-extrabold text-xs text-slate-800 dark:text-slate-200">UPI / QR Code</div>
-                                <div className="text-[10px] text-slate-500">Scan &amp; Instant Pay</div>
+                                <div className="font-bold">UPI / QR Code</div>
+                                <div className="text-[11px] text-slate-500 font-normal">Direct Mobile Payment</div>
                             </button>
 
                             <button
                                 type="button"
                                 onClick={() => setActiveMethod("card")}
-                                className={`p-3 rounded-xl border text-left transition-all ${
+                                className={`p-3 rounded border text-left text-xs font-semibold ${
                                     activeMethod === "card"
-                                        ? "border-[#0755ad] bg-blue-50 dark:bg-blue-950/60 ring-2 ring-blue-500/30"
-                                        : "border-slate-200 dark:border-slate-800 hover:bg-slate-50"
+                                        ? "border-[#061a43] bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white"
+                                        : "border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400"
                                 }`}
                             >
-                                <CreditCard className="w-5 h-5 text-indigo-600 mb-1.5" />
-                                <div className="font-extrabold text-xs text-slate-800 dark:text-slate-200">Debit / Credit Card</div>
-                                <div className="text-[10px] text-slate-500">Visa, RuPay, MC</div>
+                                <div className="font-bold">Debit / Credit Card</div>
+                                <div className="text-[11px] text-slate-500 font-normal">Visa, RuPay, MC</div>
                             </button>
 
                             <button
                                 type="button"
                                 onClick={() => setActiveMethod("netbanking")}
-                                className={`p-3 rounded-xl border text-left transition-all ${
+                                className={`p-3 rounded border text-left text-xs font-semibold ${
                                     activeMethod === "netbanking"
-                                        ? "border-[#0755ad] bg-blue-50 dark:bg-blue-950/60 ring-2 ring-blue-500/30"
-                                        : "border-slate-200 dark:border-slate-800 hover:bg-slate-50"
+                                        ? "border-[#061a43] bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white"
+                                        : "border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400"
                                 }`}
                             >
-                                <Building2 className="w-5 h-5 text-emerald-600 mb-1.5" />
-                                <div className="font-extrabold text-xs text-slate-800 dark:text-slate-200">Net Banking</div>
-                                <div className="text-[10px] text-slate-500">All Major Banks</div>
+                                <div className="font-bold">Internet Banking</div>
+                                <div className="text-[11px] text-slate-500 font-normal">Major Banks</div>
                             </button>
 
                             <button
                                 type="button"
                                 onClick={() => setActiveMethod("bank")}
-                                className={`p-3 rounded-xl border text-left transition-all ${
+                                className={`p-3 rounded border text-left text-xs font-semibold ${
                                     activeMethod === "bank"
-                                        ? "border-[#0755ad] bg-blue-50 dark:bg-blue-950/60 ring-2 ring-blue-500/30"
-                                        : "border-slate-200 dark:border-slate-800 hover:bg-slate-50"
+                                        ? "border-[#061a43] bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white"
+                                        : "border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400"
                                 }`}
                             >
-                                <ArrowLeftRight className="w-5 h-5 text-amber-600 mb-1.5" />
-                                <div className="font-extrabold text-xs text-slate-800 dark:text-slate-200">NEFT / RTGS / IMPS</div>
-                                <div className="text-[10px] text-slate-500">Official Bank A/C</div>
+                                <div className="font-bold">NEFT / RTGS / IMPS</div>
+                                <div className="text-[11px] text-slate-500 font-normal">Corporate Bank Account</div>
                             </button>
                         </div>
 
                         {/* Content for UPI */}
                         {activeMethod === "upi" && (
-                            <div className="bg-gradient-to-r from-blue-50/60 to-indigo-50/60 dark:from-slate-800/60 dark:to-slate-900/60 border border-blue-200 dark:border-slate-700 rounded-xl p-5 flex flex-col md:flex-row items-center gap-6">
-                                {/* Visual SVG QR Code */}
-                                <div className="bg-white p-3 rounded-xl border border-slate-300 dark:border-slate-700 shadow-md flex flex-col items-center shrink-0">
-                                    <div className="w-36 h-36 bg-slate-900 rounded-lg p-2 flex flex-col justify-between">
+                            <div className="border border-slate-200 dark:border-slate-700 rounded-lg p-5 flex flex-col md:flex-row items-center gap-6 bg-slate-50/50 dark:bg-slate-800/40">
+                                <div className="bg-white p-3 rounded border border-slate-300 dark:border-slate-700 text-center shrink-0">
+                                    <div className="w-32 h-32 bg-slate-900 rounded p-2 flex flex-col justify-between mx-auto">
                                         <div className="flex justify-between">
-                                            <div className="w-8 h-8 border-4 border-white bg-transparent flex items-center justify-center">
-                                                <div className="w-3 h-3 bg-white" />
+                                            <div className="w-7 h-7 border-2 border-white bg-transparent flex items-center justify-center">
+                                                <div className="w-2.5 h-2.5 bg-white" />
                                             </div>
-                                            <div className="w-8 h-8 border-4 border-white bg-transparent flex items-center justify-center">
-                                                <div className="w-3 h-3 bg-white" />
+                                            <div className="w-7 h-7 border-2 border-white bg-transparent flex items-center justify-center">
+                                                <div className="w-2.5 h-2.5 bg-white" />
                                             </div>
                                         </div>
-                                        <div className="flex items-center justify-center text-[#ffe66b] font-bold text-[10px] tracking-widest uppercase">
+                                        <div className="text-white text-[9px] font-mono tracking-widest text-center uppercase">
                                             AXIARA UPI
                                         </div>
                                         <div className="flex justify-between items-end">
-                                            <div className="w-8 h-8 border-4 border-white bg-transparent flex items-center justify-center">
-                                                <div className="w-3 h-3 bg-white" />
+                                            <div className="w-7 h-7 border-2 border-white bg-transparent flex items-center justify-center">
+                                                <div className="w-2.5 h-2.5 bg-white" />
                                             </div>
-                                            <div className="w-6 h-6 border-2 border-dashed border-white/60" />
+                                            <div className="w-5 h-5 border border-dashed border-white/60" />
                                         </div>
                                     </div>
-                                    <span className="text-[11px] font-bold text-slate-700 mt-2">Scan to Pay with Any UPI App</span>
+                                    <span className="text-[11px] font-medium text-slate-600 block mt-2">
+                                        Scan with Google Pay, PhonePe, Paytm, BHIM
+                                    </span>
                                 </div>
 
                                 <div className="space-y-3 flex-1 text-xs">
                                     <div>
-                                        <span className="text-slate-500 font-bold uppercase block mb-1">Official UPI VPA ID</span>
+                                        <span className="text-slate-500 font-semibold block mb-1">Official UPI ID:</span>
                                         <div className="flex items-center gap-2">
-                                            <span className="bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3 py-1.5 rounded-lg font-mono font-bold text-sm text-[#092d68] dark:text-blue-300 select-all">
+                                            <span className="bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3 py-1.5 rounded font-mono font-bold text-sm text-slate-900 dark:text-slate-100 select-all">
                                                 axiara.journals@upi
                                             </span>
                                             <button
                                                 type="button"
                                                 onClick={handleCopyUpi}
-                                                className="flex items-center gap-1 bg-[#092d68] hover:bg-[#001d51] text-white font-bold px-3 py-1.5 rounded-lg transition-colors"
+                                                className="bg-slate-200 hover:bg-slate-300 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-semibold px-3 py-1.5 rounded text-xs"
                                             >
-                                                {copiedUpi ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                                                <span>{copiedUpi ? "Copied" : "Copy"}</span>
+                                                {copiedUpi ? "Copied" : "Copy"}
                                             </button>
                                         </div>
                                     </div>
 
-                                    <div className="text-slate-600 dark:text-slate-400 space-y-1 text-[11px]">
-                                        <p>&bull; <b>Supported Apps:</b> Google Pay, PhonePe, Paytm, BHIM, Navi, Cred.</p>
-                                        <p>&bull; <b>Exact Amount:</b> Pay <b>{formatINR(fees.netPayable)}</b>.</p>
-                                        <p>&bull; <b>Important:</b> Note down the 12-digit <b>UTR / Transaction Ref Number</b> and enter it in the confirmation box below.</p>
+                                    <div className="text-slate-600 dark:text-slate-400 space-y-1 text-xs">
+                                        <p>&bull; Transfer exact amount: <b>{formatINR(fees.netPayable)}</b>.</p>
+                                        <p>&bull; Note down the 12-digit <b>UTR / Transaction Ref Number</b>.</p>
+                                        <p>&bull; Enter the UTR and upload your payment receipt below.</p>
                                     </div>
                                 </div>
                             </div>
@@ -395,62 +376,63 @@ export default function Step3PaymentFinalSubmission({
 
                         {/* Content for Card */}
                         {activeMethod === "card" && (
-                            <div className="bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl p-5 space-y-3 text-xs">
-                                <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-700">
-                                    <span className="font-extrabold text-sm text-slate-800 dark:text-slate-200">
-                                        Card Payment Gateway (Axiara SecurePay)
-                                    </span>
-                                    <span className="text-[11px] text-emerald-600 font-bold flex items-center gap-1">
-                                        <ShieldCheck className="w-3.5 h-3.5" /> 256-Bit SSL Encrypted
-                                    </span>
-                                </div>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div className="border border-slate-200 dark:border-slate-700 rounded-lg p-5 space-y-3 text-xs bg-slate-50/50 dark:bg-slate-800/40">
+                                <h4 className="font-bold text-sm text-slate-900 dark:text-slate-100">
+                                    Credit / Debit Card Checkout
+                                </h4>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-lg">
                                     <div>
-                                        <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 mb-1">Card Number</label>
+                                        <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                                            Card Number
+                                        </label>
                                         <input
                                             type="text"
                                             placeholder="4532 •••• •••• 8892"
-                                            className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg p-2 font-mono text-xs"
+                                            className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded p-2 font-mono text-xs focus:border-[#061a43] focus:outline-none"
                                         />
                                     </div>
                                     <div className="grid grid-cols-2 gap-2">
                                         <div>
-                                            <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 mb-1">Expiry Date</label>
+                                            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                                                Expiry
+                                            </label>
                                             <input
                                                 type="text"
-                                                placeholder="MM / YY"
-                                                className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg p-2 font-mono text-xs"
+                                                placeholder="MM/YY"
+                                                className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded p-2 font-mono text-xs focus:border-[#061a43] focus:outline-none"
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 mb-1">CVV</label>
+                                            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                                                CVV
+                                            </label>
                                             <input
                                                 type="password"
                                                 placeholder="•••"
                                                 maxLength={4}
-                                                className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg p-2 font-mono text-xs"
+                                                className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded p-2 font-mono text-xs focus:border-[#061a43] focus:outline-none"
                                             />
                                         </div>
                                     </div>
                                 </div>
-                                <p className="text-[11px] text-slate-500">
-                                    Direct card settlement will generate a transaction ID. Enter that transaction ID in the UTR input below to finalize submission.
+                                <p className="text-xs text-slate-500">
+                                    Card transactions are processed over 256-bit TLS encryption. Enter the resulting transaction reference below.
                                 </p>
                             </div>
                         )}
 
                         {/* Content for Net Banking */}
                         {activeMethod === "netbanking" && (
-                            <div className="bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl p-5 space-y-3 text-xs">
-                                <span className="font-extrabold text-sm text-slate-800 dark:text-slate-200 block">
-                                    Select Your Bank for Internet Banking
-                                </span>
+                            <div className="border border-slate-200 dark:border-slate-700 rounded-lg p-5 space-y-3 text-xs bg-slate-50/50 dark:bg-slate-800/40">
+                                <h4 className="font-bold text-sm text-slate-900 dark:text-slate-100">
+                                    Internet Banking
+                                </h4>
                                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                                     {["State Bank of India", "HDFC Bank", "ICICI Bank", "Axis Bank", "Punjab National Bank", "Bank of Baroda", "Canara Bank", "Union Bank"].map((b, i) => (
                                         <button
                                             key={i}
                                             type="button"
-                                            className="p-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:border-blue-500 text-left font-semibold text-slate-700 dark:text-slate-300"
+                                            className="p-2 rounded border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-left font-medium text-slate-700 dark:text-slate-300 hover:border-slate-400"
                                         >
                                             {b}
                                         </button>
@@ -461,17 +443,17 @@ export default function Step3PaymentFinalSubmission({
 
                         {/* Content for Bank Transfer */}
                         {activeMethod === "bank" && (
-                            <div className="bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl p-5 space-y-3 text-xs">
-                                <span className="font-extrabold text-sm text-slate-800 dark:text-slate-200 block">
-                                    Axiara Journals Corporate Bank Details
-                                </span>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-700 font-mono text-xs">
+                            <div className="border border-slate-200 dark:border-slate-700 rounded-lg p-5 space-y-3 text-xs bg-slate-50/50 dark:bg-slate-800/40">
+                                <h4 className="font-bold text-sm text-slate-900 dark:text-slate-100">
+                                    Axiara Journals Corporate Account Details
+                                </h4>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-white dark:bg-slate-900 p-4 rounded border border-slate-200 dark:border-slate-700 font-mono text-xs">
                                     <div>
-                                        <span className="text-slate-500 font-sans block text-[11px]">Account Beneficiary:</span>
+                                        <span className="text-slate-500 font-sans block text-[11px]">Beneficiary Name:</span>
                                         <b>Axiara Private Limited</b>
                                     </div>
                                     <div>
-                                        <span className="text-slate-500 font-sans block text-[11px]">Bank Name:</span>
+                                        <span className="text-slate-500 font-sans block text-[11px]">Bank:</span>
                                         <b>State Bank of India (SBI)</b>
                                     </div>
                                     <div>
@@ -490,50 +472,48 @@ export default function Step3PaymentFinalSubmission({
             )}
 
             {/* Payment Confirmation & Proof Submission */}
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
-                <div className="bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-950/60 dark:to-indigo-950/60 px-5 py-3 border-b border-blue-200 dark:border-blue-900 text-[#092d94] dark:text-blue-300 font-extrabold text-base flex items-center gap-2">
-                    <span>🧾</span> Payment Confirmation &amp; Mandatory Declaration
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden">
+                <div className="bg-slate-50 dark:bg-slate-800/80 px-6 py-3 border-b border-slate-200 dark:border-slate-800">
+                    <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">
+                        Payment Confirmation &amp; Declaration
+                    </h3>
                 </div>
 
-                <div className="p-5 md:p-6 space-y-4">
+                <div className="p-6 space-y-4">
                     {!isFullyWaived && (
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
-                                    Transaction / UTR Reference Number <span className="text-rose-500">*</span>
+                                <label className="block text-xs font-semibold text-slate-800 dark:text-slate-200 mb-1">
+                                    Transaction / UTR Reference Number <span className="text-red-600">*</span>
                                 </label>
                                 <input
                                     type="text"
                                     value={data.utrNumber || ""}
                                     onChange={(e) => onChange({ utrNumber: e.target.value.trim() })}
-                                    placeholder="e.g. 432198765432 or UPI transaction ref"
-                                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-3.5 py-2.5 text-xs font-mono font-bold tracking-wider focus:ring-2 focus:ring-[#0755ad] focus:outline-none"
+                                    placeholder="12-digit UTR or banking ref number"
+                                    className="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded px-3 py-2 text-xs font-mono font-semibold focus:border-[#061a43] focus:outline-none"
                                 />
-                                <span className="text-[11px] text-slate-500 mt-1 block">
-                                    Find this in your banking app receipt or SMS confirmation.
-                                </span>
                             </div>
 
                             <div>
-                                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
-                                    Payment Date <span className="text-rose-500">*</span>
+                                <label className="block text-xs font-semibold text-slate-800 dark:text-slate-200 mb-1">
+                                    Payment Date <span className="text-red-600">*</span>
                                 </label>
                                 <input
                                     type="date"
                                     value={paymentDateVal}
                                     onChange={(e) => onChange({ paymentDate: e.target.value })}
-                                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-3.5 py-2.5 text-xs font-semibold focus:ring-2 focus:ring-[#0755ad] focus:outline-none"
+                                    className="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded px-3 py-2 text-xs font-medium focus:border-[#061a43] focus:outline-none"
                                 />
                             </div>
 
                             <div className="sm:col-span-2">
-                                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
-                                    Upload Payment Receipt Screenshot / PDF <span className="text-rose-500">*</span>
+                                <label className="block text-xs font-semibold text-slate-800 dark:text-slate-200 mb-1">
+                                    Payment Receipt (PDF / JPG / PNG, Max 5MB) <span className="text-red-600">*</span>
                                 </label>
-                                <div className="border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl p-4 text-center hover:border-blue-500 transition-colors bg-slate-50/50 dark:bg-slate-800/40">
-                                    <label className="cursor-pointer inline-flex items-center gap-2 bg-[#092d68] hover:bg-[#001d51] text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors shadow-sm">
-                                        <Upload className="w-3.5 h-3.5" />
-                                        <span>Choose Receipt File (PDF / JPG / PNG, Max 5MB)</span>
+                                <div className="border border-slate-300 dark:border-slate-700 rounded p-4 text-center bg-slate-50/50 dark:bg-slate-800/30">
+                                    <label className="cursor-pointer inline-block bg-[#061a43] hover:bg-[#00245d] text-white text-xs font-semibold px-4 py-2 rounded">
+                                        Select Receipt File
                                         <input
                                             type="file"
                                             accept=".pdf,.jpg,.jpeg,.png,.webp"
@@ -542,9 +522,8 @@ export default function Step3PaymentFinalSubmission({
                                         />
                                     </label>
                                     {data.receiptFileName && (
-                                        <div className="mt-2 text-xs font-bold text-emerald-600 flex items-center justify-center gap-1.5">
-                                            <CheckCircle2 className="w-4 h-4" />
-                                            <span>Selected Receipt: {data.receiptFileName}</span>
+                                        <div className="mt-2 text-xs font-semibold text-emerald-700 dark:text-emerald-400">
+                                            Selected: {data.receiptFileName}
                                         </div>
                                     )}
                                 </div>
@@ -553,24 +532,23 @@ export default function Step3PaymentFinalSubmission({
                     )}
 
                     {/* Declaration Checkbox */}
-                    <div className="p-4 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl">
+                    <div className="p-4 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded">
                         <label className="flex items-start gap-3 cursor-pointer">
                             <input
                                 type="checkbox"
                                 checked={data.declarationAccepted}
                                 onChange={(e) => onChange({ declarationAccepted: e.target.checked })}
-                                className="w-4 h-4 mt-1 text-[#0755ad] rounded focus:ring-blue-500 shrink-0"
+                                className="w-4 h-4 mt-0.5 text-[#061a43] rounded"
                             />
                             <span className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
-                                I hereby confirm that (a) I have paid the applicable publication charges for the above manuscript; or (b) where an authorized fee waiver has been applied, I acknowledge and accept the approved waiver terms. I further confirm that the manuscript and payment receipt submitted are authentic and truthful. <span className="text-rose-500 font-bold">*</span>
+                                I confirm that (a) I have paid the applicable Article Processing Charges for this manuscript, or (b) where an authorized fee waiver has been applied, I accept the approved waiver terms. I certify that the submitted files and payment proof are genuine and accurate. <span className="text-red-600">*</span>
                             </span>
                         </label>
                     </div>
 
                     {errorMsg && (
-                        <div className="p-3 bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300 rounded-xl text-xs font-bold flex items-center gap-2">
-                            <AlertCircle className="w-4 h-4 shrink-0" />
-                            <span>{errorMsg}</span>
+                        <div className="p-3 bg-red-50 text-red-800 border border-red-200 rounded text-xs font-medium">
+                            {errorMsg}
                         </div>
                     )}
                 </div>
@@ -582,23 +560,17 @@ export default function Step3PaymentFinalSubmission({
                     type="button"
                     onClick={onBack}
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto px-6 py-3 rounded-xl border border-slate-300 dark:border-slate-700 font-bold text-sm text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 hover:bg-slate-100 transition-colors flex items-center justify-center gap-2"
+                    className="w-full sm:w-auto px-5 py-2.5 rounded-md border border-slate-300 dark:border-slate-700 font-semibold text-xs text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 hover:bg-slate-50"
                 >
-                    <ArrowLeft className="w-4 h-4" /> Back to Payment Details
+                    &larr; Back to Payment Details
                 </button>
 
                 <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto px-10 py-3.5 bg-gradient-to-r from-emerald-600 to-[#075dc0] text-white font-extrabold text-sm md:text-base rounded-xl shadow-lg hover:shadow-xl hover:brightness-110 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                    className="w-full sm:w-auto px-8 py-3 bg-[#061a43] hover:bg-[#00245d] text-white font-bold text-sm rounded-md shadow-sm disabled:opacity-50"
                 >
-                    {isSubmitting ? (
-                        <>Processing Submission...</>
-                    ) : (
-                        <>
-                            Final Submit Manuscript &nbsp; <Send className="w-4 h-4" />
-                        </>
-                    )}
+                    {isSubmitting ? "Processing Submission..." : "Final Submit Manuscript"}
                 </button>
             </div>
         </form>

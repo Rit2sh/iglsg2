@@ -41,7 +41,6 @@ export default function SubmissionWizard() {
     const [formData, setFormData] = useState<SubmissionFormData>(INITIAL_FORM_DATA);
 
     useEffect(() => {
-        // Load draft from localStorage or initialize manuscript ID
         const saved = localStorage.getItem("ijlsg_submission_draft");
         if (saved) {
             try {
@@ -79,7 +78,7 @@ export default function SubmissionWizard() {
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
-    const handleFinish = ({ manuscriptId }: { success: boolean; manuscriptId: string }) => {
+    const handleFinish = () => {
         setCompletedSteps([1, 2, 3]);
         localStorage.removeItem("ijlsg_submission_draft");
     };
@@ -87,15 +86,12 @@ export default function SubmissionWizard() {
     return (
         <div className="max-w-5xl mx-auto space-y-6">
             {/* Header Hero */}
-            <div className="text-center space-y-1 pt-2 pb-1">
-                <span className="text-xs font-bold uppercase tracking-widest text-[#0755ad] bg-blue-50 dark:bg-blue-950/60 px-3 py-1 rounded-full border border-blue-200 dark:border-blue-900">
-                    Axiara Journals Wing &bull; Central Submission Portal
-                </span>
-                <h1 className="text-3xl md:text-4xl font-extrabold text-[#061a43] dark:text-white tracking-tight">
+            <div className="border-b border-slate-200 dark:border-slate-800 pb-5">
+                <h1 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
                     Manuscript Submission &amp; Payment Portal
                 </h1>
-                <p className="text-slate-600 dark:text-slate-400 text-xs md:text-sm max-w-xl mx-auto">
-                    Submit your research manuscript for peer-review, review transparent publication charges, and finalize your submission.
+                <p className="text-slate-600 dark:text-slate-400 text-sm mt-1">
+                    Submit research manuscripts for peer-review, review Article Processing Charges, and record payment confirmation.
                 </p>
             </div>
 
