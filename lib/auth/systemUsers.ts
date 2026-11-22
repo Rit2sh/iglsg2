@@ -14,7 +14,7 @@ export const SYSTEM_ACCOUNTS: SystemAccount[] = [
     {
         id: "sys-admin-01",
         email: "admin@ijlsg.org",
-        password: "Admin@123",
+        password: "Ijlsg@2026#Secure",
         role: "ADMIN",
         firstName: "Chief",
         lastName: "Administrator",
@@ -25,7 +25,7 @@ export const SYSTEM_ACCOUNTS: SystemAccount[] = [
     {
         id: "sys-manager-02",
         email: "manager@ijlsg.org",
-        password: "Manager@123",
+        password: "Ijlsg@2026#Secure",
         role: "MANAGER",
         firstName: "Editorial",
         lastName: "Manager",
@@ -36,7 +36,7 @@ export const SYSTEM_ACCOUNTS: SystemAccount[] = [
     {
         id: "sys-editor-03",
         email: "editor@ijlsg.org",
-        password: "Editor@123",
+        password: "Ijlsg@2026#Secure",
         role: "EDITOR",
         firstName: "Senior",
         lastName: "Editor",
@@ -47,7 +47,7 @@ export const SYSTEM_ACCOUNTS: SystemAccount[] = [
     {
         id: "sys-reviewer-04",
         email: "reviewer@ijlsg.org",
-        password: "Reviewer@123",
+        password: "Ijlsg@2026#Secure",
         role: "PRE_REVIEWER",
         firstName: "Peer",
         lastName: "Reviewer",
@@ -58,7 +58,7 @@ export const SYSTEM_ACCOUNTS: SystemAccount[] = [
     {
         id: "sys-drafter-05",
         email: "drafter@ijlsg.org",
-        password: "Drafter@123",
+        password: "Ijlsg@2026#Secure",
         role: "DRAFTER",
         firstName: "Manuscript",
         lastName: "Drafter",
@@ -69,7 +69,7 @@ export const SYSTEM_ACCOUNTS: SystemAccount[] = [
     {
         id: "sys-user-06",
         email: "user@ijlsg.org",
-        password: "User@123",
+        password: "Ijlsg@2026#Secure",
         role: "USER",
         firstName: "Author",
         lastName: "Scholar",
